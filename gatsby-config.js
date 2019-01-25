@@ -35,6 +35,9 @@ module.exports = {
         client_id: process.env.MOLTIN_CLIENT_ID,
       },
     },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
