@@ -777,6 +777,13 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@moltin/request@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.npmjs.org/@moltin/request/-/request-1.4.3.tgz#33eca8c02d1f1ed6f1d63c0b2a20339d2c7a0f03"
+  integrity sha512-FEvy2GdzoF3WsH82sPQvwCbXBjrxDcQBM/DZVU/wF29FyHCOSE388bmInQjEK4ZNst2IpppH6K2mJaMHcRc/WA==
+  dependencies:
+    cross-fetch "2.2.3"
+
 "@moocar/lokijs@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@moocar/lokijs/-/lokijs-1.0.1.tgz#545227c173030dd0e6b1e6bdcef528012a6c325c"
@@ -3095,6 +3102,14 @@ cross-fetch@2.2.2:
     node-fetch "2.1.2"
     whatwg-fetch "2.0.4"
 
+cross-fetch@2.2.3:
+  version "2.2.3"
+  resolved "https://registry.npmjs.org/cross-fetch/-/cross-fetch-2.2.3.tgz#e8a0b3c54598136e037f8650f8e823ccdfac198e"
+  integrity sha512-PrWWNH3yL2NYIb/7WF/5vFG3DCQiXDOVf8k3ijatbrtnwNuhMWLC7YF7uqf53tbTFDzHIUD8oITw4Bxt8ST3Nw==
+  dependencies:
+    node-fetch "2.1.2"
+    whatwg-fetch "2.0.4"
+
 cross-spawn@5.1.0, cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -5088,6 +5103,12 @@ gatsby-source-filesystem@^2.0.8:
     slash "^1.0.0"
     valid-url "^1.0.9"
     xstate "^3.1.0"
+
+gatsby-source-moltin@moltin/gatsby-source-moltin:
+  version "0.1.0"
+  resolved "https://codeload.github.com/moltin/gatsby-source-moltin/tar.gz/9177ed773ab7695556dbbdee940d6a182d886217"
+  dependencies:
+    "@moltin/request" "^1.4.3"
 
 gatsby-transformer-sharp@^2.1.8:
   version "2.1.9"
