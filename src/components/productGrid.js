@@ -12,7 +12,7 @@ const ProductGrid = ({ data }) => (
   <>
     {data.allMoltinProduct.edges.map(({ node: product }) => {
       return (
-        <div>
+        <div key={product.id}>
           <Title>{product.name}</Title>
           {product.fields ? (
             <Img fixed={product.fields.linkToMainImage.childImageSharp.fixed} />
@@ -30,6 +30,7 @@ export default props => (
         allMoltinProduct {
           edges {
             node {
+              id
               name
               fields {
                 linkToMainImage {
