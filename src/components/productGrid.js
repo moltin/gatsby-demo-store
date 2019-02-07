@@ -14,8 +14,8 @@ const ProductGrid = ({ data }) => (
       return (
         <div key={product.id}>
           <Title>{product.name}</Title>
-          {product.fields ? (
-            <Img fixed={product.fields.linkToMainImage.childImageSharp.fixed} />
+          {product.mainImage ? (
+            <Img fixed={product.mainImage.childImageSharp.fixed} />
           ) : null}
         </div>
       )
@@ -31,16 +31,14 @@ export default props => (
           edges {
             node {
               id
-              name
-              fields {
-                linkToMainImage {
-                  childImageSharp {
-                    fixed(width: 125) {
-                      ...GatsbyImageSharpFixed
-                    }
+              mainImage {
+                childImageSharp {
+                  fixed(width: 125) {
+                    ...GatsbyImageSharpFixed
                   }
                 }
               }
+              name
             }
           }
         }
