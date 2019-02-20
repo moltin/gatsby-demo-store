@@ -814,6 +814,14 @@
   resolved "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
+"@moltin/gatsby-source-moltin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.0.0.tgz#a668af66c3ba6ef9fdd1818e1e7cc761753473de"
+  integrity sha512-DgcvmGgNfNKkG1JtakyJHb5/otxR8fR/gY0MB6GCNMShzE+jtucS3IzVubLnmaCpQVct+BWIyZIors54c1qiIA==
+  dependencies:
+    "@moltin/request" "^1.4.3"
+    gatsby-source-filesystem "^2.0.20"
+
 "@moltin/request@^1.4.3":
   version "1.4.3"
   resolved "https://registry.npmjs.org/@moltin/request/-/request-1.4.3.tgz#33eca8c02d1f1ed6f1d63c0b2a20339d2c7a0f03"
@@ -5564,11 +5572,26 @@ gatsby-source-filesystem@2.0.8:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-moltin@moltin/gatsby-source-moltin:
-  version "0.1.0"
-  resolved "https://codeload.github.com/moltin/gatsby-source-moltin/tar.gz/9177ed773ab7695556dbbdee940d6a182d886217"
+gatsby-source-filesystem@^2.0.20:
+  version "2.0.20"
+  resolved "https://registry.npmjs.org/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.20.tgz#0bb3dcf905c6856d87e7a44d73bd8ff056cd5b95"
+  integrity sha512-nS2hBsqKEQIJ5Yd+g9p++FcsfmvbQmZlBUzx04VPBYZBu2LuLA/ZxQkmdiTNnbDQ18KJw0Zu2PnmUerPnEMqyg==
   dependencies:
-    "@moltin/request" "^1.4.3"
+    "@babel/runtime" "^7.0.0"
+    better-queue "^3.8.7"
+    bluebird "^3.5.0"
+    chokidar "^1.7.0"
+    file-type "^10.2.0"
+    fs-extra "^5.0.0"
+    got "^7.1.0"
+    md5-file "^3.1.1"
+    mime "^2.2.0"
+    pretty-bytes "^4.0.2"
+    progress "^1.1.8"
+    read-chunk "^3.0.0"
+    slash "^1.0.0"
+    valid-url "^1.0.9"
+    xstate "^3.1.0"
 
 gatsby-transformer-sharp@2.1.8:
   version "2.1.8"

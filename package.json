@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "@moltin/gatsby-source-moltin": "^1.0.0",
     "babel-plugin-styled-components": "1.10.0",
     "babel-plugin-tailwind-components": "0.5.10",
     "gatsby": "2.0.76",
@@ -11,7 +12,6 @@
     "gatsby-plugin-sharp": "2.0.14",
     "gatsby-plugin-styled-components": "3.0.4",
     "gatsby-source-filesystem": "2.0.8",
-    "gatsby-source-moltin": "moltin/gatsby-source-moltin",
     "gatsby-transformer-sharp": "2.1.8",
     "prop-types": "15.6.2",
     "react": "16.8.1",
