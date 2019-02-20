@@ -9,12 +9,7 @@ function Header({ siteTitle, categories }) {
   return (
     <header className="py-6 md:py-8 flex items-center justify-between relative">
       <Link to="/">
-        <img
-          src={Logo}
-          className="block"
-          title={siteTitle}
-          role="presentation"
-        />
+        <img src={Logo} className="block" title={siteTitle} alt={siteTitle} />
       </Link>
 
       <Nav categories={categories} />

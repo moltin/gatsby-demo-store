@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Layout from '../components/Layout'
-import ProductGrid from '../components/productGrid'
+import ProductGrid from '../components/ProductGrid'
 
 const IndexPage = () => (
   <Layout>
