@@ -3,6 +3,6 @@
 import React from 'react'
 import { CartProvider } from './src/components/CartContext'
 
-export const wrapPageElement = ({ element, props }) => {
-  return <CartProvider {...props}>{element}</CartProvider>
+export const wrapRootElement = ({ element }) => {
+  return <CartProvider>{element}</CartProvider>
 }
