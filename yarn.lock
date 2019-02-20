@@ -759,6 +759,14 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
+"@moltin/gatsby-source-moltin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.0.0.tgz#a668af66c3ba6ef9fdd1818e1e7cc761753473de"
+  integrity sha512-DgcvmGgNfNKkG1JtakyJHb5/otxR8fR/gY0MB6GCNMShzE+jtucS3IzVubLnmaCpQVct+BWIyZIors54c1qiIA==
+  dependencies:
+    "@moltin/request" "^1.4.3"
+    gatsby-source-filesystem "^2.0.20"
+
 "@moltin/request@^1.4.3":
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/@moltin/request/-/request-1.4.4.tgz#d70326ac2358b95cf614f73fd002d77d4699c9e6"
@@ -4791,11 +4799,26 @@ gatsby-source-filesystem@2.0.20:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-moltin@moltin/gatsby-source-moltin:
-  version "0.1.0"
-  resolved "https://codeload.github.com/moltin/gatsby-source-moltin/tar.gz/17cea6a0f51c927d03e52e9f8113fbf8866bdc5f"
+gatsby-source-filesystem@^2.0.20:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.21.tgz#038b129079b198026dd789f099639fd09d58e7e1"
+  integrity sha512-lovfFurLb4h0eTJuCQHYhwPCbpZLePdtR3IurCjK+z5S0KLOJFqOOnsqO3rTkspus1EWzB3fkUZn8XuCB9lkWA==
   dependencies:
-    "@moltin/request" "^1.4.3"
+    "@babel/runtime" "^7.0.0"
+    better-queue "^3.8.7"
+    bluebird "^3.5.0"
+    chokidar "^1.7.0"
+    file-type "^10.2.0"
+    fs-extra "^5.0.0"
+    got "^7.1.0"
+    md5-file "^3.1.1"
+    mime "^2.2.0"
+    pretty-bytes "^4.0.2"
+    progress "^1.1.8"
+    read-chunk "^3.0.0"
+    slash "^1.0.0"
+    valid-url "^1.0.9"
+    xstate "^3.1.0"
 
 gatsby-transformer-sharp@2.1.14:
   version "2.1.14"
