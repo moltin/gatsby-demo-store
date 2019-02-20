@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
+import { CartContext } from '../CartContext'
+
 function Nav({ categories }) {
+  const { count } = useContext(CartContext)
+
   return (
     <nav className="ml-auto">
       <ul className="list-reset flex items-center">
@@ -30,9 +34,9 @@ function Nav({ categories }) {
           <Link to="/about">About</Link>
         </li>
 
-        {/* <li className="nav-item">
-          <Link to="/cart">Cart (0)</Link>
-        </li> */}
+        <li className="nav-item">
+          <Link to="/cart">Cart ({count})</Link>
+        </li>
       </ul>
     </nav>
   )
