@@ -1,0 +1,7 @@
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './nav.css';
+@import './product.css';
+@import './typography.css';

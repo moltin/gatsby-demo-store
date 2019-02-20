@@ -1,0 +1,38 @@
+.nav-item {
+  @apply mx-4;
+}
+
+.nav-item > a {
+  @apply text-black font-semibold no-underline text-sm uppercase p-3 block;
+}
+
+.nav-item.dropdown:hover > a,
+.nav-item > a:hover {
+  @apply text-pink;
+}
+
+.nav-item.dropdown {
+  @apply z-10;
+}
+
+.nav-item.dropdown:hover > a {
+  @apply bg-grey-light;
+}
+
+.nav-item.dropdown .nav-item-dropdown {
+  @apply absolute pin-l bg-white shadow-lg list-reset block min-w-full opacity-0 pr-3 invisible;
+  transform: translate3d(0px, -12px, 0px);
+}
+
+.nav-item.dropdown:hover .nav-item-dropdown {
+  @apply opacity-100 block pb-1 visible;
+  transform: translate3d(0px, 0, 0px);
+}
+
+.nav-item.dropdown .nav-item-dropdown-link {
+  @apply px-3 py-2 block no-underline text-grey-dark whitespace-no-wrap;
+}
+
+.nav-item.dropdown .nav-item-dropdown-link:hover {
+  @apply text-pink;
+}
