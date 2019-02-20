@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import Logo from '../../images/logo.svg'
+
 export default function Footer({ categories }) {
   return (
     <footer className="py-6 -px-2 md:py-12 md:flex">
       <div className="hidden md:flex list-reset md:w-1/4 text-center md:text-left">
-        <Link to="/" className="text-grey-dark hover:text-pink no-underline">
-          <img src="images/logo.svg" role="presentation" />
+        <Link to="/" className="text-grey-dark hover:text-black no-underline">
+          <img src={Logo} alt="Moltin demo store" />
         </Link>
       </div>
 
@@ -18,7 +20,7 @@ export default function Footer({ categories }) {
           <li key={category.id}>
             <Link
               to={`/category/${category.slug}`}
-              className="text-grey-dark hover:text-pink no-underline"
+              className="text-grey-dark hover:text-black no-underline"
             >
               {category.name}
             </Link>
@@ -31,22 +33,22 @@ export default function Footer({ categories }) {
           Information
         </li>
         <li>
-          <Link to="/" className="text-grey-dark hover:text-pink no-underline">
+          <Link to="/" className="text-grey-dark hover:text-black no-underline">
             About
           </Link>
         </li>
         <li>
-          <Link to="/" className="text-grey-dark hover:text-pink no-underline">
+          <Link to="/" className="text-grey-dark hover:text-black no-underline">
             Shipping &amp; Returns
           </Link>
         </li>
         <li>
-          <Link to="/" className="text-grey-dark hover:text-pink no-underline">
+          <Link to="/" className="text-grey-dark hover:text-black no-underline">
             Privacy Policy
           </Link>
         </li>
         <li>
-          <Link to="/" className="text-grey-dark hover:text-pink no-underline">
+          <Link to="/" className="text-grey-dark hover:text-black no-underline">
             Terms &amp; Conditions
           </Link>
         </li>
@@ -59,7 +61,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-pink no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -75,7 +77,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-pink no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -91,7 +93,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-pink no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -107,7 +109,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-pink no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"

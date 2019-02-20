@@ -3,12 +3,12 @@
 }
 
 .nav-item > a {
-  @apply text-black font-semibold no-underline text-sm uppercase p-3 block;
+  @apply no-underline p-3 block;
 }
 
 .nav-item.dropdown:hover > a,
 .nav-item > a:hover {
-  @apply text-pink;
+  @apply text-black;
 }
 
 .nav-item.dropdown {
@@ -34,5 +34,5 @@
 }
 
 .nav-item.dropdown .nav-item-dropdown-link:hover {
-  @apply text-pink;
+  @apply text-black;
 }

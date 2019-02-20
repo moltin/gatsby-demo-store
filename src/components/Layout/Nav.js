@@ -3,10 +3,10 @@ import { Link } from 'gatsby'
 
 function Nav({ categories }) {
   return (
-    <nav>
+    <nav className="ml-auto">
       <ul className="list-reset flex items-center">
         <li className="nav-item">
-          <Link to="/about">Home</Link>
+          <Link to="/">Home</Link>
         </li>
 
         <li className="inline-block relative nav-item dropdown">
@@ -29,6 +29,10 @@ function Nav({ categories }) {
         <li className="nav-item">
           <Link to="/about">About</Link>
         </li>
+
+        {/* <li className="nav-item">
+          <Link to="/cart">Cart (0)</Link>
+        </li> */}
       </ul>
     </nav>
   )

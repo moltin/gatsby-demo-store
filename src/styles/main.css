@@ -1,7 +1,23 @@
-@import 'tailwindcss/preflight';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind preflight;
+@tailwind utilities;
+@tailwind components;
 
 @import './nav.css';
 @import './product.css';
 @import './typography.css';
+
+body {
+  @apply bg-white font-sans antialiased leading-normal;
+}
+
+* {
+  transition: all 0.2s ease;
+}
+
+a {
+  @apply text-grey-dark;
+}
+
+a:hover {
+  @apply text-black;
+}

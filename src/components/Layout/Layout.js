@@ -6,6 +6,8 @@ import Header from './Header'
 import Banner from './Banner'
 import Footer from './Footer'
 
+import '../../styles/main.css'
+
 function Layout({ children }) {
   return (
     <StaticQuery
@@ -19,21 +21,21 @@ function Layout({ children }) {
         }
       `}
       render={data => (
-        <>
+        <div className="container">
           <Header siteTitle={data.site.siteMetadata.title} categories={[]} />
 
           <main>{children}</main>
 
           <Banner />
           <Footer categories={[]} />
-        </>
+        </div>
       )}
     />
   )
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 }
 
 export default Layout
