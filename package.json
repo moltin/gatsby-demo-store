@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "@moltin/gatsby-source-moltin": "^0.1.0",
+    "@moltin/gatsby-source-moltin": "^1.0.0",
     "babel-plugin-styled-components": "1.10.0",
     "babel-plugin-tailwind-components": "0.5.10",
     "gatsby": "2.0.76",
