@@ -3,8 +3,10 @@ import React, { useContext } from 'react'
 import { CartContext } from '../components/CartContext'
 import CartItem from './CartItem'
 
-export default function CartItemList({ items, meta, removeFromCart }) {
-  if (!items || !meta) return <p>Your cart is empty</p>
+export default function CartItemList() {
+  const { items, removeFromCart } = useContext(CartContext)
+
+  if (!items) return <p>Your cart is empty</p>
 
   return (
     <div className="my-6">

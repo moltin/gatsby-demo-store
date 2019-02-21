@@ -57,7 +57,7 @@ function CartProvider({ clientId, cartId = 'abc', children }) {
     <Provider
       value={{
         count,
-        setCount,
+        empty: count === 0,
         items,
         meta,
         addToCart,

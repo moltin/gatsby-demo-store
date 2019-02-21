@@ -12,14 +12,14 @@ function ProductPage({ data: { product } }) {
   } = product
 
   return (
-    <div className="flex flex-wrap -mx-5">
-      <div className="px-5 py-2 md:p-5 w-full lg:w-1/2">
-        <div className="sticky pin-t pt-10">
-          <Photo src={product.mainImage} style={{ maxHeight: '400px' }} />
+    <div className="flex flex-wrap md:bg-grey-light">
+      <div className="py-2 md:py-5 md:px-5 w-full lg:w-1/2">
+        <div className="sticky pin-t">
+          <Photo src={product.mainImage} />
         </div>
       </div>
 
-      <div className="px-5 py-2 md:p-5 w-full lg:w-1/2">
+      <div className="py-2 md:py-5 md:px-5 md:pr-10 w-full lg:w-1/2">
         <div className="my-2 flex flex-col md:flex-col-reverse">
           <h1 className="text-3xl md:text-5xl text-black font-normal">
             {product.name}
@@ -61,7 +61,7 @@ export const query = graphql`
       description
       mainImage {
         childImageSharp {
-          fixed(height: 400) {
+          fixed(width: 560) {
             ...GatsbyImageSharpFixed
           }
         }
