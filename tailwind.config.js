@@ -1,87 +1,15 @@
 let colors = {
   transparent: 'transparent',
-
-  black: '#22292f',
-  'grey-darkest': '#3d4852',
-  'grey-darker': '#606f7b',
-  'grey-dark': '#8795a1',
-  grey: '#b8c2cc',
-  'grey-light': '#dae1e7',
-  'grey-lighter': '#f1f5f8',
-  'grey-lightest': '#f8fafc',
+  black: '#131313',
+  'grey-dark': '#3D3D3D',
+  grey: '#6E6E6E',
+  'grey-light': '#F2F4F5',
+  'grey-lighter': '#B3B3B3',
   white: '#ffffff',
-
-  'red-darkest': '#3b0d0c',
-  'red-darker': '#621b18',
-  'red-dark': '#cc1f1a',
-  red: '#e3342f',
-  'red-light': '#ef5753',
-  'red-lighter': '#f9acaa',
-  'red-lightest': '#fcebea',
-
-  'orange-darkest': '#462a16',
-  'orange-darker': '#613b1f',
-  'orange-dark': '#de751f',
-  orange: '#f6993f',
-  'orange-light': '#faad63',
-  'orange-lighter': '#fcd9b6',
-  'orange-lightest': '#fff5eb',
-
-  'yellow-darkest': '#453411',
-  'yellow-darker': '#684f1d',
-  'yellow-dark': '#f2d024',
-  yellow: '#ffed4a',
-  'yellow-light': '#fff382',
-  'yellow-lighter': '#fff9c2',
-  'yellow-lightest': '#fcfbeb',
-
-  'green-darkest': '#0f2f21',
-  'green-darker': '#1a4731',
-  'green-dark': '#1f9d55',
-  green: '#38c172',
-  'green-light': '#51d88a',
-  'green-lighter': '#a2f5bf',
-  'green-lightest': '#e3fcec',
-
-  'teal-darkest': '#0d3331',
-  'teal-darker': '#20504f',
-  'teal-dark': '#38a89d',
-  teal: '#4dc0b5',
-  'teal-light': '#64d5ca',
-  'teal-lighter': '#a0f0ed',
-  'teal-lightest': '#e8fffe',
-
-  'blue-darkest': '#12283a',
-  'blue-darker': '#1c3d5a',
-  'blue-dark': '#2779bd',
-  blue: '#3490dc',
-  'blue-light': '#6cb2eb',
-  'blue-lighter': '#bcdefa',
-  'blue-lightest': '#eff8ff',
-
-  'indigo-darkest': '#191e38',
-  'indigo-darker': '#2f365f',
-  'indigo-dark': '#5661b3',
-  indigo: '#6574cd',
-  'indigo-light': '#7886d7',
-  'indigo-lighter': '#b2b7ff',
-  'indigo-lightest': '#e6e8ff',
-
-  'purple-darkest': '#21183c',
-  'purple-darker': '#382b5f',
-  'purple-dark': '#794acf',
-  purple: '#9561e2',
-  'purple-light': '#a779e9',
-  'purple-lighter': '#d6bbfc',
-  'purple-lightest': '#f3ebff',
-
-  'pink-darkest': '#451225',
-  'pink-darker': '#6f213f',
-  'pink-dark': '#eb5286',
-  pink: '#f66d9b',
-  'pink-light': '#fa7ea8',
-  'pink-lighter': '#ffbbca',
-  'pink-lightest': '#ffebef',
+  red: '#E64D39',
+  green: '#27B86C',
+  orange: '#FF8119',
+  pink: '#FF1984'
 }
 
 module.exports = {
@@ -91,23 +19,23 @@ module.exports = {
     sm: '576px',
     md: '768px',
     lg: '992px',
-    xl: '1200px',
+    xl: '1200px'
   },
 
   fonts: {
     sans: [
+      'Roboto',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',
       'Segoe UI',
-      'Roboto',
       'Oxygen',
       'Ubuntu',
       'Cantarell',
       'Fira Sans',
       'Droid Sans',
       'Helvetica Neue',
-      'sans-serif',
+      'sans-serif'
     ],
     serif: [
       'Constantia',
@@ -119,7 +47,7 @@ module.exports = {
       'Bitstream Vera Serif',
       'Liberation Serif',
       'Georgia',
-      'serif',
+      'serif'
     ],
     mono: [
       'Menlo',
@@ -127,8 +55,8 @@ module.exports = {
       'Consolas',
       'Liberation Mono',
       'Courier New',
-      'monospace',
-    ],
+      'monospace'
+    ]
   },
 
   textSizes: {
@@ -140,7 +68,7 @@ module.exports = {
     '2xl': '1.5rem', // 24px
     '3xl': '1.875rem', // 30px
     '4xl': '2.25rem', // 36px
-    '5xl': '3rem', // 48px
+    '5xl': '3rem' // 48px
   },
 
   fontWeights: {
@@ -152,20 +80,20 @@ module.exports = {
     semibold: 600,
     bold: 700,
     extrabold: 800,
-    black: 900,
+    black: 900
   },
 
   leading: {
     none: 1,
     tight: 1.25,
     normal: 1.5,
-    loose: 2,
+    loose: 2
   },
 
   tracking: {
     tight: '-0.05em',
     normal: '0',
-    wide: '0.05em',
+    wide: '0.05em'
   },
 
   textColors: colors,
@@ -175,7 +103,7 @@ module.exports = {
   backgroundSize: {
     auto: 'auto',
     cover: 'cover',
-    contain: 'contain',
+    contain: 'contain'
   },
 
   borderWidths: {
@@ -183,7 +111,7 @@ module.exports = {
     '0': '0',
     '2': '2px',
     '4': '4px',
-    '8': '8px',
+    '8': '8px'
   },
 
   borderColors: global.Object.assign({ default: colors['grey-light'] }, colors),
@@ -193,7 +121,7 @@ module.exports = {
     sm: '.125rem',
     default: '.25rem',
     lg: '.5rem',
-    full: '9999px',
+    full: '9999px'
   },
 
   width: {
@@ -225,7 +153,7 @@ module.exports = {
     '1/6': '16.66667%',
     '5/6': '83.33333%',
     full: '100%',
-    screen: '100vw',
+    screen: '100vw'
   },
 
   height: {
@@ -246,18 +174,18 @@ module.exports = {
     '48': '12rem',
     '64': '16rem',
     full: '100%',
-    screen: '100vh',
+    screen: '100vh'
   },
 
   minWidth: {
     '0': '0',
-    full: '100%',
+    full: '100%'
   },
 
   minHeight: {
     '0': '0',
     full: '100%',
-    screen: '100vh',
+    screen: '100vh'
   },
 
   maxWidth: {
@@ -270,12 +198,12 @@ module.exports = {
     '3xl': '80rem',
     '4xl': '90rem',
     '5xl': '100rem',
-    full: '100%',
+    full: '100%'
   },
 
   maxHeight: {
     full: '100%',
-    screen: '100vh',
+    screen: '100vh'
   },
 
   padding: {
@@ -293,7 +221,7 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem',
+    '32': '8rem'
   },
 
   margin: {
@@ -312,7 +240,7 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem',
+    '32': '8rem'
   },
 
   negativeMargin: {
@@ -330,7 +258,7 @@ module.exports = {
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
-    '32': '8rem',
+    '32': '8rem'
   },
 
   shadows: {
@@ -339,7 +267,7 @@ module.exports = {
     lg: '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
     outline: '0 0 0 3px rgba(52,144,220,0.5)',
-    none: 'none',
+    none: 'none'
   },
 
   zIndex: {
@@ -349,7 +277,7 @@ module.exports = {
     '20': 20,
     '30': 30,
     '40': 40,
-    '50': 50,
+    '50': 50
   },
 
   opacity: {
@@ -357,15 +285,15 @@ module.exports = {
     '25': '.25',
     '50': '.5',
     '75': '.75',
-    '100': '1',
+    '100': '1'
   },
 
   svgFill: {
-    current: 'currentColor',
+    current: 'currentColor'
   },
 
   svgStroke: {
-    current: 'currentColor',
+    current: 'currentColor'
   },
 
   modules: {
@@ -418,19 +346,19 @@ module.exports = {
     visibility: ['responsive'],
     whitespace: ['responsive'],
     width: ['responsive'],
-    zIndex: ['responsive'],
+    zIndex: ['responsive']
   },
 
   plugins: [
     require('tailwindcss/plugins/container')({
-      // center: true,
-      // padding: '1rem',
-    }),
+      center: true,
+      padding: '1rem'
+    })
   ],
 
   options: {
     prefix: '',
     important: false,
-    separator: ':',
-  },
+    separator: ':'
+  }
 }

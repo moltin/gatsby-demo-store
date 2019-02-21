@@ -1,14 +1,7 @@
 import React from 'react'
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import ProductGrid from '../components/productGrid'
+import ProductGrid from '../components/ProductGrid'
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <ProductGrid />
-  </Layout>
-)
+const IndexPage = () => <ProductGrid />
 
 export default IndexPage
