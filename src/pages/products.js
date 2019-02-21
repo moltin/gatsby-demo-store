@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import SEO from '../components/seo'
+import SEO from '../components/SEO'
 import ProductGrid from '../components/ProductGrid'
 
 const IndexPage = ({ data: { allMoltinProduct } }) => (
