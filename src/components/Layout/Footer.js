@@ -61,7 +61,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-black no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline inline-flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -77,7 +77,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-black no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline inline-flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -93,7 +93,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-black no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline inline-flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"
@@ -109,7 +109,7 @@ export default function Footer({ categories }) {
         <li>
           <Link
             to="/"
-            className="text-grey-dark hover:text-black no-underline flex items-center"
+            className="text-grey-dark hover:text-black no-underline inline-flex items-center"
           >
             <svg
               className="fill-current w-4 mr-2"

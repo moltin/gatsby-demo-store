@@ -18,6 +18,8 @@ export const query = graphql`
       edges {
         node {
           id
+          name
+          slug
           mainImage {
             childImageSharp {
               fixed(width: 400) {
@@ -25,8 +27,6 @@ export const query = graphql`
               }
             }
           }
-          name
-          slug
           meta {
             display_price {
               without_tax {
