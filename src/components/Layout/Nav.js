@@ -17,10 +17,10 @@ function Nav({ categories }) {
           <Link to="/products">All Products</Link>
 
           <ul className="nav-item-dropdown block">
-            {categories.map(category => (
+            {categories.map(({ node: category }) => (
               <li key={category.id}>
                 <Link
-                  to={`/category/${category.slug}`}
+                  to={`/categories/${category.slug}`}
                   className="nav-item-dropdown-link"
                 >
                   {category.name}

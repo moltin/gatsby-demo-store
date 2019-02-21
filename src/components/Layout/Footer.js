@@ -16,10 +16,10 @@ export default function Footer({ categories }) {
         <li className="font-semibold md:mb-3 text-grey text-sm uppercase">
           Categories
         </li>
-        {categories.map(category => (
+        {categories.map(({ node: category }) => (
           <li key={category.id}>
             <Link
-              to={`/category/${category.slug}`}
+              to={`/categories/${category.slug}`}
               className="text-grey-dark hover:text-black no-underline"
             >
               {category.name}

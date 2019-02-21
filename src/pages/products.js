@@ -19,6 +19,7 @@ export const query = graphql`
           id
           name
           slug
+          on_sale
           mainImage {
             childImageSharp {
               fixed(width: 400) {

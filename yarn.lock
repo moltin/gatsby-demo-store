@@ -767,7 +767,7 @@
     "@moltin/request" "^1.4.3"
     gatsby-source-filesystem "^2.0.20"
 
-"@moltin/request@^1.4.3":
+"@moltin/request@^1.4.3", "@moltin/request@^1.4.4":
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/@moltin/request/-/request-1.4.4.tgz#d70326ac2358b95cf614f73fd002d77d4699c9e6"
   integrity sha512-YDD7JxIsaK0snaB/vklkIyMv9Nsn1CRLYszVNMtkFh23U9SxlxkZEk8J2NDXYVA6m2F6bzf9lQ4EbwxcbGOg+g==

@@ -53,8 +53,8 @@ function ProductPage({ data: { product } }) {
 export default ProductPage
 
 export const query = graphql`
-  query($slug: String!) {
-    product: moltinProduct(slug: { eq: $slug }) {
+  query($id: String!) {
+    product: moltinProduct(id: { eq: $id }) {
       id
       slug
       name

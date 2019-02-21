@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default function PageTitle({ title, description, children }) {
   if (!title && !children) return null
 

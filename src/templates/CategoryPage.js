@@ -1,42 +1,26 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-function CollectionPageTemplate({ data: { product } }) {
-  const {
-    meta: { display_price }
-  } = product
+import PageTitle from '../components/PageTitle'
 
+function CollectionPage({ data: { category } }) {
   return (
     <>
       <PageTitle title={category.name} description={category.description} />
-      <ProductGrid products={products} />
+      {/* <ProductGrid products={products} /> */}
     </>
   )
 }
 
-export default CollectionPageTemplate
+export default CollectionPage
 
 export const query = graphql`
-  query($slug: String!) {
-    product: moltinProduct(slug: { eq: $slug }) {
+  query($id: String!) {
+    category: moltinCategory(id: { eq: $id }) {
       id
       slug
       name
       description
-      mainImage {
-        childImageSharp {
-          fixed(width: 400) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      meta {
-        display_price {
-          without_tax {
-            formatted
-          }
-        }
-      }
     }
   }
 `
