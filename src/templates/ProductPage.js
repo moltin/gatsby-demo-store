@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 
-import { CartContext } from '../components/CartContext'
 import Photo from '../components/Photo'
+import AddToCart from '../components/AddToCart'
 
 function ProductPage({ data: { product } }) {
-  const { addToCart } = useContext(CartContext)
-
   const {
     meta: { display_price }
   } = product
@@ -31,12 +29,7 @@ function ProductPage({ data: { product } }) {
         </div>
 
         <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-          <button
-            onClick={() => addToCart(product.id, 1)}
-            className="inline-block appearance-none bg-black border border-black text-white px-4 py-3 leading-tight rounded-none focus:outline-none my-2"
-          >
-            Add to Cart
-          </button>
+          <AddToCart productId={product.id} />
         </div>
 
         <div className="my-2 md:my-5">

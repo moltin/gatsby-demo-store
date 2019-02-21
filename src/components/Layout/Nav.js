@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { CartContext } from '../CartContext'
 
 function Nav() {
-  const { count, empty } = useContext(CartContext)
+  const { count, isEmpty } = useContext(CartContext)
 
   return (
     <nav className="ml-auto">
@@ -48,7 +48,7 @@ function Nav() {
                 </g>
               </svg>
 
-              {!empty && (
+              {!isEmpty && (
                 <span className="inline-flex rounded-full bg-yellow text-black text-xs font-semibold mt-1 ml-2 p-3 h-4 w-4 items-center justify-center">
                   {count}
                 </span>
