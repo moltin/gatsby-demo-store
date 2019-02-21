@@ -1,25 +1,26 @@
 import React, { createContext, useState, useEffect } from 'react'
-import { createClient } from '@moltin/request'
+import { createClient, createCartIdentifier } from '@moltin/request'
 
 let CartContext
 
 const { Provider, Consumer } = (CartContext = createContext())
 
-function CartProvider({ clientId, cartId = 'abc', children }) {
+function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
   const [count, setCount] = useState(0)
   const [items, setItems] = useState([])
   const [meta, setMeta] = useState(null)
+  const isEmpty = count === 0
 
   const moltin = new createClient({
-    client_id: 'EdP3Gi1agyUF3yFS7Ngm8iyodLgbSR3wY4ceoJl0d2',
-    application: 'react-shopkit'
+    client_id: clientId,
+    application: 'react-cartkit'
   })
 
   useEffect(() => {
-    getCart()
-  }, [])
+    getCart(cartId)
+  }, [cartId])
 
-  async function getCart() {
+  async function getCart(cartId) {
     setCount(0)
     const { data, meta } = await moltin.get(`carts/${cartId}/items`)
 
@@ -57,7 +58,7 @@ function CartProvider({ clientId, cartId = 'abc', children }) {
     <Provider
       value={{
         count,
-        empty: count === 0,
+        isEmpty,
         items,
         meta,
         addToCart,
