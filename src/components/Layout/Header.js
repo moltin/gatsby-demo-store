@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import PropTypes from 'prop-types'
 
 import Nav from './Nav'
 import Logo from '../../images/logo.svg'
@@ -15,10 +14,6 @@ function Header({ siteTitle, categories }) {
       <Nav categories={categories} />
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string
 }
 
 Header.defaultProps = {

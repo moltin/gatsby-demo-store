@@ -1,8 +1,0 @@
-p {
-  @apply text-grey leading-normal;
-}
-
-.page-title h1::after {
-  @apply bg-grey-light h-px w-16 block mx-auto;
-  content: '';
-}

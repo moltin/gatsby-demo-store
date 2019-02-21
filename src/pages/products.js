@@ -1,15 +1,14 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import ProductGrid from '../components/ProductGrid'
 
 const IndexPage = ({ data: { allMoltinProduct } }) => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+  <>
+    <SEO title="All Products" />
     <ProductGrid products={allMoltinProduct.edges} />
-  </Layout>
+  </>
 )
 
 export const query = graphql`
