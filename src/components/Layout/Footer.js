@@ -6,7 +6,7 @@ import Logo from '../../images/logo.svg'
 export default function Footer({ categories }) {
   return (
     <footer className="py-6 -px-2 md:py-12 md:flex">
-      <div className="hidden md:flex list-reset md:w-1/4 text-center md:text-left">
+      <div className="list-reset md:w-1/4 text-center md:text-left">
         <Link to="/" className="text-grey-dark hover:text-black no-underline">
           <img src={Logo} alt="Moltin demo store" />
         </Link>

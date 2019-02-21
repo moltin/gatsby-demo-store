@@ -32,7 +32,7 @@ function Layout({ children }) {
 
   return (
     <div className="container">
-      <Header siteTitle={site.siteMetadata.title} categories={categories} />
+      <Header siteTitle={site.siteMetadata.title} />
 
       <main>{children}</main>
 

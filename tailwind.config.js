@@ -9,7 +9,8 @@ let colors = {
   red: '#E64D39',
   green: '#27B86C',
   orange: '#FF8119',
-  pink: '#FF1984'
+  pink: '#FF1984',
+  yellow: '#FFE285'
 }
 
 module.exports = {
@@ -110,6 +111,7 @@ module.exports = {
     default: '1px',
     '0': '0',
     '2': '2px',
+    '3': '3px',
     '4': '4px',
     '8': '8px'
   },

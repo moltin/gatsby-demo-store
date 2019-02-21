@@ -8,8 +8,7 @@ import CartItemList from '../components/CartItemList'
 const CartPage = () => {
   const { items, meta, removeFromCart } = useContext(CartContext)
 
-  // const subTotal = meta.display_price.without_tax.formatted
-  const subTotal = 0
+  const subTotal = meta ? meta.display_price.without_tax.formatted : 0
 
   return (
     <React.Fragment>
