@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../CartContext'
+import { CartContext } from '../Cartkit'
 
 import Logo from '../../images/large-logo.svg'
 
@@ -13,7 +13,7 @@ function Header({ siteTitle }) {
       <nav className="flex items-center justify-between relative">
         <ul className="list-reset items-center justify-start hidden lg:flex lg:w-1/3">
           <li className="nav-item">
-            <Link to="/products">All Products</Link>
+            <Link to="/products">Products</Link>
           </li>
 
           <li className="nav-item">

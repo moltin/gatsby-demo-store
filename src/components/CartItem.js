@@ -6,16 +6,16 @@ import QuantityStepper from './QuantityStepper'
 
 function CartItem({
   id,
-  product_id,
+  type,
   name,
   sku,
   quantity,
   meta,
-  image: { href: src },
+  image: { href },
   removeFromCart,
   locked
 }) {
-  // const images = [{ id: product_id, src }]
+  // const images = [{ id: href, src: href }]
   const {
     display_price: {
       without_tax: {
@@ -40,7 +40,7 @@ function CartItem({
 
   return (
     <div className={klass}>
-      <div className="w-16 md:w-32 mr-4 md:mr-6">
+      <div className="w-16 md:w-32 md:mr-6">
         {/* <Photo images={images} /> */}
       </div>
       <div className="w-full flex justify-between items-center">
@@ -49,7 +49,7 @@ function CartItem({
           <div className="text-grey text-sm">{sku}</div>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between md:w-1/2">
           {!locked && (
             <div className="hidden md:block">
               <QuantityStepper itemId={id} quantity={quantity} />
@@ -67,11 +67,17 @@ function CartItem({
           </div>
 
           {!locked && (
-            <button
-              className="text-black text-2xl md:text-3xl font-semibold ml-4 md:ml-6"
-              onClick={onRemove}
-            >
-              &times;
+            <button className="text-black ml-4 md:ml-6" onClick={onRemove}>
+              <svg
+                className="fill-current w-3 h-3"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 12 12"
+              >
+                <path
+                  d="M8.54538034,10 L4.3012616,5.75588126 C3.89957947,5.35419913 3.89957947,4.70294373 4.3012616,4.3012616 C4.70294373,3.89957947 5.35419913,3.89957947 5.75588126,4.3012616 L10,8.54538034 L14.2441187,4.3012616 C14.6458009,3.89957947 15.2970563,3.89957947 15.6987384,4.3012616 C16.1004205,4.70294373 16.1004205,5.35419913 15.6987384,5.75588126 L11.4546197,10 L15.6987384,14.2441187 C16.1004205,14.6458009 16.1004205,15.2970563 15.6987384,15.6987384 C15.2970563,16.1004205 14.6458009,16.1004205 14.2441187,15.6987384 L10,11.4546197 L5.75588126,15.6987384 C5.35419913,16.1004205 4.70294373,16.1004205 4.3012616,15.6987384 C3.89957947,15.2970563 3.89957947,14.6458009 4.3012616,14.2441187 L8.54538034,10 Z"
+                  transform="translate(-4 -4)"
+                />
+              </svg>
             </button>
           )}
         </div>

@@ -7,7 +7,10 @@ const { Provider, Consumer } = (CartContext = createContext())
 
 function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
   const [count, setCount] = useState(0)
-  const [items, setItems] = useState([])
+  const [allItems, setAllItems] = useState([])
+  const [cartItems, setCartItems] = useState([])
+  const [promotionItems, setPromotionItems] = useState([])
+  const [taxItems, setTaxItems] = useState([])
   const [meta, setMeta] = useState(null)
   const isEmpty = count === 0
 
@@ -20,17 +23,27 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
     getCart(cartId)
   }, [cartId])
 
-  function updateCount(items) {
-    const newCount = items.reduce((sum, { quantity }) => sum + quantity, 0)
+  function updateItems(items) {
+    const cartItems = items.filter(({ type }) => type === 'cart_item')
+    const promotionItems = items.filter(({ type }) => type === 'promotion_item')
+    const taxItems = items.filter(({ type }) => type === 'tax_item')
 
+    const newCount = cartItems.reduce(
+      (sum, { type, quantity }) => type === 'cart_item' && sum + quantity,
+      0
+    )
+
+    setAllItems(items)
+    setCartItems(cartItems)
+    setPromotionItems(promotionItems)
+    setTaxItems(taxItems)
     setCount(newCount)
   }
 
   async function getCart(id) {
     const { data, meta } = await moltin.get(`carts/${id}/items`)
 
-    updateCount(data)
-    setItems(data)
+    updateItems(data)
     setMeta(meta)
   }
 
@@ -41,8 +54,7 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       quantity
     })
 
-    updateCount(data)
-    setItems(data)
+    updateItems(data)
     setMeta(meta)
   }
 
@@ -53,16 +65,24 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       quantity
     })
 
-    updateCount(data)
-    setItems(data)
+    updateItems(data)
     setMeta(meta)
   }
 
   async function removeFromCart(id) {
     const { data, meta } = await moltin.delete(`carts/${cartId}/items/${id}`)
 
-    updateCount(data)
-    setItems(data)
+    updateItems(data)
+    setMeta(meta)
+  }
+
+  async function addPromotion(code) {
+    const { data, meta } = await moltin.post(`carts/${cartId}/items`, {
+      type: 'promotion_item',
+      code
+    })
+
+    updateItems(data)
     setMeta(meta)
   }
 
@@ -71,11 +91,15 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       value={{
         count,
         isEmpty,
-        items,
+        cartItems,
+        promotionItems,
+        taxItems,
+        allItems,
         meta,
         addToCart,
         updateQuantity,
-        removeFromCart
+        removeFromCart,
+        addPromotion
       }}
     >
       {children}

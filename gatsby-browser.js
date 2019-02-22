@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CartProvider } from './src/components/CartContext'
+import { CartProvider } from './src/components/Cartkit'
 import Layout from './src/components/Layout'
 
 export const wrapRootElement = ({ element }) => {

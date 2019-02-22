@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 
-import { CartContext } from '../components/CartContext'
+import { CartContext } from './Cartkit'
 import CartItem from './CartItem'
 
 export default function CartItemList(props) {
-  const { isEmpty, items, meta, removeFromCart } = useContext(CartContext)
+  const { isEmpty, cartItems, meta, removeFromCart } = useContext(CartContext)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
@@ -12,7 +12,7 @@ export default function CartItemList(props) {
 
   return (
     <div className="my-6">
-      {items.map(item => (
+      {cartItems.map(item => (
         <CartItem
           key={item.id}
           removeFromCart={removeFromCart}
