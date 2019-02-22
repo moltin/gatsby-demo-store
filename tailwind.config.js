@@ -5,6 +5,7 @@ let colors = {
   grey: '#6E6E6E',
   'grey-light': '#F2F4F5',
   'grey-lighter': '#B3B3B3',
+  'grey-lightest': '#F7F7F7',
   white: '#ffffff',
   red: '#E64D39',
   green: '#27B86C',

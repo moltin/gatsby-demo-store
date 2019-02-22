@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import QuantityStepper from './QuantityStepper'
 
 // import Photo from './Photo'
 
@@ -11,7 +12,8 @@ function CartItem({
   quantity,
   meta,
   image: { href: src },
-  removeFromCart
+  removeFromCart,
+  locked
 }) {
   // const images = [{ id: product_id, src }]
   const {
@@ -25,7 +27,7 @@ function CartItem({
   const [removing, setRemoving] = useState(false)
 
   const klass = classNames(
-    'border-b border-grey-light py-6 flex items-center',
+    'border-t border-grey-light py-2 md:py-4 lg:py-6 flex items-center',
     {
       'opacity-50': removing
     }
@@ -41,26 +43,37 @@ function CartItem({
       <div className="w-16 md:w-32 mr-4 md:mr-6">
         {/* <Photo images={images} /> */}
       </div>
-      <div className="w-full flex items-center">
-        <div className="mr-auto">
-          <div className="text-black md:text-lg font-semibold">{name}</div>
+      <div className="w-full flex justify-between items-center">
+        <div>
+          <div className="text-black">{name}</div>
           <div className="text-grey text-sm">{sku}</div>
         </div>
 
-        <div className="w-1/3 flex items-center justify-between">
-          <div className="w-1/2">{quantity}</div>
+        <div className="flex items-center justify-between">
+          {!locked && (
+            <div className="hidden md:block">
+              <QuantityStepper itemId={id} quantity={quantity} />
+            </div>
+          )}
 
-          <div className="w-1/2 text-right">
-            <div className="text-black font-semibold text-lg">{value}</div>
-            {quantity > 1 && <div className="text-grey">{unit} each</div>}
+          <div className="md:w-1/2 text-right">
+            <div className="text-black">{value}</div>
+            {quantity > 1 && (
+              <div className="text-grey text-sm md:text-base">
+                <span className="md:hidden">{quantity} x </span>
+                {unit} <span className="hidden md:inline-block">each</span>
+              </div>
+            )}
           </div>
 
-          <button
-            className="text-black font-semibold ml-4 md:ml-6"
-            onClick={onRemove}
-          >
-            &times;
-          </button>
+          {!locked && (
+            <button
+              className="text-black text-2xl md:text-3xl font-semibold ml-4 md:ml-6"
+              onClick={onRemove}
+            >
+              &times;
+            </button>
+          )}
         </div>
       </div>
     </div>

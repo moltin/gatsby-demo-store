@@ -20,13 +20,16 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
     getCart(cartId)
   }, [cartId])
 
-  async function getCart(cartId) {
-    setCount(0)
-    const { data, meta } = await moltin.get(`carts/${cartId}/items`)
+  function updateCount(items) {
+    const newCount = items.reduce((sum, { quantity }) => sum + quantity, 0)
 
-    const count = data.length
+    setCount(newCount)
+  }
 
-    setCount(count)
+  async function getCart(id) {
+    const { data, meta } = await moltin.get(`carts/${id}/items`)
+
+    updateCount(data)
     setItems(data)
     setMeta(meta)
   }
@@ -38,18 +41,27 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       quantity
     })
 
-    const count = data.length
+    updateCount(data)
+    setItems(data)
+    setMeta(meta)
+  }
 
-    setCount(count)
+  async function updateQuantity(id, quantity) {
+    const { data, meta } = await moltin.put(`carts/${cartId}/items/${id}`, {
+      type: 'cart_item',
+      id,
+      quantity
+    })
+
+    updateCount(data)
     setItems(data)
     setMeta(meta)
   }
 
   async function removeFromCart(id) {
     const { data, meta } = await moltin.delete(`carts/${cartId}/items/${id}`)
-    const count = data.length
 
-    setCount(count)
+    updateCount(data)
     setItems(data)
     setMeta(meta)
   }
@@ -62,6 +74,7 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
         items,
         meta,
         addToCart,
+        updateQuantity,
         removeFromCart
       }}
     >

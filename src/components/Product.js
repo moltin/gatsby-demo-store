@@ -5,12 +5,12 @@ import Photo from './Photo'
 import Badge from './Badge'
 
 export default function Product({
-  node: { id, slug, name, mainImage, meta, on_sale },
+  node: { id, slug, name, mainImage, meta, on_sale }
 }) {
   const price = meta.display_price.without_tax.formatted
 
   return (
-    <article key={id} className="px-5 py-2 md:p-5 w-1/2 md:w-1/3">
+    <article key={id} className="px-5 py-2 w-full md:p-5 md:w-1/2 lg:w-1/3">
       <Link
         to={`products/${slug}`}
         className="block w-full h-full no-underline"

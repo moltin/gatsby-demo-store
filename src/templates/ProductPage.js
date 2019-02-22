@@ -23,7 +23,7 @@ function ProductPage({ data: { product } }) {
             {product.name}
           </h1>
 
-          <span className="block text-grey text-xl my-2 md:mt-8">
+          <span className="block text-grey text-xl md:my-2 md:mt-8">
             {display_price.without_tax.formatted}
           </span>
         </div>

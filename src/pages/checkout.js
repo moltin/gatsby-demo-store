@@ -7,8 +7,17 @@ import CartItemList from '../components/CartItemList'
 export default function CartPage() {
   return (
     <React.Fragment>
-      <PageTitle title="Shopping Cart" />
-      <CartItemList />
+      <PageTitle title="Checkout" />
+
+      <div className="flex flex-wrap">
+        <div className="py-2 w-full lg:w-2/3">hello</div>
+
+        <div className="py-2 w-full lg:w-1/3">
+          <div className="md:bg-grey-lightest p-5">
+            <CartItemList locked />
+          </div>
+        </div>
+      </div>
 
       <Link
         to="/checkout"

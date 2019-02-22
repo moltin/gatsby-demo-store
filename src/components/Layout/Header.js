@@ -1,17 +1,85 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import Nav from './Nav'
+import { CartContext } from '../CartContext'
+
 import Logo from '../../images/large-logo.svg'
 
-function Header({ siteTitle, categories }) {
-  return (
-    <header className="py-6 md:py-10 flex items-center justify-between relative">
-      <Link to="/">
-        <img src={Logo} className="block" title={siteTitle} alt={siteTitle} />
-      </Link>
+function Header({ siteTitle }) {
+  const { count, isEmpty } = useContext(CartContext)
 
-      <Nav categories={categories} />
+  return (
+    <header className="py-6 md:py-10">
+      <nav className="flex items-center justify-between relative">
+        <ul className="list-reset items-center justify-start hidden lg:flex lg:w-1/3">
+          <li className="nav-item">
+            <Link to="/products">All Products</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+
+        <div className="hidden md:flex md:w-1/3 flex items-center">
+          <Link to="/" className="mx-auto flex items-center justify-center">
+            <img src={Logo} title={siteTitle} alt={siteTitle} />
+          </Link>
+        </div>
+
+        <ul className="list-reset flex items-center justify-end w-1/3">
+          <li className="nav-item">
+            <Link to="/cart">
+              <span className="inline-flex items-center">
+                <svg
+                  viewBox="0 0 16 17"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  className="inline-block h-4 mt-1"
+                >
+                  <g
+                    stroke="none"
+                    strokeWidth="1"
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <g
+                      transform="translate(-1367.000000, -50.000000)"
+                      stroke="#131313"
+                      strokeWidth="1.5"
+                    >
+                      <g
+                        id="header"
+                        transform="translate(64.000000, 48.000000)"
+                      >
+                        <g
+                          id="cart"
+                          transform="translate(1262.000000, 0.000000)"
+                        >
+                          <g transform="translate(42.000000, 3.000000)">
+                            <polygon id="Path-2" points="0 15 1 4 13 4 14 15" />
+                            <path
+                              d="M4,7 C4,2 4,0 7,0 C10,0 10,2 10,7"
+                              id="Path-3"
+                            />
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+
+                {!isEmpty && (
+                  <span className="inline-flex rounded-full bg-yellow text-black text-xs font-semibold mt-1 ml-2 p-3 h-4 w-4 items-center justify-center">
+                    {count}
+                  </span>
+                )}
+              </span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   )
 }

@@ -39,6 +39,10 @@ p {
 
 /* Nav */
 
+.nav-item:first-child {
+  @apply ml-0;
+}
+
 .nav-item {
   @apply ml-12;
 }

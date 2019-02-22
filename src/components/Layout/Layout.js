@@ -7,39 +7,37 @@ import Footer from './Footer'
 
 import '../../styles/main.css'
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   const {
     site,
     allMoltinCategory: { edges: categories }
-  } = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allMoltinCategory {
-        edges {
-          node {
-            id
-            name
-            slug
-          }
-        }
-      }
-    }
-  `)
+  } = useStaticQuery(categoriesQuery)
 
   return (
     <div className="container">
       <Header siteTitle={site.siteMetadata.title} />
-
       <main>{children}</main>
-
       <Banner />
       <Footer categories={categories} />
     </div>
   )
 }
 
-export default Layout
+const categoriesQuery = graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMoltinCategory {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+  }
+`
