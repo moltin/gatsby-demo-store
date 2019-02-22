@@ -9,7 +9,9 @@ const IndexPage = ({ data: { allMoltinProduct } }) => (
   <>
     <SEO title="All Products" />
     <PageTitle>All Products</PageTitle>
-    <ProductGrid products={allMoltinProduct.edges} />
+    <ProductGrid
+      products={allMoltinProduct.edges.map(({ node: product }) => product)}
+    />
   </>
 )
 
