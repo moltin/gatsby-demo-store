@@ -759,15 +759,15 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-"@moltin/gatsby-source-moltin@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.0.0.tgz#a668af66c3ba6ef9fdd1818e1e7cc761753473de"
-  integrity sha512-DgcvmGgNfNKkG1JtakyJHb5/otxR8fR/gY0MB6GCNMShzE+jtucS3IzVubLnmaCpQVct+BWIyZIors54c1qiIA==
+"@moltin/gatsby-source-moltin@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.1.0.tgz#0c6d3437fa9eacb8e552d2bf4cf866f21f13404d"
+  integrity sha512-zkzGtuEuG4f/HHF0OJ2hmhpzyLjsVtyh2vSzzk/zim9IsA97kLSGQXMqUpEbs6jAEC5WuevlfZugDGFHDCLenw==
   dependencies:
     "@moltin/request" "^1.4.3"
     gatsby-source-filesystem "^2.0.20"
 
-"@moltin/request@^1.4.3", "@moltin/request@^1.4.4":
+"@moltin/request@1.4.4", "@moltin/request@^1.4.3":
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/@moltin/request/-/request-1.4.4.tgz#d70326ac2358b95cf614f73fd002d77d4699c9e6"
   integrity sha512-YDD7JxIsaK0snaB/vklkIyMv9Nsn1CRLYszVNMtkFh23U9SxlxkZEk8J2NDXYVA6m2F6bzf9lQ4EbwxcbGOg+g==
@@ -9460,7 +9460,7 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rimraf@2.6.3, rimraf@^2.2.8, rimraf@^2.5.0, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3:
+rimraf@2.6.3, rimraf@^2.2.8, rimraf@^2.5.0, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
