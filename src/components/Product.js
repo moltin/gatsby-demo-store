@@ -4,9 +4,7 @@ import { Link } from 'gatsby'
 import Photo from './Photo'
 import Badge from './Badge'
 
-export default function Product({
-  node: { id, slug, name, mainImage, meta, on_sale }
-}) {
+export default function Product({ id, slug, name, mainImage, meta, on_sale }) {
   const price = meta.display_price.without_tax.formatted
 
   return (

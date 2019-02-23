@@ -2,12 +2,13 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import PageTitle from '../components/PageTitle'
+import ProductGrid from '../components/ProductGrid'
 
 function CollectionPage({ data: { category } }) {
   return (
     <>
       <PageTitle title={category.name} description={category.description} />
-      {/* <ProductGrid products={products} /> */}
+      <ProductGrid products={category.products} />
     </>
   )
 }
@@ -21,6 +22,26 @@ export const query = graphql`
       slug
       name
       description
+      products {
+        id
+        name
+        slug
+        on_sale
+        mainImage {
+          childImageSharp {
+            fixed(width: 560) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+        meta {
+          display_price {
+            without_tax {
+              formatted
+            }
+          }
+        }
+      }
     }
   }
 `
