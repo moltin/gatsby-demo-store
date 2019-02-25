@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { CartContext } from '../components/Cartkit'
 
-export default function AddToCart({ productId }) {
-  const [quantity, setQuantity] = useState(1)
+export default function AddToCart({ productId, quantity }) {
   const { addToCart } = useContext(CartContext)
 
   return (

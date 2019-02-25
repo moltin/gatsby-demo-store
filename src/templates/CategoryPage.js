@@ -1,15 +1,21 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
+import SEO from '../components/SEO'
 import PageTitle from '../components/PageTitle'
 import ProductGrid from '../components/ProductGrid'
 
 function CollectionPage({ data: { category } }) {
   return (
-    <>
+    <React.Fragment>
+      <SEO
+        title={category.meta_title || category.name}
+        description={category.meta_description || category.description}
+      />
+
       <PageTitle title={category.name} description={category.description} />
       <ProductGrid products={category.products} />
-    </>
+    </React.Fragment>
   )
 }
 
@@ -41,6 +47,9 @@ export const query = graphql`
             }
           }
         }
+        # meta_image
+        # meta_title
+        # meta_description
       }
     }
   }
