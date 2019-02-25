@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import QuantityStepper from './QuantityStepper'
 
-// import Photo from './Photo'
+import Photo from './Photo'
 
 function CartItem({
   id,
@@ -15,7 +15,6 @@ function CartItem({
   removeFromCart,
   locked
 }) {
-  // const images = [{ id: href, src: href }]
   const {
     display_price: {
       without_tax: {
@@ -26,12 +25,11 @@ function CartItem({
   } = meta
   const [removing, setRemoving] = useState(false)
 
-  const klass = classNames(
-    'border-t border-grey-light py-2 md:py-4 lg:py-6 flex items-center',
-    {
-      'opacity-50': removing
-    }
-  )
+  const klass = classNames('border-t border-grey-light flex items-center', {
+    'opacity-50': removing,
+    'py-2 md:py-4 lg:py-6': !locked,
+    'py-4': locked
+  })
 
   async function onRemove() {
     await setRemoving(true)
@@ -40,16 +38,22 @@ function CartItem({
 
   return (
     <div className={klass}>
-      <div className="w-16 md:w-32 md:mr-6">
-        {/* <Photo images={images} /> */}
+      <div
+        className={classNames('mr-3 md:mr-6', {
+          'w-16 md:w-32': !locked,
+          'w-8 md:w-16': locked
+        })}
+      >
+        <Photo cartImg src={href} alt={name} />
       </div>
+
       <div className="w-full flex justify-between items-center">
         <div>
           <div className="text-black">{name}</div>
           <div className="text-grey text-sm">{sku}</div>
         </div>
 
-        <div className="flex items-center justify-between md:w-1/2">
+        <div className="flex items-center justify-end md:w-1/2">
           {!locked && (
             <div className="hidden md:block">
               <QuantityStepper itemId={id} quantity={quantity} />
@@ -59,7 +63,7 @@ function CartItem({
           <div className="md:w-1/2 text-right">
             <div className="text-black">{value}</div>
             {quantity > 1 && (
-              <div className="text-grey text-sm md:text-base">
+              <div className="text-grey text-sm">
                 <span className="md:hidden">{quantity} x </span>
                 {unit} <span className="hidden md:inline-block">each</span>
               </div>

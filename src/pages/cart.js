@@ -12,7 +12,7 @@ export default function CartPage() {
 
       <Link
         to="/checkout"
-        className="inline-block appearance-none bg-black border border-black text-white px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
+        className="inline-block appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
       >
         Continue to checkout
       </Link>
