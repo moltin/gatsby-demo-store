@@ -2,8 +2,8 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `I Love Lamp`,
+    description: `I love carpet. I love desk. I love lamp. I Love Lamp is the official Moltin demo store.`,
     author: `@gatsbyjs`
   },
   plugins: [

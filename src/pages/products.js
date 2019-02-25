@@ -23,7 +23,6 @@ export const query = graphql`
           id
           name
           slug
-          on_sale
           mainImage {
             childImageSharp {
               fixed(width: 560) {
@@ -38,6 +37,10 @@ export const query = graphql`
               }
             }
           }
+          on_sale
+          # main_image_alt_text
+          # meta_title
+          # meta_description
         }
       }
     }
