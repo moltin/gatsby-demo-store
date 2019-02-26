@@ -5,13 +5,14 @@ import CartItem from './CartItem'
 
 export default function CartItemList(props) {
   const { isEmpty, cartItems, meta, removeFromCart } = useContext(CartContext)
+  // addPromotion, promotionItems
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
   const subTotal = meta ? meta.display_price.without_tax.formatted : 0
 
   return (
-    <div className="my-6">
+    <div className="">
       {cartItems.map(item => (
         <CartItem
           key={item.id}
@@ -21,7 +22,19 @@ export default function CartItemList(props) {
         />
       ))}
 
-      <div className="border-t border-grey-light py-2 md:py-4 lg:py-6 w-full text-right">
+      {/* <button onClick={() => addPromotion('DEF')}>Add Promotion</button>
+
+      {promotionItems.map(promotion => (
+        <div>
+          <h4>{promotion.name}</h4>
+          <p>Code used: {promotion.sku}</p>
+          <button onClick={() => removeFromCart(promotion.id)}>
+            Remove promotion
+          </button>
+        </div>
+      ))} */}
+
+      <div className="border-t border-grey-light pt-2 md:pt-4 lg:pt-6 w-full text-right">
         <div className="text-grey">Subtotal</div>
         <div className="text-black text-2xl lg:text-3xl font-semibold">
           {subTotal}

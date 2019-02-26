@@ -86,6 +86,14 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
     setMeta(meta)
   }
 
+  async function checkout(customer, billing, shipping = billing) {
+    return true
+  }
+
+  async function pay() {
+    return true
+  }
+
   return (
     <Provider
       value={{
@@ -99,7 +107,9 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
         addToCart,
         updateQuantity,
         removeFromCart,
-        addPromotion
+        addPromotion,
+        checkout,
+        pay
       }}
     >
       {children}
