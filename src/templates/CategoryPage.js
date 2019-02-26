@@ -47,10 +47,10 @@ export const query = graphql`
             }
           }
         }
-        # meta_image
-        # meta_title
-        # meta_description
       }
+      # meta_image
+      meta_title
+      meta_description
     }
   }
 `

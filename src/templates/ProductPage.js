@@ -79,12 +79,9 @@ export const query = graphql`
           }
         }
       }
-      # main_image_alt_text
-      # meta_image
-      # meta_title
-      # meta_description
+      meta_title
+      meta_description
     }
-
     site {
       siteMetadata {
         url
