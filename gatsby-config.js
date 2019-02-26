@@ -5,7 +5,8 @@ module.exports = {
     title: 'I Love Lamp',
     description:
       'I love carpet. I love desk. I love lamp. I Love Lamp is the official Moltin demo store.',
-    author: '@moltin'
+    author: '@moltin',
+    url: process.env.DEPLOY_PRIME_URL || process.env.URL || 'localhost:8000'
   },
   plugins: [
     'gatsby-plugin-react-helmet',

@@ -5,7 +5,7 @@ import SEO from '../components/SEO'
 import Photo from '../components/Photo'
 import AddToCart from '../components/AddToCart'
 
-function ProductPage({ data: { product } }) {
+function ProductPage({ data: { product, site } }) {
   const {
     meta: { display_price }
   } = product
@@ -15,6 +15,7 @@ function ProductPage({ data: { product } }) {
       <SEO
         title={product.meta_title || product.name}
         description={product.meta_description || product.description}
+        image={`${site.siteMetadata.url}${product.mainImage.publicURL}`}
       />
 
       <div className="flex flex-wrap md:bg-grey-light">
@@ -69,6 +70,7 @@ export const query = graphql`
             ...GatsbyImageSharpFixed
           }
         }
+        publicURL
       }
       meta {
         display_price {
@@ -81,6 +83,12 @@ export const query = graphql`
       # meta_image
       # meta_title
       # meta_description
+    }
+
+    site {
+      siteMetadata {
+        url
+      }
     }
   }
 `

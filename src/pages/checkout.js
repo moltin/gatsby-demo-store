@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../components/Cartkit'
 
 import PageTitle from '../components/PageTitle'
+import Input from '../components/Input'
 import CartItemList from '../components/CartItemList'
 
 function CheckoutPage() {
@@ -21,25 +22,20 @@ function CheckoutPage() {
 
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
-                <label htmlFor="name" className="mb-2 inline-block">
-                  Name
-                </label>
-                <input
-                  id="name"
+                <Input
+                  autoFocus
                   name="customer.name"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="Full name"
+                  required
                 />
               </div>
 
               <div className="my-2 w-full px-2">
-                <label htmlFor="email" className="mb-2 inline-block">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="customer.email"
+                <Input
                   type="email"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  name="customer.email"
+                  label="Email"
+                  required
                 />
               </div>
             </div>
@@ -51,71 +47,49 @@ function CheckoutPage() {
             </h2>
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
-                <label htmlFor="firstName" className="mb-2 inline-block">
-                  First name
-                </label>
-                <input
-                  id="firstName"
+                <Input
                   name="shipping_address.first_name"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="First name"
+                  required
                 />
               </div>
 
               <div className="my-2 w-full px-2">
-                <label htmlFor="lastName" className="mb-2 inline-block">
-                  Last name
-                </label>
-                <input
-                  id="lastName"
+                <Input
                   name="shipping_address.last_name"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="Last name"
+                  required
                 />
               </div>
             </div>
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
-                <label htmlFor="address" className="mb-2 inline-block">
-                  Address
-                </label>
-                <input
-                  id="address"
+                <Input
                   name="shipping_address.line_1"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="Address"
+                  required
                 />
               </div>
             </div>
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
-                <label htmlFor="city" className="mb-2 inline-block">
-                  City
-                </label>
-                <input
-                  id="city"
-                  name="shipping_address.city"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
-                />
+                <Input name="shipping_address.city" label="City" required />
               </div>
             </div>
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
-                <label htmlFor="county" className="mb-2 inline-block">
-                  State / County / Region
-                </label>
-                <input
-                  id="county"
+                <Input
                   name="shipping_address.county"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="State / County / Region"
+                  required
                 />
               </div>
 
               <div className="my-2 w-full px-2">
-                <label htmlFor="postcode" className="mb-2 inline-block">
-                  ZIP / Postcode
-                </label>
-                <input
-                  id="postcode"
+                <Input
                   name="shipping_address.post_code"
-                  className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
+                  label="ZIP / Postcode"
+                  required
                 />
               </div>
             </div>
@@ -134,7 +108,7 @@ function CheckoutPage() {
 
             <div className="my-2 w-full">
               <label
-                for="billingIsShipping"
+                htmlFor="billingIsShipping"
                 className="p-0 m-0 flex items-center"
               >
                 <div className="flex items-center justify-center mr-4 relative">
