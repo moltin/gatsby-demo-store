@@ -49,7 +49,6 @@ function CheckoutPage() {
             <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
               Shipping address
             </h2>
-
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
                 <label htmlFor="firstName" className="mb-2 inline-block">
@@ -73,7 +72,6 @@ function CheckoutPage() {
                 />
               </div>
             </div>
-
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
                 <label htmlFor="address" className="mb-2 inline-block">
@@ -86,7 +84,6 @@ function CheckoutPage() {
                 />
               </div>
             </div>
-
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
                 <label htmlFor="city" className="mb-2 inline-block">
@@ -99,7 +96,6 @@ function CheckoutPage() {
                 />
               </div>
             </div>
-
             <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
                 <label htmlFor="county" className="mb-2 inline-block">
@@ -111,9 +107,7 @@ function CheckoutPage() {
                   className="block appearance-none w-full bg-white border border-grey-dark hover:border-grey px-4 py-3 leading-tight rounded-none focus:outline-none"
                 />
               </div>
-            </div>
 
-            <div className="md:flex -mx-2">
               <div className="my-2 w-full px-2">
                 <label htmlFor="postcode" className="mb-2 inline-block">
                   ZIP / Postcode

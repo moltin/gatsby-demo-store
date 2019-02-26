@@ -1,6 +1,5 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { StripeProvider } from 'react-stripe-elements'
 
 import Header from './Header'
 import Banner from './Banner'
@@ -15,14 +14,12 @@ export default function Layout({ children }) {
   } = useStaticQuery(categoriesQuery)
 
   return (
-    <StripeProvider apiKey="pk_test_qBzZekHWVR1PYb1wufidEfHJ">
-      <div className="container">
-        <Header siteTitle={site.siteMetadata.title} />
-        <main>{children}</main>
-        <Banner />
-        <Footer categories={categories} />
-      </div>
-    </StripeProvider>
+    <div className="container">
+      <Header siteTitle={site.siteMetadata.title} />
+      <main>{children}</main>
+      <Banner />
+      <Footer categories={categories} />
+    </div>
   )
 }
 
