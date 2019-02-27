@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 
 import SEO from '../components/SEO'
 import Photo from '../components/Photo'
+import Badge from '../components/Badge'
 import AddToCart from '../components/AddToCart'
 
 function ProductPage({ data: { product, site } }) {
@@ -17,6 +18,8 @@ function ProductPage({ data: { product, site } }) {
         description={product.meta_description || product.description}
         image={`${site.siteMetadata.url}${product.mainImage.publicURL}`}
       />
+
+      {/* <pre>{JSON.stringify(product, null, 2)}</pre> */}
 
       <div className="flex flex-wrap md:bg-grey-light">
         <div className="py-2 md:py-5 md:px-5 w-full lg:w-1/2">
@@ -34,8 +37,9 @@ function ProductPage({ data: { product, site } }) {
               {product.name}
             </h1>
 
-            <span className="block text-grey text-xl md:my-2 md:mt-8">
+            <span className="block text-grey text-xl md:my-2 md:mt-8 inline-flex items-center">
               {display_price.without_tax.formatted}
+              {product.on_sale && <Badge color="green">On Sale</Badge>}
             </span>
           </div>
 
@@ -64,6 +68,7 @@ export const query = graphql`
       slug
       name
       description
+      sku
       mainImage {
         childImageSharp {
           fixed(width: 560) {
@@ -81,6 +86,12 @@ export const query = graphql`
       }
       meta_title
       meta_description
+      on_sale
+      bulb
+      bulb_qty
+      material
+      finish
+      max_watt
     }
     site {
       siteMetadata {
