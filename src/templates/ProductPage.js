@@ -149,8 +149,6 @@ function ProductPage({ data: { product } }) {
   )
 }
 
-export default ProductPage
-
 export const query = graphql`
   query($id: String!) {
     product: moltinProduct(id: { eq: $id }) {
@@ -185,3 +183,5 @@ export const query = graphql`
     }
   }
 `
+
+export default ProductPage

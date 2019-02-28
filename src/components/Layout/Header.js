@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 import { CartContext } from '../Cartkit'
 
-import Logo from '../../images/large-logo.svg'
+import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle }) {
   const { count, isEmpty } = useContext(CartContext)
@@ -11,7 +11,7 @@ function Header({ siteTitle }) {
   return (
     <header className="py-6 md:py-10">
       <nav className="flex items-center justify-between relative">
-        <ul className="list-reset items-center justify-start hidden lg:flex lg:w-1/3">
+        <ul className="list-reset items-center justify-start hidden md:flex md:w-1/3">
           <li className="nav-item">
             <Link to="/products">Products</Link>
           </li>
@@ -22,12 +22,18 @@ function Header({ siteTitle }) {
         </ul>
 
         <div className="hidden md:flex md:w-1/3 flex items-center">
-          <Link to="/" className="mx-auto flex items-center justify-center">
+          <Link
+            to="/"
+            className="mx-auto flex items-center justify-center logo"
+          >
             <img src={Logo} title={siteTitle} alt={siteTitle} />
           </Link>
         </div>
 
-        <ul className="list-reset flex items-center justify-end w-1/3">
+        <ul className="list-reset flex items-center justify-end md:w-1/3">
+          <li className="md:hidden nav-item">
+            <Link to="/products">Shop</Link>
+          </li>
           <li className="nav-item">
             <Link to="/cart">
               <span className="inline-flex items-center">
@@ -71,8 +77,10 @@ function Header({ siteTitle }) {
                 </svg>
 
                 {!isEmpty && (
-                  <span className="inline-flex rounded-full bg-yellow text-black text-xs font-semibold mt-1 ml-2 p-3 h-4 w-4 items-center justify-center">
-                    {count}
+                  <span className="md:inline-flex rounded-full bg-yellow -mt-2 md:mt-1 -ml-1 md:ml-2 md:p-3 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
+                    <span className="hidden md:inline text-black text-xs font-semibold">
+                      {count}
+                    </span>
                   </span>
                 )}
               </span>
