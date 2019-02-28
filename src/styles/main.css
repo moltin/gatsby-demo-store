@@ -63,7 +63,12 @@ p {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  min-height: 700px;
+}
+
+@screen lg {
+  .hero {
+    min-height: 700px;
+  }
 }
 
 .hero img {

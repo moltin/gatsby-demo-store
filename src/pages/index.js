@@ -12,19 +12,16 @@ function IndexPage({
     <>
       <div className="hero overflow-y-hidden">
         <div className="container relative">
-          {/* <img
-            src="http://localhost:8000/static/b103597cb29d58be491915f41328a444/f910a/f21d99f6-242f-4921-8fb8-1af677b83c2e.png"
-            className="absolute pin-r"
-          /> */}
-          <div className="md:w-1/2">
-            <div className="my-auto">
-              <h1 className="text-2xl md:text-3xl lg:text-5xl text-black font-normal mb-4">
-                The Collections
+          <div className="w-full md:w-2/3 lg:w-1/2 py-12 px-8 md:px-0">
+            <div className="text-center md:text-left md:my-auto">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal mb-4">
+                The Alchémist Collection
               </h1>
               <p>
-                Abstract geometric lampshade and matching base creates a crisp
-                modern-looking piece of art, rather than a typical boring lamp.
-                Designed especially for those who love to stand out and shine.
+                The perfect lighting scheme is made up of a variety of different
+                lamps, for both form and function. Start with a pair of table
+                lamps either side of a bed or sofa, but when there’s no space to
+                fit a side table, consider a floor lamp or wall lamps instead.
               </p>
 
               <Link
