@@ -1,38 +1,23 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Category from '../components/Category'
+import CollectionHero from '../components/CollectionHero'
 
 function IndexPage({
   data: {
-    categories: { edges: categories }
+    categories: { edges: categories },
+    collections: { edges: collections }
   }
 }) {
+  const { node: collection } = collections[
+    Math.floor(Math.random() * collections.length)
+  ]
+
   return (
     <>
       <div className="hero overflow-y-hidden">
-        <div className="container relative">
-          <div className="w-full md:w-2/3 lg:w-1/2 py-12 px-8 md:px-0">
-            <div className="text-center md:text-left md:my-auto">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal mb-4">
-                The Alchémist Collection
-              </h1>
-              <p>
-                The perfect lighting scheme is made up of a variety of different
-                lamps, for both form and function. Start with a pair of table
-                lamps either side of a bed or sofa, but when there’s no space to
-                fit a side table, consider a floor lamp or wall lamps instead.
-              </p>
-
-              <Link
-                to={`/collections/top-picks`}
-                className="inline-block appearance-none border border-b-3 border-black text-black mt-8 px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
-              >
-                Shop Now
-              </Link>
-            </div>
-          </div>
-        </div>
+        {collection && <CollectionHero {...collection} />}
       </div>
 
       {categories && (
@@ -56,6 +41,24 @@ export const query = graphql`
           description
           products {
             name
+            mainImage {
+              childImageSharp {
+                fixed(width: 560) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    collections: allMoltinCollection {
+      edges {
+        node {
+          name
+          slug
+          description
+          products {
             mainImage {
               childImageSharp {
                 fixed(width: 560) {
