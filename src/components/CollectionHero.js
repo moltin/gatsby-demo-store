@@ -4,9 +4,7 @@ import { Link } from 'gatsby'
 import Photo from './Photo'
 
 export default function CollectionHero({ name, slug, description, products }) {
-  const { mainImage, name: productName } = products[
-    Math.floor(Math.random() * products.length)
-  ]
+  const { mainImage } = products[Math.floor(Math.random() * products.length)]
 
   return (
     <div className="container relative">
