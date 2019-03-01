@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import Photo from '../components/photo'
+import Photo from './Photo'
 
 export default function CollectionHero({ name, slug, description, products }) {
   const { mainImage, name: productName } = products[
