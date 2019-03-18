@@ -17,7 +17,7 @@ const initialState = {
 function cartReducer(state, action) {
   switch (action.type) {
     case 'SET_CART':
-      const { data: items, meta } = aciton.payload
+      const { data: items, meta } = action.payload
 
       const cartItems = items.filter(({ type }) => type === 'cart_item')
       const promotionItems = items.filter(
