@@ -17,13 +17,13 @@ const initialState = {
 function cartReducer(state, action) {
   switch (action.type) {
     case 'SET_CART':
-      const { data, meta } = aciton.payload
+      const { data: items, meta } = aciton.payload
 
-      const cartItems = data.filter(({ type }) => type === 'cart_item')
-      const promotionItems = data.filter(
+      const cartItems = items.filter(({ type }) => type === 'cart_item')
+      const promotionItems = items.filter(
         ({ type }) => type === 'promotion_item'
       )
-      const taxItems = data.filter(({ type }) => type === 'tax_item')
+      const taxItems = items.filter(({ type }) => type === 'tax_item')
       const count = cartItems.reduce(
         (sum, { type, quantity }) => type === 'cart_item' && sum + quantity,
         0
@@ -31,7 +31,7 @@ function cartReducer(state, action) {
 
       return {
         ...state,
-        items: data.data,
+        items,
         cartItems,
         promotionItems,
         taxItems,
@@ -111,7 +111,6 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       value={{
         ...state,
         isEmpty,
-
         addToCart,
         updateQuantity,
         removeFromCart,
