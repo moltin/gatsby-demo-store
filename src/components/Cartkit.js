@@ -1,18 +1,52 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import { createClient, createCartIdentifier } from '@moltin/request'
 
 let CartContext
 
 const { Provider, Consumer } = (CartContext = createContext())
 
+const initialState = {
+  count: 0,
+  items: [],
+  cartItems: [],
+  promotionItems: [],
+  taxItems: [],
+  meta: null
+}
+
+function cartReducer(state, action) {
+  switch (action.type) {
+    case 'SET_CART':
+      const { data, meta } = aciton.payload
+
+      const cartItems = data.filter(({ type }) => type === 'cart_item')
+      const promotionItems = data.filter(
+        ({ type }) => type === 'promotion_item'
+      )
+      const taxItems = data.filter(({ type }) => type === 'tax_item')
+      const count = cartItems.reduce(
+        (sum, { type, quantity }) => type === 'cart_item' && sum + quantity,
+        0
+      )
+
+      return {
+        ...state,
+        items: data.data,
+        cartItems,
+        promotionItems,
+        taxItems,
+        count,
+        meta
+      }
+
+    default:
+      throw new Error()
+  }
+}
+
 function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
-  const [count, setCount] = useState(0)
-  const [allItems, setAllItems] = useState([])
-  const [cartItems, setCartItems] = useState([])
-  const [promotionItems, setPromotionItems] = useState([])
-  const [taxItems, setTaxItems] = useState([])
-  const [meta, setMeta] = useState(null)
-  const isEmpty = count === 0
+  const [state, dispatch] = useReducer(cartReducer, initialState)
+  const isEmpty = state.count === 0
 
   const moltin = new createClient({
     client_id: clientId,
@@ -23,67 +57,45 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
     getCart(cartId)
   }, [cartId])
 
-  function updateItems(items) {
-    const cartItems = items.filter(({ type }) => type === 'cart_item')
-    const promotionItems = items.filter(({ type }) => type === 'promotion_item')
-    const taxItems = items.filter(({ type }) => type === 'tax_item')
-
-    const newCount = cartItems.reduce(
-      (sum, { type, quantity }) => type === 'cart_item' && sum + quantity,
-      0
-    )
-
-    setAllItems(items)
-    setCartItems(cartItems)
-    setPromotionItems(promotionItems)
-    setTaxItems(taxItems)
-    setCount(newCount)
-  }
-
   async function getCart(id) {
-    const { data, meta } = await moltin.get(`carts/${id}/items`)
+    const payload = await moltin.get(`carts/${id}/items`)
 
-    updateItems(data)
-    setMeta(meta)
+    dispatch({ type: 'SET_CART', payload })
   }
 
   async function addToCart(id, quantity) {
-    const { data, meta } = await moltin.post(`carts/${cartId}/items`, {
+    const payload = await moltin.post(`carts/${cartId}/items`, {
       type: 'cart_item',
       id,
       quantity
     })
 
-    updateItems(data)
-    setMeta(meta)
+    dispatch({ type: 'SET_CART', payload })
   }
 
   async function updateQuantity(id, quantity) {
-    const { data, meta } = await moltin.put(`carts/${cartId}/items/${id}`, {
+    const payload = await moltin.put(`carts/${cartId}/items/${id}`, {
       type: 'cart_item',
       id,
       quantity
     })
 
-    updateItems(data)
-    setMeta(meta)
+    dispatch({ type: 'SET_CART', payload })
   }
 
   async function removeFromCart(id) {
-    const { data, meta } = await moltin.delete(`carts/${cartId}/items/${id}`)
+    const payload = await moltin.delete(`carts/${cartId}/items/${id}`)
 
-    updateItems(data)
-    setMeta(meta)
+    dispatch({ type: 'SET_CART', payload })
   }
 
   async function addPromotion(code) {
-    const { data, meta } = await moltin.post(`carts/${cartId}/items`, {
+    const payload = await moltin.post(`carts/${cartId}/items`, {
       type: 'promotion_item',
       code
     })
 
-    updateItems(data)
-    setMeta(meta)
+    dispatch({ type: 'SET_CART', payload })
   }
 
   async function checkout(customer, billing, shipping = billing) {
@@ -97,13 +109,9 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
   return (
     <Provider
       value={{
-        count,
+        ...state,
         isEmpty,
-        cartItems,
-        promotionItems,
-        taxItems,
-        allItems,
-        meta,
+
         addToCart,
         updateQuantity,
         removeFromCart,
