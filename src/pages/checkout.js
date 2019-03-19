@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
 
 import { CartContext } from '../components/Cartkit'
@@ -16,8 +16,22 @@ const initialValues = {
 
 function CheckoutPage() {
   const { isEmpty, subTotal, checkout } = useContext(CartContext)
+  const [checkoutError, setCheckoutError] = useState(null)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
+
+  async function onSubmit(values) {
+    try {
+      const order = await checkout(values)
+      alert(order)
+    } catch ({ errors }) {
+      const [{ detail }] = errors
+
+      setCheckoutError(detail)
+    }
+
+    // try payment
+  }
 
   return (
     <React.Fragment>
@@ -26,7 +40,7 @@ function CheckoutPage() {
       <div className="flex flex-wrap -mx-4">
         <div className="p-4 w-full lg:w-3/5">
           <Form
-            onSubmit={checkout}
+            onSubmit={onSubmit}
             validate={validation}
             initialValues={initialValues}
           >
@@ -45,6 +59,12 @@ function CheckoutPage() {
 
               return (
                 <form onSubmit={handleSubmit}>
+                  {checkoutError && (
+                    <div className="bg-red text-white p-3 text-center">
+                      {checkoutError}
+                    </div>
+                  )}
+
                   <div>
                     <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
                       Contact information
