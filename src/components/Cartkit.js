@@ -29,6 +29,8 @@ function cartReducer(state, action) {
         0
       )
 
+      const subTotal = meta ? meta.display_price.without_tax.formatted : 0
+
       return {
         ...state,
         items,
@@ -36,7 +38,8 @@ function cartReducer(state, action) {
         promotionItems,
         taxItems,
         count,
-        meta
+        meta,
+        subTotal
       }
 
     default:

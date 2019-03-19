@@ -4,15 +4,15 @@ import { CartContext } from './Cartkit'
 import CartItem from './CartItem'
 
 export default function CartItemList(props) {
-  const { isEmpty, cartItems, meta, removeFromCart } = useContext(CartContext)
+  const { isEmpty, cartItems, subTotal, removeFromCart } = useContext(
+    CartContext
+  )
   // addPromotion, promotionItems
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
-  const subTotal = meta ? meta.display_price.without_tax.formatted : 0
-
   return (
-    <div className="">
+    <div>
       {cartItems.map(item => (
         <CartItem
           key={item.id}
