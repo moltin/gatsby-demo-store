@@ -10,12 +10,12 @@ import validation from '../validation/checkout'
 
 const initialValues = {
   billingIsShipping: true,
-  saveDetails: false,
-  marketing_opt_in: false
+  createCustomer: false,
+  customer: { marketing_opt_in: false }
 }
 
 function CheckoutPage() {
-  const { isEmpty, subTotal } = useContext(CartContext)
+  const { isEmpty, subTotal, checkout } = useContext(CartContext)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
@@ -26,14 +26,13 @@ function CheckoutPage() {
       <div className="flex flex-wrap -mx-4">
         <div className="p-4 w-full lg:w-3/5">
           <Form
-            // onSubmit={checkout}
-            onSubmit={console.log}
+            onSubmit={checkout}
             validate={validation}
             initialValues={initialValues}
           >
             {({ handleSubmit, submitting, invalid, values }) => {
               if (
-                !values.saveDetails &&
+                !values.createCustomer &&
                 values.customer &&
                 values.customer.password
               ) {
@@ -67,57 +66,18 @@ function CheckoutPage() {
 
                     <div className="my-2 w-full">
                       <label
-                        htmlFor="marketing_opt_in"
+                        htmlFor="createCustomer"
                         className="p-0 m-0 inline-flex items-center cursor-pointer"
                       >
                         <div className="flex items-center justify-center mr-4 relative">
                           <Field
-                            id="marketing_opt_in"
-                            name="marketing_opt_in"
+                            id="createCustomer"
+                            name="createCustomer"
                             component="input"
                             type="checkbox"
                             className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
                           />
-                          {values.marketing_opt_in && (
-                            <span className="absolute text-white flex">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 10 7"
-                                className="w-3 h-3 fill-current"
-                              >
-                                <path
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M9 1L3.5 6 1 3.727"
-                                />
-                              </svg>
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-black">
-                          Send me details on new products, discounts and special
-                          offers
-                        </span>
-                      </label>
-                    </div>
-
-                    <div className="my-2 w-full">
-                      <label
-                        htmlFor="saveDetails"
-                        className="p-0 m-0 inline-flex items-center cursor-pointer"
-                      >
-                        <div className="flex items-center justify-center mr-4 relative">
-                          <Field
-                            id="saveDetails"
-                            name="saveDetails"
-                            component="input"
-                            type="checkbox"
-                            className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
-                          />
-                          {values.saveDetails && (
+                          {values.createCustomer && (
                             <span className="absolute text-white flex">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -142,14 +102,55 @@ function CheckoutPage() {
                       </label>
                     </div>
 
-                    {values.saveDetails && (
-                      <div className="my-2 w-full">
-                        <Input
-                          type="password"
-                          name="customer.password"
-                          label="Password"
-                        />
-                      </div>
+                    {values.createCustomer && (
+                      <React.Fragment>
+                        <div className="my-2 w-full">
+                          <label
+                            htmlFor="customer.marketing_opt_in"
+                            className="p-0 m-0 inline-flex items-center cursor-pointer"
+                          >
+                            <div className="flex items-center justify-center mr-4 relative">
+                              <Field
+                                id="customer.marketing_opt_in"
+                                name="customer.marketing_opt_in"
+                                component="input"
+                                type="checkbox"
+                                className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                              />
+                              {values.customer.marketing_opt_in && (
+                                <span className="absolute text-white flex">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 10 7"
+                                    className="w-3 h-3 fill-current"
+                                  >
+                                    <path
+                                      fill="none"
+                                      stroke="currentColor"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M9 1L3.5 6 1 3.727"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-black">
+                              Send me details on new products, discounts and
+                              special offers
+                            </span>
+                          </label>
+                        </div>
+
+                        <div className="my-2 w-full">
+                          <Input
+                            type="password"
+                            name="customer.password"
+                            label="Password"
+                          />
+                        </div>
+                      </React.Fragment>
                     )}
                   </div>
 

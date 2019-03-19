@@ -6,7 +6,7 @@ import Promotion from './Promotion'
 import PromotionForm from './PromotionForm'
 
 export default function PromotionManager({ locked }) {
-  const { promotionItems, addPromotion, removeFromCart } = useContext(
+  const { promotionItems, addPromotion, removePromotion } = useContext(
     CartContext
   )
 
@@ -18,7 +18,7 @@ export default function PromotionManager({ locked }) {
       {promotionActive ? (
         <Promotion
           {...promotion}
-          removeFromCart={removeFromCart}
+          removePromotion={removePromotion}
           locked={locked}
         />
       ) : (

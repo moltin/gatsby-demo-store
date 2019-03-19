@@ -31,7 +31,10 @@ const checkoutValidation = values => {
     errors.customer.email = 'Provide a valid email'
   }
 
-  if (values.saveDetails && (!values.customer || !values.customer.password)) {
+  if (
+    values.createCustomer &&
+    (!values.customer || !values.customer.password)
+  ) {
     if (!errors.customer) {
       errors.customer = {}
     }
@@ -79,12 +82,20 @@ const checkoutValidation = values => {
     errors.shipping_address.county = 'Required'
   }
 
-  if (!values.shipping_address || !values.shipping_address.post_code) {
+  if (!values.shipping_address || !values.shipping_address.postcode) {
     if (!errors.shipping_address) {
       errors.shipping_address = {}
     }
 
-    errors.shipping_address.post_code = 'Required'
+    errors.shipping_address.postcode = 'Required'
+  }
+
+  if (!values.shipping_address || !values.shipping_address.country) {
+    if (!errors.shipping_address) {
+      errors.shipping_address = {}
+    }
+
+    errors.shipping_address.country = 'Required'
   }
 
   return errors

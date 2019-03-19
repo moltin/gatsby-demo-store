@@ -101,8 +101,30 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
     dispatch({ type: 'SET_CART', payload })
   }
 
-  async function checkout(customer, billing, shipping = billing) {
-    return true
+  async function checkout({
+    customer,
+    shipping_address,
+    billing_address = shipping_address
+  }) {
+    const createCustomer = customer && customer.password
+    let customerId
+
+    if (createCustomer) {
+      const { data: newCustomer } = await moltin.post(`customers`, {
+        type: 'customer',
+        ...customer
+      })
+
+      customerId = newCustomer.id
+    }
+
+    const { data: order } = await moltin.post(`carts/${cartId}/checkout`, {
+      ...(createCustomer ? { customer: { id: customerId } } : { customer }),
+      shipping_address,
+      billing_address
+    })
+
+    return order
   }
 
   async function pay() {
@@ -118,6 +140,7 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
         updateQuantity,
         removeFromCart,
         addPromotion,
+        removePromotion: removeFromCart,
         checkout,
         pay
       }}

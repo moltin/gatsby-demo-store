@@ -2,7 +2,7 @@ import React from 'react'
 
 import Badge from './Badge'
 
-export default function Promotion({ id, sku, locked, removeFromCart }) {
+export default function Promotion({ id, sku, locked, removePromotion }) {
   return (
     <div className="pt-6 md:pt-8 lg:pt-6">
       <span className="text-black inline-flex items-center">
@@ -13,7 +13,7 @@ export default function Promotion({ id, sku, locked, removeFromCart }) {
       {!locked && (
         <button
           className="text-black ml-4 md:ml-6"
-          onClick={() => removeFromCart(id)}
+          onClick={() => removePromotion(id)}
         >
           <svg
             className="fill-current w-3 h-3"
