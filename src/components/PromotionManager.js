@@ -18,10 +18,10 @@ export default function PromotionManager({ locked }) {
     return (
       <div className="pt-6 md:pt-8 lg:pt-6">
         <span className="text-grey">
-          Promotion applied:{' '}
-          <pre className="border border-black text-black p-1 inline font-mono text-sm">
+          <pre className="border border-black text-black p-1 inline font-mono text-sm mr-2">
             {promotion.sku}
           </pre>
+          promotion applied
         </span>
 
         {!locked && (
