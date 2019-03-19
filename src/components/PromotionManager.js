@@ -18,7 +18,7 @@ export default function PromotionManager({ locked }) {
     return (
       <div className="pt-6 md:pt-8 lg:pt-6">
         <span className="text-grey">
-          {promotion.name}:{' '}
+          Promotion applied:{' '}
           <pre className="border border-black text-black p-1 inline font-mono text-sm">
             {promotion.sku}
           </pre>
@@ -51,7 +51,7 @@ export default function PromotionManager({ locked }) {
         {({ handleSubmit, submitting, invalid }) => (
           <form onSubmit={handleSubmit}>
             <div className="inline-flex">
-              <Input name="code" placeholder="Add promo code" />
+              <Input name="code" placeholder='Try "SAVE50"' />
               <button
                 type="submit"
                 className="appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none ml-3 mt-6 no-underline"
