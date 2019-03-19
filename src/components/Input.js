@@ -42,7 +42,7 @@ export default function Input({
               {...input}
             />
 
-            {error && <span className="text-red text-sm">{error}</span>}
+            {error && <span className="text-red text-sm">{meta.error}</span>}
           </div>
         )
       }}
