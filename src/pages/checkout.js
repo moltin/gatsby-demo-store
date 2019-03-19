@@ -31,7 +31,7 @@ function CheckoutPage() {
             validate={validation}
             initialValues={initialValues}
           >
-            {({ handleSubmit, submitting, pristine, values }) => {
+            {({ handleSubmit, submitting, invalid, values }) => {
               if (
                 !values.saveDetails &&
                 values.customer &&
@@ -53,11 +53,7 @@ function CheckoutPage() {
 
                     <div className="md:flex -mx-2">
                       <div className="my-2 w-full px-2">
-                        <Input
-                          autoFocus
-                          name="customer.name"
-                          label="Full name"
-                        />
+                        <Input name="customer.name" label="Full name" />
                       </div>
 
                       <div className="my-2 w-full px-2">
@@ -226,7 +222,7 @@ function CheckoutPage() {
                     </p>
 
                     <button
-                      disabled={submitting || pristine}
+                      disabled={submitting || invalid}
                       type="submit"
                       className="block w-full appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none mt-4 no-underline"
                     >
