@@ -25,9 +25,9 @@ function CheckoutPage() {
       const order = await checkout(values)
       alert(order)
     } catch ({ errors }) {
-      const [{ detail }] = errors
+      // const [{ detail }] = errors
 
-      setCheckoutError(detail)
+      setCheckoutError(errors)
     }
 
     // try payment

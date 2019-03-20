@@ -5,10 +5,7 @@ import Layout from './src/components/Layout'
 
 export const wrapRootElement = ({ element }) => {
   return (
-    <CartProvider
-      clientId="EdP3Gi1agyUF3yFS7Ngm8iyodLgbSR3wY4ceoJl0d2"
-      cartId="abc"
-    >
+    <CartProvider clientId="EdP3Gi1agyUF3yFS7Ngm8iyodLgbSR3wY4ceoJl0d2">
       {element}
     </CartProvider>
   )

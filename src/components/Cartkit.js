@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect } from 'react'
 import { createClient, createCartIdentifier } from '@moltin/request'
 
 let CartContext
+let cartId = createCartIdentifier()
 
 const { Provider, Consumer } = (CartContext = createContext())
 
@@ -42,12 +43,15 @@ function cartReducer(state, action) {
         subTotal
       }
 
+    case 'EMPTY_CART':
+      return initialState
+
     default:
       throw new Error()
   }
 }
 
-function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
+function CartProvider({ clientId, children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
   const isEmpty = state.count === 0
 
@@ -123,6 +127,10 @@ function CartProvider({ clientId, cartId = createCartIdentifier(), children }) {
       shipping_address,
       billing_address
     })
+
+    await moltin.delete(`carts/${cartId}`)
+
+    dispatch({ type: 'EMPTY_CART' })
 
     return order
   }
