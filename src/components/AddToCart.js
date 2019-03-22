@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 
-import { CartContext } from '../components/Cartkit'
+import { CartContext } from '../shopkit'
 import Select from '../components/Select'
 
 export default function AddToCart({ productId }) {

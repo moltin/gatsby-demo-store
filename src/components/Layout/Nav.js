@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../Cartkit'
+import { CartContext } from '../../shopkit'
 
 function Nav() {
   const { count, isEmpty } = useContext(CartContext)

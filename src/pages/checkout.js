@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
 
-import { CartContext } from '../components/Cartkit'
+import { CartContext } from '../shopkit'
 import PageTitle from '../components/PageTitle'
 import Input from '../components/Input'
 import AddressFields from '../components/AddressFields'

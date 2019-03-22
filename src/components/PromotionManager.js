@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { CartContext } from './Cartkit'
+import { CartContext } from '../shopkit'
 
 import Promotion from './Promotion'
 import PromotionForm from './PromotionForm'

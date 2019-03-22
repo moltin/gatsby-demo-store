@@ -1,58 +1,21 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import { createClient, createCartIdentifier } from '@moltin/request'
 
+import reducer, { initialState, SET_CART, RESET_CART } from './reducer'
+import useLocalStorage from './hooks/useLocalStorage'
+
 let CartContext
-let cartId = createCartIdentifier()
 
 const { Provider, Consumer } = (CartContext = createContext())
 
-const initialState = {
-  count: 0,
-  items: [],
-  cartItems: [],
-  promotionItems: [],
-  taxItems: [],
-  meta: null
-}
-
-function cartReducer(state, action) {
-  switch (action.type) {
-    case 'SET_CART':
-      const { data: items, meta } = action.payload
-
-      const cartItems = items.filter(({ type }) => type === 'cart_item')
-      const promotionItems = items.filter(
-        ({ type }) => type === 'promotion_item'
-      )
-      const taxItems = items.filter(({ type }) => type === 'tax_item')
-      const count = cartItems.reduce(
-        (sum, { type, quantity }) => type === 'cart_item' && sum + quantity,
-        0
-      )
-
-      const subTotal = meta ? meta.display_price.without_tax.formatted : 0
-
-      return {
-        ...state,
-        items,
-        cartItems,
-        promotionItems,
-        taxItems,
-        count,
-        meta,
-        subTotal
-      }
-
-    case 'EMPTY_CART':
-      return initialState
-
-    default:
-      throw new Error()
-  }
-}
-
-function CartProvider({ clientId, children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState)
+function CartProvider({
+  clientId,
+  cartId: initialCartId = createCartIdentifier(),
+  children,
+  ...props
+}) {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  let [cartId, setCartId] = useLocalStorage('mcart', initialCartId)
   const isEmpty = state.count === 0
 
   const moltin = new createClient({
@@ -62,12 +25,13 @@ function CartProvider({ clientId, children }) {
 
   useEffect(() => {
     getCart(cartId)
+    setCartId(cartId)
   }, [cartId])
 
   async function getCart(id) {
     const payload = await moltin.get(`carts/${id}/items`)
 
-    dispatch({ type: 'SET_CART', payload })
+    dispatch({ type: SET_CART, payload })
   }
 
   async function addToCart(id, quantity) {
@@ -77,7 +41,7 @@ function CartProvider({ clientId, children }) {
       quantity
     })
 
-    dispatch({ type: 'SET_CART', payload })
+    dispatch({ type: SET_CART, payload })
   }
 
   async function updateQuantity(id, quantity) {
@@ -87,13 +51,13 @@ function CartProvider({ clientId, children }) {
       quantity
     })
 
-    dispatch({ type: 'SET_CART', payload })
+    dispatch({ type: SET_CART, payload })
   }
 
   async function removeFromCart(id) {
     const payload = await moltin.delete(`carts/${cartId}/items/${id}`)
 
-    dispatch({ type: 'SET_CART', payload })
+    dispatch({ type: SET_CART, payload })
   }
 
   async function addPromotion(code) {
@@ -102,7 +66,7 @@ function CartProvider({ clientId, children }) {
       code
     })
 
-    dispatch({ type: 'SET_CART', payload })
+    dispatch({ type: SET_CART, payload })
   }
 
   async function checkout({
@@ -130,7 +94,7 @@ function CartProvider({ clientId, children }) {
 
     await moltin.delete(`carts/${cartId}`)
 
-    dispatch({ type: 'EMPTY_CART' })
+    dispatch({ type: RESET_CART })
 
     return order
   }
@@ -143,6 +107,7 @@ function CartProvider({ clientId, children }) {
     <Provider
       value={{
         ...state,
+        ...props,
         isEmpty,
         addToCart,
         updateQuantity,

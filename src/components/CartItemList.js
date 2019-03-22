@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { CartContext } from './Cartkit'
+import { CartContext } from '../shopkit'
 import CartItem from './CartItem'
 import PromotionManager from './PromotionManager'
 
