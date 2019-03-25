@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../shopkit'
+import { Cartkit } from '../shopkit'
 import PageTitle from '../components/PageTitle'
 import CartItemList from '../components/CartItemList'
 
 export default function CartPage() {
-  const { isEmpty } = useContext(CartContext)
+  const { isEmpty } = useContext(Cartkit)
 
   return (
     <React.Fragment>

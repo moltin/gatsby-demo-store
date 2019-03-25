@@ -11,7 +11,7 @@ export default function PromotionForm({ addPromotion }) {
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <div className="inline-flex">
-            <Input name="code" placeholder='Try "SAVE50"' />
+            <Input name="code" placeholder='Try "SAVE50"' hideError />
 
             <button
               type="submit"

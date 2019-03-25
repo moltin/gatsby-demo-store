@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../../shopkit'
+import { Cartkit } from '../../shopkit'
 
 function Nav() {
-  const { count, isEmpty } = useContext(CartContext)
+  const { count, isEmpty } = useContext(Cartkit)
 
   return (
     <nav className="ml-auto">

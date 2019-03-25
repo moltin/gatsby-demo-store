@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
 
-import { CartContext } from '../shopkit'
+import { Cartkit, Checkoutkit } from '../shopkit'
 import PageTitle from '../components/PageTitle'
 import Input from '../components/Input'
 import AddressFields from '../components/AddressFields'
@@ -15,14 +15,15 @@ const initialValues = {
 }
 
 function CheckoutPage() {
-  const { isEmpty, subTotal, checkout } = useContext(CartContext)
+  const { cartId, isEmpty, subTotal } = useContext(Cartkit)
+  const { checkout } = useContext(Checkoutkit)
   const [checkoutError, setCheckoutError] = useState(null)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
   async function onSubmit(values) {
     try {
-      const order = await checkout(values)
+      const order = await checkout(cartId, values)
       alert(order)
     } catch ({ errors }) {
       // const [{ detail }] = errors
