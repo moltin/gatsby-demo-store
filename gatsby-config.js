@@ -34,7 +34,7 @@ module.exports = {
     {
       resolve: '@moltin/gatsby-source-moltin',
       options: {
-        client_id: process.env.MOLTIN_CLIENT_ID,
+        client_id: process.env.GATSBY_MOLTIN_CLIENT_ID,
         flows: {
           product: [
             'meta_title',

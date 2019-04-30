@@ -5,7 +5,7 @@ import Layout from './src/components/Layout'
 
 export const wrapRootElement = ({ element }) => {
   return (
-    <ShopkitProvider clientId="EdP3Gi1agyUF3yFS7Ngm8iyodLgbSR3wY4ceoJl0d2">
+    <ShopkitProvider clientId={process.env.GATSBY_MOLTIN_CLIENT_ID}>
       {element}
     </ShopkitProvider>
   )
