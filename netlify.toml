@@ -4,5 +4,5 @@
   command = "yarn build"
 
 [template.environment]
-  MOLTIN_CLIENT_ID = "Your Moltin client ID"
-  STRIPE_PUBLISHABLE_KEY = "Your publishable key"
+  GATSBY_MOLTIN_CLIENT_ID = "Your Moltin client ID"
+  GATSBY_STRIPE_PUBLISHABLE_KEY = "Your publishable key"
