@@ -25,7 +25,7 @@ function IndexPage({
               </p>
 
               <Link
-                to={`/collections/top-picks`}
+                to={`/products`}
                 className="inline-block appearance-none border border-b-3 border-black text-black mt-8 px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
               >
                 Shop Now
