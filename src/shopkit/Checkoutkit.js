@@ -31,15 +31,21 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
       billing_address
     })
 
-    // await moltin.delete(`carts/${cartId}`)
-
-    // dispatch({ type: RESET_CART })
-
     return order
   }
 
-  async function pay({ orderId }) {
-    return true
+  async function pay({ orderId, token }) {
+    try {
+      const { payment } = await moltin.post(`orders/${orderId}/payments`, {
+        gateway: 'stripe',
+        method: 'purchase',
+        payment: token
+      })
+
+      return payment
+    } catch (err) {
+      throw new Error(err.message || 'Payment failed')
+    }
   }
 
   return (

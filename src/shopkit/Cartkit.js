@@ -114,6 +114,12 @@ function CartProvider({
     dispatch({ type: SET_CART, payload })
   }
 
+  async function deleteCart(id = cartId) {
+    await moltin.delete(`carts/${id}`)
+
+    dispatch({ type: RESET_CART })
+  }
+
   return (
     <Provider
       value={{
@@ -125,7 +131,8 @@ function CartProvider({
         updateQuantity,
         removeFromCart,
         addPromotion,
-        removePromotion: removeFromCart
+        removePromotion: removeFromCart,
+        deleteCart
       }}
     >
       {children}

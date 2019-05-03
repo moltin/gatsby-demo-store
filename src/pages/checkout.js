@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
+import { CardElement, injectStripe } from 'react-stripe-elements'
 
 import { Cartkit, Checkoutkit } from '../shopkit'
 import PageTitle from '../components/PageTitle'
@@ -14,8 +15,9 @@ const initialValues = {
   customer: { marketing_opt_in: false }
 }
 
-function CheckoutPage() {
-  const { cartId, isEmpty, subTotal } = useContext(Cartkit)
+function CheckoutPage({ stripe }) {
+  const [paid, setPaid] = useState(false)
+  const { cartId, isEmpty, subTotal, deleteCart } = useContext(Cartkit)
   const { checkout } = useContext(Checkoutkit)
   const [checkoutError, setCheckoutError] = useState(null)
 
@@ -23,18 +25,53 @@ function CheckoutPage() {
 
   async function onSubmit(values) {
     try {
-      const order = await checkout(cartId, values)
-      alert(order)
+      await checkout(cartId, values)
     } catch ({ errors }) {
-      // const [{ detail }] = errors
-
-      setCheckoutError(errors)
+      return setCheckoutError(errors)
     }
 
-    // try payment
+    const { shipping_address } = values
+
+    try {
+      await stripe.createToken({
+        name: `${shipping_address.first_name} ${shipping_address.last_name}`,
+        address_line1: shipping_address.line_1,
+        address_line2: shipping_address.line_2,
+        address_city: shipping_address.city,
+        address_state: shipping_address.county,
+        address_zip: shipping_address.postcode,
+        address_country: shipping_address.country
+      })
+    } catch (tokenError) {
+      console.log('Failed to create token', tokenError)
+      alert('Unable to create Stripe token')
+      return false
+    }
+
+    try {
+      // await pay({
+      //   orderId: order.id,
+      //   token: token.token.id
+      // })
+
+      await setPaid(true)
+    } catch (paymentError) {
+      console.log(paymentError)
+      alert('Payment failed')
+    }
+
+    try {
+      await deleteCart()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  return (
+  return paid ? (
+    <div className="py-6">
+      <h2>Thank you for your order!</h2>
+    </div>
+  ) : (
     <React.Fragment>
       <PageTitle title="Checkout" />
 
@@ -45,7 +82,7 @@ function CheckoutPage() {
             validate={validation}
             initialValues={initialValues}
           >
-            {({ handleSubmit, submitting, invalid, values }) => {
+            {({ handleSubmit, submitting, invalid, values, form }) => {
               if (
                 !values.createCustomer &&
                 values.customer &&
@@ -57,6 +94,8 @@ function CheckoutPage() {
               if (values.billingIsShipping) {
                 delete values.billing_address
               }
+
+              const onStripeChange = e => form.change('stripe', e)
 
               return (
                 <form onSubmit={handleSubmit}>
@@ -235,6 +274,36 @@ function CheckoutPage() {
                     <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
                       Payment method
                     </h2>
+
+                    <div>
+                      <CardElement
+                        onChange={onStripeChange}
+                        hidePostalCode={true}
+                        id="payment"
+                        style={{
+                          base: {
+                            color: '#131313',
+                            fontFamily:
+                              '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '16px',
+                            '::placeholder': {
+                              color: '#B3B3B3'
+                            }
+                          },
+                          invalid: {
+                            color: '#E62F17',
+                            ':focus': {
+                              color: '#E62F17'
+                            }
+                          }
+                        }}
+                      />
+                      {values.stripe && values.stripe.error && (
+                        <span className="text-red text-sm">
+                          {values.stripe.error.message}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="bg-grey-lightest p-4 my-6">
@@ -270,4 +339,4 @@ function CheckoutPage() {
   )
 }
 
-export default CheckoutPage
+export default injectStripe(CheckoutPage)
