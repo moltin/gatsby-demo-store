@@ -58,6 +58,14 @@ module.exports = {
         purgeOnly: ['src/styles/main.css']
       }
     },
-    'gatsby-plugin-stripe'
+    'gatsby-plugin-stripe',
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
+        anonymize: true,
+        respectDNT: true
+      }
+    }
   ]
 }
