@@ -18,22 +18,18 @@ const initialValues = {
 function CheckoutPage({ stripe }) {
   const [paid, setPaid] = useState(false)
   const { cartId, isEmpty, subTotal, deleteCart } = useContext(Cartkit)
-  const { checkout } = useContext(Checkoutkit)
+  const { checkout, pay } = useContext(Checkoutkit)
   const [checkoutError, setCheckoutError] = useState(null)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
   async function onSubmit(values) {
     try {
-      await checkout(cartId, values)
-    } catch ({ errors }) {
-      return setCheckoutError(errors)
-    }
+      const order = await checkout(cartId, values)
 
-    const { shipping_address } = values
+      const { shipping_address } = values
 
-    try {
-      await stripe.createToken({
+      const token = await stripe.createToken({
         name: `${shipping_address.first_name} ${shipping_address.last_name}`,
         address_line1: shipping_address.line_1,
         address_line2: shipping_address.line_2,
@@ -42,26 +38,13 @@ function CheckoutPage({ stripe }) {
         address_zip: shipping_address.postcode,
         address_country: shipping_address.country
       })
-    } catch (tokenError) {
-      console.log('Failed to create token', tokenError)
-      alert('Unable to create Stripe token')
-      return false
-    }
 
-    try {
-      // await pay({
-      //   orderId: order.id,
-      //   token: token.token.id
-      // })
+      await pay({
+        orderId: order.id,
+        token: token.token.id
+      })
 
       await setPaid(true)
-    } catch (paymentError) {
-      console.log(paymentError)
-      alert('Payment failed')
-    }
-
-    try {
-      await deleteCart()
     } catch (err) {
       console.log(err)
     }
