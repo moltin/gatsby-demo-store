@@ -5,7 +5,7 @@ import { CartProvider, Cartkit } from './Cartkit'
 import { CustomerProvider, Customerkit } from './Customerkit'
 import { CheckoutProvider, Checkoutkit } from './Checkoutkit'
 
-class MoltinNodeStorageAdapter {
+class MoltinLocalStorageAdapter {
   set(key, value) {
     return window.localStorage.setItem(key, value)
   }
@@ -33,7 +33,7 @@ function ShopkitProvider({
   const moltin = new MoltinClient({
     client_id: clientId,
     application: 'react-cartkit',
-    storage: new MoltinNodeStorageAdapter()
+    storage: new MoltinLocalStorageAdapter()
   })
 
   return (
