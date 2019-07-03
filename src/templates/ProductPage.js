@@ -9,7 +9,7 @@ import { Shopkit } from '../shopkit'
 
 function ProductPage({ data: { product } }) {
   const { moltin } = useContext(Shopkit)
-  const [availableCount, setAvailableCount] = useState(0)
+  const [inventoryAvailability, setInventoryAvailability] = useState(0)
   const [inventoryLoading, setInventoryLoading] = useState(true)
   const [inventoryError, setInventoryError] = useState(false)
 
@@ -21,7 +21,7 @@ function ProductPage({ data: { product } }) {
         } = await moltin.get(`inventories/${product.id}`)
 
         setInventoryLoading(false)
-        setAvailableCount(available)
+        setInventoryAvailability(available)
       } catch (error) {
         setInventoryError(error)
       }
@@ -33,6 +33,8 @@ function ProductPage({ data: { product } }) {
   const {
     meta: { display_price }
   } = product
+
+  const outOfStock = inventoryAvailability === 0
 
   return (
     <React.Fragment>
@@ -66,7 +68,7 @@ function ProductPage({ data: { product } }) {
           </div>
 
           <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} disabled={availableCount === 0} />
+            <AddToCart productId={product.id} disabled={outOfStock} />
           </div>
 
           <div className="my-2 md:my-5">
@@ -76,8 +78,10 @@ function ProductPage({ data: { product } }) {
               ) : inventoryLoading ? (
                 'Loading inventory'
               ) : (
-                <Badge color={availableCount === 0 ? 'red' : 'green'}>
-                  {availableCount} available
+                <Badge color={outOfStock ? 'red' : 'green'}>
+                  {outOfStock
+                    ? 'Out of stock'
+                    : `${inventoryAvailability} in stock`}
                 </Badge>
               )}
             </h4>
