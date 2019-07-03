@@ -10,6 +10,7 @@ import { Shopkit } from '../shopkit'
 function ProductPage({ data: { product } }) {
   const { moltin } = useContext(Shopkit)
   const [inventoryAvailability, setInventoryAvailability] = useState(0)
+  const [productInStock, setProductInStock] = useState(null)
   const [inventoryLoading, setInventoryLoading] = useState(true)
   const [inventoryError, setInventoryError] = useState(false)
 
@@ -20,6 +21,7 @@ function ProductPage({ data: { product } }) {
       } = await moltin.get(`inventories/${product.id}`)
 
       setInventoryLoading(false)
+      setProductInStock(available !== 0)
       setInventoryAvailability(available)
     } catch ({ errors: [error] }) {
       console.error(error)
@@ -32,14 +34,14 @@ function ProductPage({ data: { product } }) {
   }
 
   useEffect(() => {
+    if (product.manage_stock) return setProductInStock(true)
+
     getProductInventory()
   }, [])
 
   const {
     meta: { display_price }
   } = product
-
-  const outOfStock = inventoryAvailability === 0
 
   return (
     <React.Fragment>
@@ -73,24 +75,26 @@ function ProductPage({ data: { product } }) {
           </div>
 
           <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} disabled={outOfStock} />
+            <AddToCart productId={product.id} disabled={!productInStock} />
           </div>
 
-          <div className="my-2 md:my-5">
-            <h4 className="text-lg text-black font-bold my-2">
-              {inventoryError ? (
-                inventoryError
-              ) : inventoryLoading ? (
-                'Loading inventory'
-              ) : (
-                <Badge color={outOfStock ? 'red' : 'green'}>
-                  {outOfStock
-                    ? 'Out of stock'
-                    : `${inventoryAvailability} in stock`}
-                </Badge>
-              )}
-            </h4>
-          </div>
+          {!product.manage_stock && (
+            <div className="my-2 md:my-5">
+              <h4 className="text-lg text-black font-bold my-2">
+                {inventoryError ? (
+                  inventoryError
+                ) : inventoryLoading ? (
+                  'Loading inventory'
+                ) : (
+                  <Badge color={productInStock ? 'green' : 'red'}>
+                    {productInStock
+                      ? `${inventoryAvailability} in stock`
+                      : 'Out of stock'}
+                  </Badge>
+                )}
+              </h4>
+            </div>
+          )}
 
           <div className="my-2 md:my-5">
             <h4 className="hidden md:block text-lg text-black font-bold my-2">
@@ -218,6 +222,7 @@ export const query = graphql`
           }
         }
       }
+      manage_stock
       meta_title
       meta_description
       on_sale
