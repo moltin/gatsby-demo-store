@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { graphql, withPrefix } from 'gatsby'
 
 import SEO from '../components/SEO'
 import Photo from '../components/Photo'
 import Badge from '../components/Badge'
 import AddToCart from '../components/AddToCart'
+import { Shopkit } from '../shopkit'
 
 function ProductPage({ data: { product } }) {
+  const { moltin } = useContext(Shopkit)
+  const [availableCount, setAvailableCount] = useState(0)
+  const [inventoryLoading, setInventoryLoading] = useState(true)
+  const [inventoryError, setInventoryError] = useState(false)
+
+  useEffect(() => {
+    async function getProductInventory() {
+      try {
+        const {
+          data: { available }
+        } = await moltin.get(`inventories/${product.id}`)
+
+        setInventoryLoading(false)
+        setAvailableCount(available)
+      } catch (error) {
+        setInventoryError(error)
+      }
+    }
+
+    getProductInventory()
+  }, [])
+
   const {
     meta: { display_price }
   } = product
@@ -44,6 +67,20 @@ function ProductPage({ data: { product } }) {
 
           <div className="flex flex-wrap flex-col md:flex-row md:items-end">
             <AddToCart productId={product.id} />
+          </div>
+
+          <div className="my-2 md:my-5">
+            <h4 className="text-lg text-black font-bold my-2">
+              {inventoryError ? (
+                inventoryError
+              ) : inventoryLoading ? (
+                'Loading inventory'
+              ) : (
+                <Badge color={availableCount === 0 ? 'red' : 'green'}>
+                  {availableCount} available
+                </Badge>
+              )}
+            </h4>
           </div>
 
           <div className="my-2 md:my-5">
