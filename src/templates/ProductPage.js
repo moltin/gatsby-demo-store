@@ -13,25 +13,25 @@ function ProductPage({ data: { product } }) {
   const [inventoryLoading, setInventoryLoading] = useState(true)
   const [inventoryError, setInventoryError] = useState(false)
 
-  useEffect(() => {
-    async function getProductInventory() {
-      try {
-        const {
-          data: { available }
-        } = await moltin.get(`inventories/${product.id}`)
+  async function getProductInventory() {
+    try {
+      const {
+        data: { available }
+      } = await moltin.get(`inventories/${product.id}`)
 
-        setInventoryLoading(false)
-        setInventoryAvailability(available)
-      } catch ({ errors: [error] }) {
-        console.error(error)
-        setInventoryError(
-          `There was a problem retrieving the inventory details for ${
-            product.name
-          }`
-        )
-      }
+      setInventoryLoading(false)
+      setInventoryAvailability(available)
+    } catch ({ errors: [error] }) {
+      console.error(error)
+      setInventoryError(
+        `There was a problem retrieving the inventory details for ${
+          product.name
+        }`
+      )
     }
+  }
 
+  useEffect(() => {
     getProductInventory()
   }, [])
 
