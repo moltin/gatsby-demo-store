@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "@moltin/gatsby-source-moltin": "1.2.0",
-    "@moltin/request": "1.4.4",
+    "@moltin/request": "^2.0.2",
     "classnames": "2.2.6",
     "final-form": "4.11.1",
     "gatsby": "2.1.18",

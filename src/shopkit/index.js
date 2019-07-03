@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { createClient } from '@moltin/request'
+import { MoltinClient } from '@moltin/request'
 
 import { CartProvider, Cartkit } from './Cartkit'
 import { CustomerProvider, Customerkit } from './Customerkit'
@@ -16,7 +16,7 @@ function ShopkitProvider({
   children,
   ...props
 }) {
-  const moltin = new createClient({
+  const moltin = new MoltinClient({
     client_id: clientId,
     application: 'react-cartkit'
   })
