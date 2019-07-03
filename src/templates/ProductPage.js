@@ -66,7 +66,7 @@ function ProductPage({ data: { product } }) {
           </div>
 
           <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} />
+            <AddToCart productId={product.id} disabled={availableCount === 0} />
           </div>
 
           <div className="my-2 md:my-5">
