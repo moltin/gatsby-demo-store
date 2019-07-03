@@ -22,8 +22,13 @@ function ProductPage({ data: { product } }) {
 
         setInventoryLoading(false)
         setInventoryAvailability(available)
-      } catch (error) {
-        setInventoryError(error)
+      } catch ({ errors: [error] }) {
+        console.error(error)
+        setInventoryError(
+          `There was a problem retrieving the inventory details for ${
+            product.name
+          }`
+        )
       }
     }
 
