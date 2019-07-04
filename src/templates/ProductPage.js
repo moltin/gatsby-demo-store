@@ -28,9 +28,7 @@ function ProductPage({ data: { product } }) {
   const { moltin } = useContext(Shopkit)
   const [state, dispatch] = useReducer(reducer, {
     inStock: null,
-    allocated: 0,
-    available: 0,
-    total: 0
+    available: 0
   })
   const [inventoryLoading, setInventoryLoading] = useState(true)
   const [inventoryError, setInventoryError] = useState(false)
@@ -38,12 +36,12 @@ function ProductPage({ data: { product } }) {
   async function getProductInventory() {
     try {
       const {
-        data: { allocated, available, total }
+        data: { available }
       } = await moltin.get(`inventories/${product.id}`)
 
       dispatch({
         type: available === 0 ? 'OUT_OF_STOCK' : 'IN_STOCK',
-        inventory: { allocated, available, total }
+        inventory: { available }
       })
       setInventoryLoading(false)
     } catch ({ errors: [error] }) {
@@ -57,6 +55,12 @@ function ProductPage({ data: { product } }) {
   }
 
   useEffect(() => {
+    if (!product.manage_stock) {
+      dispatch({ type: 'IN_STOCK' })
+
+      return setInventoryLoading(false)
+    }
+
     getProductInventory()
   }, [])
 
@@ -91,32 +95,34 @@ function ProductPage({ data: { product } }) {
 
             <span className="block text-grey text-xl md:my-2 md:mt-8 inline-flex items-center">
               {display_price.without_tax.formatted}
-              {product.on_sale && <Badge color="green">On Sale</Badge>}
-            </span>
-          </div>
-
-          <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} disabled={!state.inStock} />
-          </div>
-
-          {!product.manage_stock && (
-            <div className="my-2 md:my-5">
-              <h4 className="text-lg text-black font-bold my-2">
-                {inventoryError ? (
-                  inventoryError
-                ) : inventoryLoading ? (
-                  'Loading inventory'
+              {product.on_sale && (
+                <Badge color="green" className="mx-2">
+                  On Sale
+                </Badge>
+              )}
+              {!inventoryError &&
+                (inventoryLoading ? (
+                  <Badge className="mx-2"> Loading inventory</Badge>
                 ) : (
                   <Badge
                     color={state.inStock ? 'green' : 'red'}
                     className="mx-2"
                   >
                     {state.inStock
-                      ? `${state.available} in stock`
+                      ? product.manage_stock
+                        ? `${state.available} in stock `
+                        : 'In Stock'
                       : 'Out of stock'}
                   </Badge>
-                )}
-              </h4>
+                ))}
+            </span>
+          </div>
+
+          {inventoryError ? (
+            inventoryError
+          ) : (
+            <div className="flex flex-wrap flex-col md:flex-row md:items-end">
+              <AddToCart productId={product.id} disabled={!state.inStock} />
             </div>
           )}
 
