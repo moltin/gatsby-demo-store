@@ -7,7 +7,9 @@ export default function Promotion({ id, sku, locked, removePromotion }) {
     <div className="pt-6 md:pt-8 lg:pt-6">
       <span className="text-black inline-flex items-center">
         Promotion applied:
-        <Badge color="green">{sku}</Badge>
+        <Badge color="green" className="mx-2">
+          {sku}
+        </Badge>
       </span>
 
       {!locked && (

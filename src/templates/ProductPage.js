@@ -107,7 +107,10 @@ function ProductPage({ data: { product } }) {
                 ) : inventoryLoading ? (
                   'Loading inventory'
                 ) : (
-                  <Badge color={state.inStock ? 'green' : 'red'}>
+                  <Badge
+                    color={state.inStock ? 'green' : 'red'}
+                    className="mx-2"
+                  >
                     {state.inStock
                       ? `${state.available} in stock`
                       : 'Out of stock'}
