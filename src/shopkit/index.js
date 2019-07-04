@@ -1,9 +1,23 @@
 import React, { createContext } from 'react'
-import { createClient } from '@moltin/request'
+import { MoltinClient } from '@moltin/request'
 
 import { CartProvider, Cartkit } from './Cartkit'
 import { CustomerProvider, Customerkit } from './Customerkit'
 import { CheckoutProvider, Checkoutkit } from './Checkoutkit'
+
+class MoltinLocalStorageAdapter {
+  set(key, value) {
+    return window.localStorage.setItem(key, value)
+  }
+
+  get(key) {
+    return window.localStorage.getItem(key)
+  }
+
+  delete(key) {
+    return window.localStorage.removeItem(key)
+  }
+}
 
 let ShopkitContext
 
@@ -16,9 +30,10 @@ function ShopkitProvider({
   children,
   ...props
 }) {
-  const moltin = new createClient({
+  const moltin = new MoltinClient({
     client_id: clientId,
-    application: 'react-cartkit'
+    application: 'react-cartkit',
+    storage: new MoltinLocalStorageAdapter()
   })
 
   return (

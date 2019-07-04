@@ -17,7 +17,12 @@ export default function Product({ id, slug, name, mainImage, meta, on_sale }) {
 
         <div className="pt-4 pb-2">
           <p className="text-black no-underline flex items-center">
-            {name} {on_sale && <Badge color="green">On Sale</Badge>}
+            {name}
+            {on_sale && (
+              <Badge color="green" className="mx-2">
+                On Sale
+              </Badge>
+            )}
           </p>
           <span className="text-grey text-sm">{price}</span>
         </div>

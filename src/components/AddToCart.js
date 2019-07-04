@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react'
 import { Cartkit } from '../shopkit'
 import Select from '../components/Select'
 
-export default function AddToCart({ productId }) {
+export default function AddToCart({ disabled, productId }) {
   const { addToCart } = useContext(Cartkit)
   const [quantity, setQuantity] = useState(1)
 
@@ -24,11 +24,13 @@ export default function AddToCart({ productId }) {
           .map(i => ({ id: i, name: i }))}
         defaultValue={1}
         onChange={updateQuantity}
+        disabled={disabled}
       />
 
       <button
         onClick={handleAddToCart}
         className="inline-block appearance-none bg-black border border-black text-white px-4 py-3 leading-tight rounded-none focus:outline-none ml-2"
+        disabled={disabled}
       >
         Add to Cart
       </button>

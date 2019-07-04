@@ -1,12 +1,69 @@
-import React from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { graphql, withPrefix } from 'gatsby'
 
 import SEO from '../components/SEO'
 import Photo from '../components/Photo'
 import Badge from '../components/Badge'
 import AddToCart from '../components/AddToCart'
+import { Shopkit } from '../shopkit'
+
+function reducer(state, { type, inventory }) {
+  switch (type) {
+    case 'IN_STOCK':
+      return {
+        inStock: true,
+        ...inventory
+      }
+    case 'OUT_OF_STOCK':
+      return {
+        inStock: false,
+        ...inventory
+      }
+    default:
+      return state
+  }
+}
 
 function ProductPage({ data: { product } }) {
+  const { moltin } = useContext(Shopkit)
+  const [state, dispatch] = useReducer(reducer, {
+    inStock: null,
+    available: 0
+  })
+  const [inventoryLoading, setInventoryLoading] = useState(true)
+  const [inventoryError, setInventoryError] = useState(false)
+
+  async function getProductInventory() {
+    try {
+      const {
+        data: { available }
+      } = await moltin.get(`inventories/${product.id}`)
+
+      dispatch({
+        type: available === 0 ? 'OUT_OF_STOCK' : 'IN_STOCK',
+        inventory: { available }
+      })
+      setInventoryLoading(false)
+    } catch ({ errors: [error] }) {
+      console.error(error)
+      setInventoryError(
+        `There was a problem retrieving the inventory details for ${
+          product.name
+        }`
+      )
+    }
+  }
+
+  useEffect(() => {
+    if (!product.manage_stock) {
+      dispatch({ type: 'IN_STOCK' })
+
+      return setInventoryLoading(false)
+    }
+
+    getProductInventory()
+  }, [])
+
   const {
     meta: { display_price }
   } = product
@@ -38,13 +95,36 @@ function ProductPage({ data: { product } }) {
 
             <span className="block text-grey text-xl md:my-2 md:mt-8 inline-flex items-center">
               {display_price.without_tax.formatted}
-              {product.on_sale && <Badge color="green">On Sale</Badge>}
+              {product.on_sale && (
+                <Badge color="green" className="mx-2">
+                  On Sale
+                </Badge>
+              )}
+              {!inventoryError &&
+                (inventoryLoading ? (
+                  <Badge className="mx-2"> Loading inventory</Badge>
+                ) : (
+                  <Badge
+                    color={state.inStock ? 'green' : 'red'}
+                    className="mx-2"
+                  >
+                    {state.inStock
+                      ? product.manage_stock
+                        ? `${state.available} in stock `
+                        : 'In Stock'
+                      : 'Out of stock'}
+                  </Badge>
+                ))}
             </span>
           </div>
 
-          <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} />
-          </div>
+          {inventoryError ? (
+            inventoryError
+          ) : (
+            <div className="flex flex-wrap flex-col md:flex-row md:items-end">
+              <AddToCart productId={product.id} disabled={!state.inStock} />
+            </div>
+          )}
 
           <div className="my-2 md:my-5">
             <h4 className="hidden md:block text-lg text-black font-bold my-2">
@@ -172,6 +252,7 @@ export const query = graphql`
           }
         }
       }
+      manage_stock
       meta_title
       meta_description
       on_sale
