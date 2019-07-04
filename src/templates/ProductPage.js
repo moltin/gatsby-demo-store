@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { graphql, withPrefix } from 'gatsby'
 
 import SEO from '../components/SEO'
@@ -7,22 +7,45 @@ import Badge from '../components/Badge'
 import AddToCart from '../components/AddToCart'
 import { Shopkit } from '../shopkit'
 
+function reducer(state, { type, inventory }) {
+  switch (type) {
+    case 'IN_STOCK':
+      return {
+        inStock: true,
+        ...inventory
+      }
+    case 'OUT_OF_STOCK':
+      return {
+        inStock: false,
+        ...inventory
+      }
+    default:
+      return state
+  }
+}
+
 function ProductPage({ data: { product } }) {
   const { moltin } = useContext(Shopkit)
-  const [inventoryAvailability, setInventoryAvailability] = useState(0)
-  const [productInStock, setProductInStock] = useState(null)
+  const [state, dispatch] = useReducer(reducer, {
+    inStock: null,
+    allocated: 0,
+    available: 0,
+    total: 0
+  })
   const [inventoryLoading, setInventoryLoading] = useState(true)
   const [inventoryError, setInventoryError] = useState(false)
 
   async function getProductInventory() {
     try {
       const {
-        data: { available }
+        data: { allocated, available, total }
       } = await moltin.get(`inventories/${product.id}`)
 
+      dispatch({
+        type: available === 0 ? 'OUT_OF_STOCK' : 'IN_STOCK',
+        inventory: { allocated, available, total }
+      })
       setInventoryLoading(false)
-      setProductInStock(available !== 0)
-      setInventoryAvailability(available)
     } catch ({ errors: [error] }) {
       console.error(error)
       setInventoryError(
@@ -34,8 +57,6 @@ function ProductPage({ data: { product } }) {
   }
 
   useEffect(() => {
-    if (product.manage_stock) return setProductInStock(true)
-
     getProductInventory()
   }, [])
 
@@ -75,7 +96,7 @@ function ProductPage({ data: { product } }) {
           </div>
 
           <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-            <AddToCart productId={product.id} disabled={!productInStock} />
+            <AddToCart productId={product.id} disabled={!state.inStock} />
           </div>
 
           {!product.manage_stock && (
@@ -86,9 +107,9 @@ function ProductPage({ data: { product } }) {
                 ) : inventoryLoading ? (
                   'Loading inventory'
                 ) : (
-                  <Badge color={productInStock ? 'green' : 'red'}>
-                    {productInStock
-                      ? `${inventoryAvailability} in stock`
+                  <Badge color={state.inStock ? 'green' : 'red'}>
+                    {state.inStock
+                      ? `${state.available} in stock`
                       : 'Out of stock'}
                   </Badge>
                 )}
