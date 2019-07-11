@@ -1029,7 +1029,7 @@
     "@moltin/request" "^2.0.0"
     gatsby-source-filesystem "^2.0.20"
 
-"@moltin/request@^2.0.0", "@moltin/request@^2.0.2":
+"@moltin/request@2.0.2", "@moltin/request@^2.0.0":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@moltin/request/-/request-2.0.2.tgz#aec1c4de2bfb5a6d465ee615b509483262019207"
   integrity sha512-+ulHabpFp//lNXpVt2JM+jX6cC2rQ9AAo5slSuIWa2/xrzdbbYYx1QFE4Z9neoWrCCz5RX7OC2CTBM8/wd98EA==
@@ -5145,7 +5145,7 @@ gatsby-page-utils@^0.0.2:
     micromatch "^3.1.10"
     slash "^1.0.0"
 
-gatsby-plugin-google-analytics@^2.1.1:
+gatsby-plugin-google-analytics@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-2.1.1.tgz#228e91dead90e58cea2dc9b76fa3700a084378fb"
   integrity sha512-WA3Ag8FEoaraA+ygKmNM0NAka1xKEAKKZzl6VUSmJliAOQic3e8DDkxW2JOI0Ui6bUEA/TBAcMQvFO1ueCnyWg==
@@ -11811,7 +11811,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@^10.11.0:
+validator@10.11.0:
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
   integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
