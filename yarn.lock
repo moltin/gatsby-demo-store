@@ -4843,10 +4843,10 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-final-form@4.16.1:
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.16.1.tgz#1a4047e55d375ae65c799a676c59e85ffeccb4d3"
-  integrity sha512-nUY6ZyFRvnOhSukqpmzm6pt38qYjCA6zSeW630CcfOvy0tBM+Wy0ZLIE36y/QiUfuAtMEJWp8k7GK5LqrqubEw==
+final-form@4.16.2:
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.16.2.tgz#ff7d92f7fcf89a0b20cefb1ec7754e513b6321be"
+  integrity sha512-OJNy64UxCWNZ5dpHNYsRMusRb7SaNC845Fx7QIFnWGncgivcUivP3w8xXql2nV9sZQdyVQtpRcK8s1S5UFrpJQ==
   dependencies:
     "@babel/runtime" "^7.3.1"
 
