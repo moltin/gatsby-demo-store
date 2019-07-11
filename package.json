@@ -23,7 +23,7 @@
     "react-final-form": "4.1.0",
     "react-helmet": "5.2.1",
     "tailwindcss": "0.7.4",
-    "validator": "10.11.0"
+    "validator": "11.1.0"
   },
   "scripts": {
     "build": "gatsby build",
