@@ -4837,10 +4837,10 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-final-form@4.16.2:
-  version "4.16.2"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.16.2.tgz#ff7d92f7fcf89a0b20cefb1ec7754e513b6321be"
-  integrity sha512-OJNy64UxCWNZ5dpHNYsRMusRb7SaNC845Fx7QIFnWGncgivcUivP3w8xXql2nV9sZQdyVQtpRcK8s1S5UFrpJQ==
+final-form@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.17.0.tgz#7ffd4d56967b4ff25f7b6a03ed00484c2c35fcc2"
+  integrity sha512-/vFaHCybK89qR4E6ytKRKiDCqMNtW+H9FtEGcJQEKyLJU2znPRMmKXSEGnDHnTCkuud5fGhegLepW3+h/RvblQ==
   dependencies:
     "@babel/runtime" "^7.3.1"
 
