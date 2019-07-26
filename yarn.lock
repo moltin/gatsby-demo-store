@@ -5258,10 +5258,10 @@ gatsby-plugin-sharp@2.2.4:
     sharp "^0.22.1"
     svgo "^1.2.0"
 
-gatsby-plugin-stripe@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-stripe/-/gatsby-plugin-stripe-1.2.1.tgz#c21678bdac6f13289d7ccd494fe07f5110317ea2"
-  integrity sha512-1cKdSqCA3AVNunTLvg9cUMp9e8in215IR+K0p0ND29QjR8NC+Ch2EwwHJLZfAcCA1cqrnxOk1wDQwRlks7G5IQ==
+gatsby-plugin-stripe@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-stripe/-/gatsby-plugin-stripe-1.2.2.tgz#c84832f5bbebe3fa7043860ae593e3d231c77fba"
+  integrity sha512-0ewGrYO4/gJeyPzLrTIkQoihzodFji0Ihtsv8gn2CRTo95FmjimiKWsNkvCEhytT4yWBov9Eh8AGoqzV9ryeAQ==
 
 gatsby-react-router-scroll@^2.1.2:
   version "2.1.2"
