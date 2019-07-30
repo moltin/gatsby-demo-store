@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 
-import { Cartkit } from '../shopkit'
+import { CartContext } from '../context'
 
 import Promotion from './Promotion'
 import PromotionForm from './PromotionForm'
 
 export default function PromotionManager({ locked }) {
-  const { promotionItems, addPromotion, removePromotion } = useContext(Cartkit)
+  const { promotionItems, addPromotion, removePromotion } = useContext(
+    CartContext
+  )
 
   const promotionActive = !!promotionItems.length
   const [promotion] = promotionItems

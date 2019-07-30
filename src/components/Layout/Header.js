@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { Cartkit } from '../../shopkit'
-// import {  Customerkit } from '../../shopkit'
+import { CartContext } from '../../context'
+// import {  CustomerContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle }) {
-  const { count, isEmpty } = useContext(Cartkit)
-  // const { loggedIn, user } = useContext(Customerkit)
+  const { count, isEmpty } = useContext(CartContext)
+  // const { loggedIn, user } = useContext(CustomerContext)
 
   return (
     <header className="py-6 md:py-10">
