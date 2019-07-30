@@ -1,9 +1,9 @@
 import React, { createContext } from 'react'
 import { MoltinClient } from '@moltin/request'
 
-import { CartProvider, Cartkit } from './Cartkit'
-import { CustomerProvider, Customerkit } from './Customerkit'
-import { CheckoutProvider, Checkoutkit } from './Checkoutkit'
+import { CartProvider, CartContext } from './CartContext'
+import { CustomerProvider, CustomerContext } from './CustomerContext'
+import { CheckoutProvider, CheckoutContext } from './CheckoutContext'
 
 class MoltinLocalStorageAdapter {
   set(key, value) {
@@ -19,11 +19,11 @@ class MoltinLocalStorageAdapter {
   }
 }
 
-let ShopkitContext
+let MoltinContext
 
-const { Provider, Consumer } = (ShopkitContext = createContext())
+const { Provider, Consumer } = (MoltinContext = createContext())
 
-function ShopkitProvider({
+function MoltinProvider({
   clientId,
   cartId,
   customerToken,
@@ -32,7 +32,7 @@ function ShopkitProvider({
 }) {
   const moltin = new MoltinClient({
     client_id: clientId,
-    application: 'react-cartkit',
+    application: 'gatsby-demo-store',
     storage: new MoltinLocalStorageAdapter()
   })
 
@@ -53,10 +53,10 @@ function ShopkitProvider({
 }
 
 export {
-  ShopkitProvider,
-  Consumer as ShopkitConsumer,
-  ShopkitContext as Shopkit,
-  Cartkit,
-  Customerkit,
-  Checkoutkit
+  MoltinProvider,
+  Consumer as MoltinConsumer,
+  MoltinContext,
+  CartContext,
+  CustomerContext,
+  CheckoutContext
 }

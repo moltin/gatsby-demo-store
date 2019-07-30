@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 
-import { Cartkit } from '../shopkit'
+import { CartContext } from '../context'
 import Select from '../components/Select'
 
 export default function AddToCart({ disabled, productId }) {
-  const { addToCart } = useContext(Cartkit)
+  const { addToCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
 
   function updateQuantity({ target: { value } }) {

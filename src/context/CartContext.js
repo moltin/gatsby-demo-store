@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useReducer, useEffect } from 'react'
 import { createCartIdentifier } from '@moltin/request'
 
-import { Shopkit } from './'
+import { MoltinContext } from '.'
 
 import useLocalStorage from './useLocalStorage'
 
@@ -63,7 +63,7 @@ function CartProvider({
   children,
   ...props
 }) {
-  const { moltin } = useContext(Shopkit)
+  const { moltin } = useContext(MoltinContext)
   const [state, dispatch] = useReducer(reducer, initialState)
   const [cartId, setCartId] = useLocalStorage('mcart', initialCartId)
   const isEmpty = state.count === 0
@@ -133,4 +133,4 @@ function CartProvider({
   )
 }
 
-export { CartProvider, Consumer as CartConsumer, CartContext as Cartkit }
+export { CartProvider, Consumer as CartConsumer, CartContext }

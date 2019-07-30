@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 
-import { Cartkit } from '../shopkit'
+import { CartContext } from '../context'
 
 export default function QuantityStepper({ itemId, quantity }) {
-  const { updateQuantity } = useContext(Cartkit)
+  const { updateQuantity } = useContext(CartContext)
 
   const increase = () => updateQuantity(itemId, quantity + 1)
   const decrease = () => updateQuantity(itemId, quantity - 1)

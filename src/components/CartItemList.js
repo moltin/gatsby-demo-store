@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 
-import { Cartkit } from '../shopkit'
+import { CartContext } from '../context'
 import CartItem from './CartItem'
 import PromotionManager from './PromotionManager'
 
 export default function CartItemList(props) {
-  const { isEmpty, cartItems, subTotal, removeFromCart } = useContext(Cartkit)
+  const { isEmpty, cartItems, subTotal, removeFromCart } = useContext(
+    CartContext
+  )
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 

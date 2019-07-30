@@ -1,13 +1,13 @@
 import React, { useContext, createContext } from 'react'
 
-import { Shopkit } from './'
+import { MoltinContext } from '.'
 
 let CheckoutContext
 
 const { Provider, Consumer } = (CheckoutContext = createContext())
 
 function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
-  const { moltin } = useContext(Shopkit)
+  const { moltin } = useContext(MoltinContext)
 
   async function checkout(
     cartId = initialCartId,
@@ -55,8 +55,4 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
   )
 }
 
-export {
-  CheckoutProvider,
-  Consumer as CheckoutConsumer,
-  CheckoutContext as Checkoutkit
-}
+export { CheckoutProvider, Consumer as CheckoutConsumer, CheckoutContext }

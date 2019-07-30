@@ -20,7 +20,7 @@ yarn
 
 Once you have the project setup, you can now configure the ENV variables required to run the project.
 
-Create a `.env` file in the root directory and add your `MOLTIN_CLIENT_ID` found on your stores [Dashboard](https://dashboard.moltin.com).
+Create a `.env` file in the root directory and add your `GATSBY_MOLTIN_CLIENT_ID` found on your stores [Dashboard](https://dashboard.moltin.com).
 
 Now you're ready to go!
 

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useReducer, useState } from 'react'
 
-import { Shopkit } from '../shopkit'
+import { MoltinContext } from '../context'
 
 function inventoryReducer(inventory, { type, data }) {
   switch (type) {
@@ -20,7 +20,7 @@ function inventoryReducer(inventory, { type, data }) {
 }
 
 function useMoltinInventory({ id, manage_stock, name }) {
-  const { moltin } = useContext(Shopkit)
+  const { moltin } = useContext(MoltinContext)
   const [inventory, inventoryDispatch] = useReducer(inventoryReducer, {
     inStock: null,
     available: 0

@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useReducer, useEffect } from 'react'
 
-import { Shopkit } from './'
+import { MoltinContext } from '.'
 import useLocalStorage from './useLocalStorage'
 
 const SET_CUSTOMER = 'SET_CUSTOMER'
@@ -32,7 +32,7 @@ function reducer(action, state) {
 }
 
 function CustomerProvider({ children, customerToken, ...props }) {
-  const { moltin } = useContext(Shopkit)
+  const { moltin } = useContext(MoltinContext)
   const [state, dispatch] = useReducer(reducer, initialState)
   const [token, setToken] = useLocalStorage('mtoken', customerToken)
   // const [customerId, setCustomerId] = useLocalStorage('mcustomer')
@@ -102,8 +102,4 @@ function CustomerProvider({ children, customerToken, ...props }) {
   )
 }
 
-export {
-  CustomerProvider,
-  Consumer as CustomerConsumer,
-  CustomerContext as Customerkit
-}
+export { CustomerProvider, Consumer as CustomerConsumer, CustomerContext }
