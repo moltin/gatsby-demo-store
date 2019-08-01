@@ -5,14 +5,25 @@ import CartItem from './CartItem'
 import PromotionManager from './PromotionManager'
 
 export default function CartItemList(props) {
-  const { isEmpty, cartItems, subTotal, removeFromCart } = useContext(
-    CartContext
-  )
+  const {
+    isEmpty,
+    cartItems,
+    subTotal,
+    removeFromCart,
+    regulated
+  } = useContext(CartContext)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
 
   return (
     <div>
+      {regulated && (
+        <p className="bg-red text-white p-1 text-center text-sm leading-loose mb-3">
+          Due to the <strong>{regulated.name}</strong> item in your cart you
+          will need to provide some further verification to complete your order.
+        </p>
+      )}
+
       {cartItems.map(item => (
         <CartItem
           key={item.id}

@@ -2,7 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: 'I Love Lamp',
+    title: 'My Pharmacy',
     description:
       'I love carpet. I love desk. I love lamp. I Love Lamp is the official Moltin demo store.',
     author: '@moltin',

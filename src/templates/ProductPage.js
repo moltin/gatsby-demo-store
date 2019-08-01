@@ -25,7 +25,7 @@ function ProductPage({ data: { product } }) {
         image={withPrefix(product.mainImage.childImageSharp.fixed.src)}
       />
 
-      <div className="flex flex-wrap md:bg-grey-light">
+      <div className="flex flex-wrap">
         <div className="py-2 md:py-5 md:px-5 w-full lg:w-1/2">
           <div className="sticky pin-t">
             <Photo
@@ -43,6 +43,11 @@ function ProductPage({ data: { product } }) {
 
             <span className="block text-grey text-xl md:my-2 md:mt-8 inline-flex items-center">
               {display_price.without_tax.formatted}
+              {product.regulated_product && (
+                <Badge color="red" className="mx-2">
+                  Regulated
+                </Badge>
+              )}
               {product.on_sale && (
                 <Badge color="green" className="mx-2">
                   On Sale
@@ -110,6 +115,7 @@ export const query = graphql`
         }
       }
       manage_stock
+      regulated_product
     }
   }
 `

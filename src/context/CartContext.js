@@ -125,7 +125,8 @@ function CartProvider({
         updateQuantity,
         removeFromCart,
         addPromotion,
-        removePromotion: removeFromCart
+        removePromotion: removeFromCart,
+        regulated: state.cartItems.find(i => i.sku === 'prescription-pills')
       }}
     >
       {children}

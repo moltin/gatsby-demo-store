@@ -11,7 +11,7 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
 
   async function checkout(
     cartId = initialCartId,
-    { customer, shipping_address, billing_address = shipping_address }
+    { customer, shipping_address, billing_address = shipping_address, ...flows }
   ) {
     const createCustomer = customer && customer.password
     let customerId
@@ -28,7 +28,8 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     const { data: order } = await moltin.post(`carts/${cartId}/checkout`, {
       ...(createCustomer ? { customer: { id: customerId } } : { customer }),
       shipping_address,
-      billing_address
+      billing_address,
+      ...flows
     })
 
     // await moltin.delete(`carts/${cartId}`)

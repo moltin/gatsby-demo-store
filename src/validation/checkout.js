@@ -98,6 +98,11 @@ const checkoutValidation = values => {
     errors.shipping_address.country = 'Required'
   }
 
+  if (values.regulated && !values.patient_record_number) {
+    errors.patient_record_number =
+      'Required due to regulated products in your cart'
+  }
+
   return errors
 }
 

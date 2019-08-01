@@ -8,14 +8,8 @@ import AddressFields from '../components/AddressFields'
 import CartItemList from '../components/CartItemList'
 import validation from '../validation/checkout'
 
-const initialValues = {
-  billingIsShipping: true,
-  createCustomer: false,
-  customer: { marketing_opt_in: false }
-}
-
 function CheckoutPage() {
-  const { cartId, isEmpty, subTotal } = useContext(CartContext)
+  const { cartId, isEmpty, subTotal, regulated } = useContext(CartContext)
   const { checkout } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
 
@@ -32,6 +26,13 @@ function CheckoutPage() {
     }
 
     // try payment
+  }
+
+  const initialValues = {
+    billingIsShipping: true,
+    createCustomer: false,
+    customer: { marketing_opt_in: false },
+    regulated
   }
 
   return (
@@ -181,6 +182,131 @@ function CheckoutPage() {
                     </h2>
 
                     <AddressFields type="shipping_address" />
+                  </div>
+
+                  <div>
+                    <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
+                      Shipping options
+                    </h2>
+
+                    {!regulated && (
+                      <div className="my-2 w-full">
+                        <label
+                          htmlFor="shippingIsUSPS"
+                          className="p-0 m-0 inline-flex items-center cursor-pointer"
+                        >
+                          <div className="flex items-center justify-center mr-4 relative">
+                            <Field
+                              id="shippingIsUSPS"
+                              name="shippingIsUSPS"
+                              component="input"
+                              type="checkbox"
+                              className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                            />
+                            {values.shippingIsUSPS && (
+                              <span className="absolute text-white flex">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 10 7"
+                                  className="w-3 h-3 fill-current"
+                                >
+                                  <path
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M9 1L3.5 6 1 3.727"
+                                  />
+                                </svg>
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-black">USPS</span>
+                        </label>
+                      </div>
+                    )}
+
+                    <div className="my-2 w-full">
+                      <label
+                        htmlFor="ShippingIsFedEx"
+                        className="p-0 m-0 inline-flex items-center cursor-pointer"
+                      >
+                        <div className="flex items-center justify-center mr-4 relative">
+                          <Field
+                            id="ShippingIsFedEx"
+                            name="ShippingIsFedEx"
+                            component="input"
+                            type="checkbox"
+                            className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                          />
+                          {values.ShippingIsFedEx && (
+                            <span className="absolute text-white flex">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 10 7"
+                                className="w-3 h-3 fill-current"
+                              >
+                                <path
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M9 1L3.5 6 1 3.727"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-black">FedEx</span>
+                      </label>
+                    </div>
+
+                    <div className="my-2 w-full">
+                      <label
+                        htmlFor="ShippingIsUPS"
+                        className="p-0 m-0 inline-flex items-center cursor-pointer"
+                      >
+                        <div className="flex items-center justify-center mr-4 relative">
+                          <Field
+                            id="ShippingIsUPS"
+                            name="ShippingIsUPS"
+                            component="input"
+                            type="checkbox"
+                            className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                          />
+                          {values.ShippingIsUPS && (
+                            <span className="absolute text-white flex">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 10 7"
+                                className="w-3 h-3 fill-current"
+                              >
+                                <path
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M9 1L3.5 6 1 3.727"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-black">UPS</span>
+                      </label>
+                    </div>
+
+                    {regulated && (
+                      <div className="my-2 w-full">
+                        <Input
+                          name="patient_record_number"
+                          label="Patient record number"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div>

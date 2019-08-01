@@ -26,15 +26,16 @@ function Header({ siteTitle }) {
         <div className="hidden md:flex md:w-1/3 flex items-center">
           <Link
             to="/"
-            className="mx-auto flex items-center justify-center logo"
+            className="mx-auto flex items-center justify-center logo no-underline text-3xl font-bold"
           >
-            <img src={Logo} title={siteTitle} alt={siteTitle} />
+            {/* <img src={Logo} title={siteTitle} alt={siteTitle} /> */}
+            My Pharmacy
           </Link>
         </div>
 
         <ul className="list-reset flex items-center justify-end md:w-1/3">
           <li className="md:hidden nav-item">
-            <Link to="/products">Shop</Link>
+            <Link to="/products">Products</Link>
           </li>
           {/* <li className="list-item">
             {loggedIn ? (

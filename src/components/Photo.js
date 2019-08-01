@@ -17,7 +17,7 @@ export default function Photo({ src, cartImg, ...props }) {
   }
 
   return (
-    <div className="product-image cursor-pointer bg-grey-light flex items-center justify-center w-full overflow-hidden relative">
+    <div className="product-image cursor-pointer flex items-center justify-center w-full overflow-hidden relative">
       {renderImage()}
     </div>
   )

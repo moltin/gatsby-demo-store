@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import QuantityStepper from './QuantityStepper'
 
 import Photo from './Photo'
+import Badge from './Badge'
 
 function CartItem({
   id,
@@ -50,6 +51,7 @@ function CartItem({
         <div>
           <div className="text-black">{name}</div>
           <div className="text-grey text-sm">{sku}</div>
+          {sku === 'prescription-pills' && <Badge color="red">Regulated</Badge>}
         </div>
 
         <div className="flex items-center justify-end md:w-1/2">
