@@ -34,20 +34,7 @@ module.exports = {
     {
       resolve: '@moltin/gatsby-source-moltin',
       options: {
-        client_id: process.env.GATSBY_MOLTIN_CLIENT_ID,
-        flows: {
-          product: [
-            'meta_title',
-            'meta_description',
-            'on_sale',
-            'bulb',
-            'jamie',
-            'bulb_qty',
-            'material',
-            'finish',
-            'max_watt'
-          ]
-        }
+        client_id: process.env.GATSBY_MOLTIN_CLIENT_ID
       }
     },
     'gatsby-plugin-postcss',
