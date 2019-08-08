@@ -13,7 +13,7 @@ export default function Product({ id, slug, name, mainImage, meta, on_sale }) {
         to={`/products/${slug}`}
         className="block w-full h-full no-underline"
       >
-        <Photo src={mainImage} style={{ maxHeight: '400px' }} />
+        <Photo src={mainImage} />
 
         <div className="pt-4 pb-2">
           <p className="text-black no-underline flex items-center">
