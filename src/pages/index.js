@@ -58,8 +58,8 @@ export const query = graphql`
             name
             mainImage {
               childImageSharp {
-                fixed(width: 560) {
-                  ...GatsbyImageSharpFixed
+                fluid(maxWidth: 560) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

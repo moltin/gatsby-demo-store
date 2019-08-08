@@ -13,7 +13,7 @@ export default function Category({ name, slug, description, products }) {
         <div className="cursor-pointer flex items-center justify-center w-full overflow-hidden relative">
           <Link to={`/categories/${slug}`}>
             <Img
-              fixed={product.mainImage.childImageSharp.fixed}
+              fluid={product.mainImage.childImageSharp.fluid}
               alt={product.name}
             />
           </Link>
