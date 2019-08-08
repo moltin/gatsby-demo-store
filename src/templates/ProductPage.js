@@ -22,7 +22,7 @@ function ProductPage({ data: { product } }) {
         type="product"
         title={product.meta_title || product.name}
         description={product.meta_description || product.description}
-        image={withPrefix(product.mainImage.childImageSharp.fixed.src)}
+        image={withPrefix(product.mainImage.childImageSharp.fluid.src)}
       />
 
       <div className="flex flex-wrap md:bg-grey-light">
@@ -96,8 +96,8 @@ export const query = graphql`
       sku
       mainImage {
         childImageSharp {
-          fixed(width: 560) {
-            ...GatsbyImageSharpFixed
+          fluid(maxWidth: 560) {
+            ...GatsbyImageSharpFluid
           }
         }
         publicURL

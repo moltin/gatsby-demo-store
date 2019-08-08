@@ -34,8 +34,8 @@ export const query = graphql`
         slug
         mainImage {
           childImageSharp {
-            fixed(width: 560) {
-              ...GatsbyImageSharpFixed
+            fluid(maxWidth: 560) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
