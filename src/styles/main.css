@@ -75,3 +75,7 @@ p {
   transform: scale(2);
   transform-origin: top;
 }
+
+button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}

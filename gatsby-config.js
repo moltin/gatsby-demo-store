@@ -34,20 +34,7 @@ module.exports = {
     {
       resolve: '@moltin/gatsby-source-moltin',
       options: {
-        client_id: process.env.MOLTIN_CLIENT_ID,
-        flows: {
-          product: [
-            'meta_title',
-            'meta_description',
-            'on_sale',
-            'bulb',
-            'jamie',
-            'bulb_qty',
-            'material',
-            'finish',
-            'max_watt'
-          ]
-        }
+        client_id: process.env.GATSBY_MOLTIN_CLIENT_ID
       }
     },
     'gatsby-plugin-postcss',
@@ -58,6 +45,14 @@ module.exports = {
         purgeOnly: ['src/styles/main.css']
       }
     },
-    'gatsby-plugin-stripe'
+    'gatsby-plugin-stripe',
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
+        anonymize: true,
+        respectDNT: true
+      }
+    }
   ]
 }

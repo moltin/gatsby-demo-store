@@ -3,7 +3,9 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
 export default function Category({ name, slug, description, products }) {
-  const product = products[Math.floor(Math.random() * products.length)]
+  const product = products
+    ? products[Math.floor(Math.random() * products.length)]
+    : null
 
   return (
     <article className="px-8 md:px-4 py-2 my-6 w-full lg:w-1/3">

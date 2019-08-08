@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../Cartkit'
+import { CartContext } from '../../context'
+// import {  CustomerContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle }) {
   const { count, isEmpty } = useContext(CartContext)
+  // const { loggedIn, user } = useContext(CustomerContext)
 
   return (
     <header className="py-6 md:py-10">
@@ -34,6 +36,13 @@ function Header({ siteTitle }) {
           <li className="md:hidden nav-item">
             <Link to="/products">Shop</Link>
           </li>
+          {/* <li className="list-item">
+            {loggedIn ? (
+              <Link to="/orders">{user.name}</Link>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+          </li> */}
           <li className="nav-item">
             <Link to="/cart">
               <span className="inline-flex items-center">

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { CartContext } from './Cartkit'
+import { CartContext } from '../context'
 
 export default function QuantityStepper({ itemId, quantity }) {
   const { updateQuantity } = useContext(CartContext)

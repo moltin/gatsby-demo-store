@@ -6,7 +6,7 @@ export default function Photo({ src, cartImg, ...props }) {
     if (!src) return <span>No photo</span>
 
     return cartImg ? (
-      <img className="block m-auto object-cover" src={src} {...props} />
+      <img className="block m-auto object-cover" src={src} alt="" {...props} />
     ) : (
       <Img
         className="block m-auto object-cover"

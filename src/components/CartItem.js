@@ -6,7 +6,6 @@ import Photo from './Photo'
 
 function CartItem({
   id,
-  type,
   name,
   sku,
   quantity,

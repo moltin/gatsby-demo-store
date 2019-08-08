@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
-import { CartContext } from '../components/Cartkit'
+import { CartContext } from '../context'
 import PageTitle from '../components/PageTitle'
 import CartItemList from '../components/CartItemList'
 

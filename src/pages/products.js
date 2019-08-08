@@ -37,10 +37,6 @@ export const query = graphql`
               }
             }
           }
-          on_sale
-          # main_image_alt_text
-          # meta_title
-          # meta_description
         }
       }
     }
