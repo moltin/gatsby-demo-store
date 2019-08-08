@@ -38,6 +38,7 @@ const categoriesQuery = graphql`
 
     collections: allMoltinCollection {
       nodes {
+        id
         name
         slug
       }

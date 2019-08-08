@@ -55,6 +55,7 @@ export const query = graphql`
     categories: allMoltinCategory {
       edges {
         node {
+          id
           name
           slug
           description

@@ -64,7 +64,7 @@ function Header({ siteTitle, collections }) {
           </li> */}
           <li className="nav-item">
             <Link to="/cart">
-              <span className="inline-flex items-center">
+              <span className="relative inline-flex items-center">
                 <svg
                   viewBox="0 0 16 17"
                   version="1.1"
@@ -83,14 +83,8 @@ function Header({ siteTitle, collections }) {
                       stroke="#131313"
                       strokeWidth="1.5"
                     >
-                      <g
-                        id="header"
-                        transform="translate(64.000000, 48.000000)"
-                      >
-                        <g
-                          id="cart"
-                          transform="translate(1262.000000, 0.000000)"
-                        >
+                      <g transform="translate(64.000000, 48.000000)">
+                        <g transform="translate(1262.000000, 0.000000)">
                           <g transform="translate(42.000000, 3.000000)">
                             <polygon id="Path-2" points="0 15 1 4 13 4 14 15" />
                             <path
@@ -105,7 +99,7 @@ function Header({ siteTitle, collections }) {
                 </svg>
 
                 {!isEmpty && (
-                  <span className="md:inline-flex rounded-full bg-yellow -mt-2 md:mt-1 -ml-1 md:ml-2 md:p-3 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
+                  <span className="md:inline-flex rounded-full bg-yellow -mt-3 -ml-0 md:p-2 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
                     <span className="hidden md:inline text-black text-xs font-semibold">
                       {count}
                     </span>
