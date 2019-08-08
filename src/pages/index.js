@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, Link } from 'gatsby'
 
 import Category from '../components/Category'
+import PageTitle from '../components/PageTitle'
 
 function IndexPage({
   data: {
@@ -14,14 +15,18 @@ function IndexPage({
         <div className="container relative">
           <div className="w-full md:w-2/3 lg:w-1/2 py-12 px-8 md:px-0">
             <div className="text-center md:text-left md:my-auto">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal mb-4">
-                The Alchémist Collection
+              <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal">
+                The Moltin demo store
               </h1>
-              <p>
-                The perfect lighting scheme is made up of a variety of different
-                lamps, for both form and function. Start with a pair of table
-                lamps either side of a bed or sofa, but when there’s no space to
-                fit a side table, consider a floor lamp or wall lamps instead.
+              <p className="mt-2">
+                This is a Gatsby demo store, built using the source plugin to
+                fetch products.
+              </p>
+
+              <p className="mt-2">
+                Product, category and collection pages are statically generated,
+                and all dynamic cart/checkout functionality happens dynamically
+                with our JS SDKs.
               </p>
 
               <Link

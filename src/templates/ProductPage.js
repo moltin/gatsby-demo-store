@@ -25,7 +25,7 @@ function ProductPage({ data: { product } }) {
         image={withPrefix(product.mainImage.childImageSharp.fluid.src)}
       />
 
-      <div className="flex flex-wrap md:bg-grey-light">
+      <div className="flex flex-wrap">
         <div className="py-2 md:py-5 md:px-5 w-full lg:w-1/2">
           <div className="sticky pin-t">
             <Photo
