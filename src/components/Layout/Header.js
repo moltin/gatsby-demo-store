@@ -6,7 +6,7 @@ import { CartContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
 
-function Header({ siteTitle }) {
+function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
   // const { loggedIn, user } = useContext(CustomerContext)
 
@@ -20,6 +20,25 @@ function Header({ siteTitle }) {
 
           <li className="nav-item">
             <Link to="/about">About</Link>
+          </li>
+
+          <li className="nav-item relative mx-1 px-1 py-2 group mb-1 md:mb-0">
+            <Link to="/collections">Collections</Link>
+
+            <div className="absolute left-0 top-0 mt-2 py-3 px-4 rounded shadow-lg bg-white z-10 hidden group-hover:block">
+              <ul className="whitespace-no-wrap list-reset">
+                {collections.nodes.map(collection => (
+                  <li key={collection.id}>
+                    <Link
+                      to={`/collections/${collection.slug}`}
+                      className="block text-grey hover:text-black no-underline my-1"
+                    >
+                      {collection.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </li>
         </ul>
 
@@ -99,10 +118,6 @@ function Header({ siteTitle }) {
       </nav>
     </header>
   )
-}
-
-Header.defaultProps = {
-  siteTitle: ``
 }
 
 export default Header

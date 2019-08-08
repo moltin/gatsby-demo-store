@@ -47,11 +47,13 @@ p {
   @apply ml-12;
 }
 
-.nav-item > a {
+.nav-item > a,
+.nav-item-link {
   @apply no-underline block text-grey;
 }
 
-.nav-item > a:hover {
+.nav-item > a:hover,
+.nav-item-link:hover {
   @apply text-black;
 }
 
@@ -78,4 +80,8 @@ p {
 
 button:disabled {
   @apply opacity-50 cursor-not-allowed;
+}
+
+.group:hover .group-hover\:block {
+  display: block !important;
 }

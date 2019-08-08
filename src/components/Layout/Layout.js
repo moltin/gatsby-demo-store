@@ -8,14 +8,11 @@ import Footer from './Footer'
 import '../../styles/main.css'
 
 export default function Layout({ children }) {
-  const {
-    site,
-    allMoltinCategory: { edges: categories }
-  } = useStaticQuery(categoriesQuery)
+  const { site, categories, collections } = useStaticQuery(categoriesQuery)
 
   return (
     <div className="container">
-      <Header siteTitle={site.siteMetadata.title} />
+      <Header siteTitle={site.siteMetadata.title} collections={collections} />
       <main>{children}</main>
       <Banner />
       <Footer categories={categories} />
@@ -30,13 +27,19 @@ const categoriesQuery = graphql`
         title
       }
     }
-    allMoltinCategory {
-      edges {
-        node {
-          id
-          name
-          slug
-        }
+
+    categories: allMoltinCategory {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+
+    collections: allMoltinCollection {
+      nodes {
+        name
+        slug
       }
     }
   }

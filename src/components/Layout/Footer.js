@@ -16,7 +16,7 @@ export default function Footer({ categories }) {
         <li className="font-semibold md:mb-3 text-grey text-sm uppercase">
           Categories
         </li>
-        {categories.map(({ node: category }) => (
+        {categories.nodes.map(category => (
           <li key={category.id}>
             <Link
               to={`/categories/${category.slug}`}
