@@ -2,7 +2,6 @@ import React from 'react'
 import { graphql, Link } from 'gatsby'
 
 import Category from '../components/Category'
-import PageTitle from '../components/PageTitle'
 
 function IndexPage({
   data: {

@@ -4,7 +4,7 @@ export default function Select({ options, defaultValue, ...props }) {
   return (
     <div className="inline-flex relative">
       <select
-        className="block appearance-none w-full border border-black hover:border-grey pl-4 pr-10 py-2 leading-tight rounded-none focus:outline-none"
+        className="block bg-transparent appearance-none w-full border border-black hover:border-grey pl-4 pr-10 py-2 leading-tight rounded-none focus:outline-none"
         {...props}
       >
         {options.map(opt => (
