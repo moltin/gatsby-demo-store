@@ -1,7 +1,15 @@
 import React from 'react'
 import Img from 'gatsby-image'
+import cx from 'classnames'
 
-export default function Photo({ src, cartImg, ...props }) {
+export default function Photo({ src, cartImg, transparent, ...props }) {
+  const imageClass = cx(
+    'product-image cursor-pointer flex items-center justify-center w-full overflow-hidden relative',
+    {
+      'bg-grey-light': !transparent
+    }
+  )
+
   function renderImage() {
     if (!src) return <span>No photo</span>
 
@@ -21,9 +29,5 @@ export default function Photo({ src, cartImg, ...props }) {
     )
   }
 
-  return (
-    <div className="product-image cursor-pointer flex items-center justify-center w-full overflow-hidden relative">
-      {renderImage()}
-    </div>
-  )
+  return <div className={imageClass}>{renderImage()}</div>
 }

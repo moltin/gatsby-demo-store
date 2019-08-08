@@ -31,6 +31,7 @@ function ProductPage({ data: { product } }) {
             <Photo
               src={product.mainImage}
               alt={product.main_image_alt_text || product.name}
+              transparent
             />
           </div>
         </div>
