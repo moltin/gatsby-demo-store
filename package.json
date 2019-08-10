@@ -4,7 +4,7 @@
     "@moltin/gatsby-source-moltin": "1.4.1",
     "@moltin/request": "2.0.2",
     "classnames": "2.2.6",
-    "final-form": "4.18.3",
+    "final-form": "4.18.4",
     "gatsby": "2.13.15",
     "gatsby-image": "2.2.5",
     "gatsby-plugin-google-analytics": "2.1.2",
