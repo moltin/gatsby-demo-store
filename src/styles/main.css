@@ -85,3 +85,13 @@ button:disabled {
 .group:hover .group-hover\:block {
   display: block !important;
 }
+
+/* Stripe */
+
+.StripeElement {
+  @apply bg-white border border-grey-dark px-4 py-3 leading-tight rounded-none;
+}
+
+.StripeElement:hover {
+  @apply border-grey;
+}
