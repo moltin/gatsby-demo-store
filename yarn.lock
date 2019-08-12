@@ -9782,6 +9782,13 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
+react-stripe-elements@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-4.0.0.tgz#541561cb27498b8355fe3273bb68030beae7439e"
+  integrity sha512-/GK7oMJSp06gNww/3vp7BHie3VavjaCa2m7IQ+it7QLcPTGaG+sTVFz2tRz9OGKlcM2HqqTiutrNwYfRRK+YIw==
+  dependencies:
+    prop-types "^15.5.10"
+
 react@16.8.6, react@^16.8.4:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
