@@ -98,6 +98,14 @@ const checkoutValidation = values => {
     errors.shipping_address.country = 'Required'
   }
 
+  if (!values.stripe || !values.stripe.complete) {
+    if (!errors.stripe) {
+      errors.stripe = {}
+    }
+
+    errors.stripe.complete = 'Required'
+  }
+
   return errors
 }
 

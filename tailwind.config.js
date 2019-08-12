@@ -11,7 +11,8 @@ let colors = {
   green: '#27B86C',
   orange: '#FF8119',
   pink: '#FF1984',
-  yellow: '#FFE285'
+  yellow: '#FFE285',
+  overlay: 'rgba(0, 0, 0, 0.1)'
 }
 
 module.exports = {

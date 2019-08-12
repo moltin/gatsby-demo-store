@@ -38,8 +38,18 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     return order
   }
 
-  async function pay({ orderId }) {
-    return true
+  async function pay({ gateway, method, orderId, ...rest }) {
+    try {
+      const { payment } = await moltin.post(`orders/${orderId}/payments`, {
+        gateway,
+        method,
+        ...rest
+      })
+
+      return payment
+    } catch (err) {
+      throw new Error(err.message || 'Payment failed')
+    }
   }
 
   return (

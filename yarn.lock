@@ -4837,10 +4837,10 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-final-form@4.18.4:
-  version "4.18.4"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.18.4.tgz#55f6dfb1463045a6e9248d928e573459a8cd97f3"
-  integrity sha512-UUymL6UykjwO2yUN3EhBdw8ajaa448/CczgXvLcyXwbHRjWbA3Yjdxm6WSHQBx4pLv4iEqkvmPRnQ+xmS9GUcA==
+final-form@4.18.3:
+  version "4.18.3"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.18.3.tgz#66cee7d43e3693e5001cf2d6293734756b80f8fd"
+  integrity sha512-RLC8aSxpbFI2r6JbwFI6CWI1/YI2S60xysliI3mEl2r4rZJ21pgKH+pc4PURuPezrTRkhB8ZEQsq/0PpGBNPIA==
   dependencies:
     "@babel/runtime" "^7.3.1"
 
@@ -5170,13 +5170,6 @@ gatsby-page-utils@^0.0.3:
     lodash "^4.17.10"
     micromatch "^3.1.10"
     slash "^1.0.0"
-
-gatsby-plugin-google-analytics@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-2.1.2.tgz#93955e348528dadd3d0b5f0e4a181401c3f67d58"
-  integrity sha512-+TjrBTI+JcZfjohvob2dgLPRr6uQxURvvgZysiyBvAxddlZuLQGyFxcQXSAYBXhtzA2AGvdJC3TSY9b/sgOZ1w==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
 
 gatsby-plugin-manifest@2.2.2:
   version "2.2.2"
@@ -9705,15 +9698,15 @@ react-dev-utils@^4.2.3:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@16.9.0:
-  version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
-  integrity sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
+react-dom@16.8.6:
+  version "16.8.6"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
+  integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.15.0"
+    scheduler "^0.13.6"
 
 react-error-overlay@^3.0.0:
   version "3.0.0"
@@ -9789,16 +9782,14 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react@16.9.0:
-  version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
-  integrity sha512-+7LQnFBwkiw+BobzOF6N//BdoNw0ouwmSJTEm9cglOOmsg/TMiFHZLe2sEoN5M7LgJTj9oHH0gxklfnQe66S1w==
+react-stripe-elements@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-4.0.0.tgz#541561cb27498b8355fe3273bb68030beae7439e"
+  integrity sha512-/GK7oMJSp06gNww/3vp7BHie3VavjaCa2m7IQ+it7QLcPTGaG+sTVFz2tRz9OGKlcM2HqqTiutrNwYfRRK+YIw==
   dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
+    prop-types "^15.5.10"
 
-react@^16.8.4:
+react@16.8.6, react@^16.8.4:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
@@ -10290,14 +10281,6 @@ scheduler@^0.13.2, scheduler@^0.13.6:
   version "0.13.6"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
   integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-
-scheduler@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.15.0.tgz#6bfcf80ff850b280fed4aeecc6513bc0b4f17f8e"
-  integrity sha512-xAefmSfN6jqAa7Kuq7LIJY0bwAPG3xlCj0HMEBQk1lxYiDKZscY2xJ5U/61ZTrYbmNQbXa+gc7czPkVo11tnCg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"

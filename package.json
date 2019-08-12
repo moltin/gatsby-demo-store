@@ -7,7 +7,6 @@
     "final-form": "4.18.4",
     "gatsby": "2.13.15",
     "gatsby-image": "2.2.5",
-    "gatsby-plugin-google-analytics": "2.1.2",
     "gatsby-plugin-manifest": "2.2.2",
     "gatsby-plugin-offline": "2.2.2",
     "gatsby-plugin-postcss": "2.1.1",
@@ -21,6 +20,7 @@
     "react-dom": "16.9.0",
     "react-final-form": "4.1.0",
     "react-helmet": "5.2.1",
+    "react-stripe-elements": "^4.0.0",
     "tailwindcss": "0.7.4",
     "validator": "10.11.0"
   },

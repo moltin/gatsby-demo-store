@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 function SEO({
   description,
-  lang,
+  lang = 'en',
   meta,
   keywords,
   title,

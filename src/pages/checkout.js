@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
+import { CardElement, injectStripe } from 'react-stripe-elements'
+import { Link } from 'gatsby'
 
 import { CartContext, CheckoutContext } from '../context'
 import PageTitle from '../components/PageTitle'
@@ -14,24 +16,86 @@ const initialValues = {
   customer: { marketing_opt_in: false }
 }
 
-function CheckoutPage() {
-  const { cartId, isEmpty, subTotal } = useContext(CartContext)
-  const { checkout } = useContext(CheckoutContext)
+function CheckoutPage({ stripe }) {
+  const { cartId, isEmpty, subTotal, deleteCart } = useContext(CartContext)
+  const [paid, setPaid] = useState(false)
+  const [order, setOrder] = useState(null)
+  const { checkout, pay } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
 
-  if (isEmpty) return <p className="text-center">Your cart is empty</p>
+  if (paid)
+    return (
+      <div className="text-center py-12">
+        <svg
+          className="text-black w-24 h-24 mx-auto mb-6"
+          xmlns="http://www.w3.org/2000/svg"
+          width="80"
+          height="80"
+          viewBox="0 0 80 80"
+        >
+          <g fill="none" fillRule="evenodd">
+            <circle
+              className="stroke-current"
+              cx="40"
+              cy="40"
+              r="39"
+              strokeWidth="2"
+            />
+            <polyline
+              className="stroke-current"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3"
+              points="24.5 41.5 34.5 51.5 55.5 30.5"
+            />
+          </g>
+        </svg>
+        <h3 className="text-center text-3xl text-black">Order completed</h3>
+        <p className="text-center text-grey mb-6">Thank for your order!</p>
+        {order && order.id && (
+          <p className="text-center text-grey mb-6">
+            ID: <span className="font-mono text-sm">{order.id}</span>
+          </p>
+        )}
+
+        <Link
+          to="/"
+          className="inline-block appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none no-underline"
+        >
+          Continue shopping &rarr;
+        </Link>
+      </div>
+    )
+  if (isEmpty && !paid) return <p className="text-center">Your cart is empty</p>
 
   async function onSubmit(values) {
     try {
+      const { shipping_address } = values
       const order = await checkout(cartId, values)
-      alert(order)
-    } catch ({ errors }) {
-      // const [{ detail }] = errors
 
+      const token = await stripe.createToken({
+        name: `${shipping_address.first_name} ${shipping_address.last_name}`,
+        address_line1: shipping_address.line_1,
+        address_line2: shipping_address.line_2,
+        address_city: shipping_address.city,
+        address_state: shipping_address.county,
+        address_zip: shipping_address.postcode,
+        address_country: shipping_address.country
+      })
+
+      await pay({
+        gateway: 'stripe',
+        method: 'purchase',
+        orderId: order.id,
+        payment: token.token.id
+      })
+
+      await setOrder(order)
+      await deleteCart()
+      await setPaid(true)
+    } catch ({ errors }) {
       setCheckoutError(errors)
     }
-
-    // try payment
   }
 
   return (
@@ -45,7 +109,9 @@ function CheckoutPage() {
             validate={validation}
             initialValues={initialValues}
           >
-            {({ handleSubmit, submitting, invalid, values }) => {
+            {({ handleSubmit, submitting, invalid, values, form }) => {
+              const onStripeChange = e => form.change('stripe', e)
+
               if (
                 !values.createCustomer &&
                 values.customer &&
@@ -235,6 +301,36 @@ function CheckoutPage() {
                     <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
                       Payment method
                     </h2>
+
+                    <div className="my-2 w-full">
+                      <CardElement
+                        onChange={onStripeChange}
+                        hidePostalCode={true}
+                        id="payment"
+                        style={{
+                          base: {
+                            color: '#131313',
+                            fontFamily:
+                              'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '16px',
+                            '::placeholder': {
+                              color: '#B3B3B3'
+                            }
+                          },
+                          invalid: {
+                            color: '#E62F17',
+                            ':focus': {
+                              color: '#E62F17'
+                            }
+                          }
+                        }}
+                      />
+                      {values.stripe && values.stripe.error && (
+                        <span className="text-red text-sm">
+                          {values.stripe.error.message}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="bg-grey-lightest p-4 my-6">
@@ -270,4 +366,4 @@ function CheckoutPage() {
   )
 }
 
-export default CheckoutPage
+export default injectStripe(CheckoutPage)
