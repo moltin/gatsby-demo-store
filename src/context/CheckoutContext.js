@@ -38,12 +38,12 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     return order
   }
 
-  async function pay({ orderId, token }) {
+  async function pay({ gateway, method, orderId, ...rest }) {
     try {
       const { payment } = await moltin.post(`orders/${orderId}/payments`, {
-        gateway: 'stripe',
-        method: 'purchase',
-        payment: token
+        gateway,
+        method,
+        ...rest
       })
 
       return payment

@@ -17,7 +17,8 @@ const initialValues = {
 
 function CheckoutPage() {
   const { cartId, isEmpty, subTotal, deleteCart } = useContext(CartContext)
-  const { checkout } = useContext(CheckoutContext)
+  const [paid, setPaid] = useState(false)
+  const { checkout, payWithGateway } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
 
   if (isEmpty) return <p className="text-center">Your cart is empty</p>
