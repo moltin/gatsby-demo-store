@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Form, Field } from 'react-final-form'
+import { CardElement, injectStripe } from 'react-stripe-elements'
 
 import { CartContext, CheckoutContext } from '../context'
 import PageTitle from '../components/PageTitle'
@@ -15,7 +16,7 @@ const initialValues = {
 }
 
 function CheckoutPage() {
-  const { cartId, isEmpty, subTotal } = useContext(CartContext)
+  const { cartId, isEmpty, subTotal, deleteCart } = useContext(CartContext)
   const { checkout } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
 
@@ -270,4 +271,4 @@ function CheckoutPage() {
   )
 }
 
-export default CheckoutPage
+export default injectStripe(CheckoutPage)
