@@ -89,7 +89,7 @@ button:disabled {
 /* Stripe */
 
 .StripeElement {
-  @apply bg-white border border-grey-dark px-4 py-3 leading-tight rounded-none;
+  @apply bg-white border border-black px-4 py-3 leading-tight rounded-none;
 }
 
 .StripeElement:hover {

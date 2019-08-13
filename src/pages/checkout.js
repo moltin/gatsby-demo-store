@@ -102,8 +102,8 @@ function CheckoutPage({ stripe }) {
     <React.Fragment>
       <PageTitle title="Checkout" />
 
-      <div className="flex flex-wrap -mx-4">
-        <div className="p-4 w-full lg:w-3/5">
+      <div className="flex flex-wrap lg:-mx-4">
+        <div className="lg:p-4 w-full lg:w-3/5">
           <Form
             onSubmit={onSubmit}
             validate={validation}
@@ -303,6 +303,12 @@ function CheckoutPage({ stripe }) {
                     </h2>
 
                     <div className="my-2 w-full">
+                      <div className="bg-yellow text-sm p-3 my-6">
+                        Use the test card{' '}
+                        <pre className="inline">4242 4242 4242 4242</pre> and
+                        any future expiry and CVC below to checkout.
+                      </div>
+
                       <CardElement
                         onChange={onStripeChange}
                         hidePostalCode={true}
@@ -311,7 +317,7 @@ function CheckoutPage({ stripe }) {
                           base: {
                             color: '#131313',
                             fontFamily:
-                              'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                              '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                             fontSize: '16px',
                             '::placeholder': {
                               color: '#B3B3B3'
@@ -353,7 +359,7 @@ function CheckoutPage({ stripe }) {
           </Form>
         </div>
 
-        <div className="p-4 w-full lg:w-2/5">
+        <div className="hidden lg:block p-4 w-full lg:w-2/5">
           <div className="bg-grey-lightest p-6 sticky pin-t">
             <h2 className="text-black font-medium leading-loose p-0 mb-3">
               Shopping Cart
