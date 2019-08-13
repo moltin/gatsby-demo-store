@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useReducer, useEffect } from 'react'
 import { createCartIdentifier } from '@moltin/request'
+import { toast } from 'react-toastify'
 
 import { MoltinContext } from '.'
 
@@ -87,6 +88,10 @@ function CartProvider({
     })
 
     dispatch({ type: SET_CART, payload })
+
+    toast.success(
+      `Added ${quantity} ${quantity > 1 ? 'items' : 'item'} to cart`
+    )
   }
 
   async function updateQuantity(id, quantity) {
@@ -97,12 +102,16 @@ function CartProvider({
     })
 
     dispatch({ type: SET_CART, payload })
+
+    toast.success(`Quantity updated to ${quantity}`)
   }
 
   async function removeFromCart(id) {
     const payload = await moltin.delete(`carts/${cartId}/items/${id}`)
 
     dispatch({ type: SET_CART, payload })
+
+    toast.success('Item removed from cart')
   }
 
   async function addPromotion(code) {
@@ -112,6 +121,8 @@ function CartProvider({
     })
 
     dispatch({ type: SET_CART, payload })
+
+    toast.success('Promotion applied')
   }
 
   async function deleteCart(id) {

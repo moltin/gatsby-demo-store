@@ -99,7 +99,7 @@ function Header({ siteTitle, collections }) {
                 </svg>
 
                 {!isEmpty && (
-                  <span className="md:inline-flex rounded-full bg-yellow -mt-3 -ml-0 md:p-2 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
+                  <span className="md:inline-flex rounded-full bg-yellow -mt-3 -ml-0 md:p-3 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
                     <span className="hidden md:inline text-black text-xs font-semibold">
                       {count}
                     </span>
