@@ -28,7 +28,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "dev": "gatsby clean && gatsby develop",
+    "dev": "yarn clean && gatsby develop",
     "format": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
