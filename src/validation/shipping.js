@@ -1,6 +1,6 @@
 import IsEmail from 'validator/lib/isEmail'
 
-const checkoutValidation = values => {
+const shippingValidation = values => {
   const errors = {}
 
   if (!values.customer || !values.customer.name) {
@@ -98,15 +98,7 @@ const checkoutValidation = values => {
     errors.shipping_address.country = 'Required'
   }
 
-  if (!values.stripe || !values.stripe.complete) {
-    if (!errors.stripe) {
-      errors.stripe = {}
-    }
-
-    errors.stripe.complete = 'Required'
-  }
-
   return errors
 }
 
-export default checkoutValidation
+export default shippingValidation
