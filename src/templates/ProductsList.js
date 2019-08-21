@@ -20,25 +20,3 @@ function ProductsList({ pageContext }) {
 }
 
 export default ProductsList
-
-const query = graphql`
-  query allProductsQuery {
-    allMoltinProduct {
-      edges {
-        node {
-          id
-          name
-          slug
-
-          meta {
-            display_price {
-              without_tax {
-                formatted
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
