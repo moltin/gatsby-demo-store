@@ -8,7 +8,8 @@ import PageTitle from '../components/PageTitle'
 import Input from '../components/Input'
 import AddressFields from '../components/AddressFields'
 import CartItemList from '../components/CartItemList'
-import validation from '../validation/checkout'
+import shippingValidation from '../validation/shipping'
+import paymentValidation from '../validation/payment'
 
 const initialValues = {
   billingIsShipping: true,
@@ -17,11 +18,44 @@ const initialValues = {
 }
 
 function CheckoutPage({ stripe }) {
+  const [currentStep, setCurrentStep] = useState('shipping')
   const { cartId, isEmpty, subTotal, deleteCart } = useContext(CartContext)
   const [paid, setPaid] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
   const { checkout, pay } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
+
+  const shippingStep = currentStep === 'shipping'
+  const paymentStep = currentStep === 'payment'
+
+  function validate(values) {
+    if (shippingStep) return shippingValidation(values)
+
+    return paymentValidation(values)
+  }
+
+  function handleSubmit(values) {
+    if (shippingStep) return proceedToPayment(values)
+
+    return onSubmit(values)
+  }
+
+  async function proceedToPayment(values) {
+    setLoading(true)
+
+    try {
+      // const {
+      //   shipping_address: { county, postcode }
+      // } = values
+
+      setCurrentStep('payment')
+      setLoading(false)
+    } catch ({ errors }) {
+      setLoading(false)
+      setCheckoutError(errors)
+    }
+  }
 
   if (paid)
     return (
@@ -105,8 +139,8 @@ function CheckoutPage({ stripe }) {
       <div className="flex flex-wrap lg:-mx-4">
         <div className="lg:p-4 w-full lg:w-3/5">
           <Form
-            onSubmit={onSubmit}
-            validate={validation}
+            onSubmit={handleSubmit}
+            validate={validate}
             initialValues={initialValues}
           >
             {({ handleSubmit, submitting, invalid, values, form }) => {
@@ -132,65 +166,27 @@ function CheckoutPage({ stripe }) {
                     </div>
                   )}
 
-                  <div>
-                    <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
-                      Contact information
-                    </h2>
+                  {shippingStep && (
+                    <React.Fragment>
+                      <div>
+                        <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
+                          Contact information
+                        </h2>
 
-                    <div className="md:flex -mx-2">
-                      <div className="my-2 w-full px-2">
-                        <Input name="customer.name" label="Full name" />
-                      </div>
+                        <div className="md:flex -mx-2">
+                          <div className="my-2 w-full px-2">
+                            <Input name="customer.name" label="Full name" />
+                          </div>
 
-                      <div className="my-2 w-full px-2">
-                        <Input
-                          type="email"
-                          name="customer.email"
-                          label="Email"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="my-2 w-full">
-                      <label
-                        htmlFor="createCustomer"
-                        className="p-0 m-0 inline-flex items-center cursor-pointer"
-                      >
-                        <div className="flex items-center justify-center mr-4 relative">
-                          <Field
-                            id="createCustomer"
-                            name="createCustomer"
-                            component="input"
-                            type="checkbox"
-                            className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
-                          />
-                          {values.createCustomer && (
-                            <span className="absolute text-white flex">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 10 7"
-                                className="w-3 h-3 fill-current"
-                              >
-                                <path
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M9 1L3.5 6 1 3.727"
-                                />
-                              </svg>
-                            </span>
-                          )}
+                          <div className="my-2 w-full px-2">
+                            <Input
+                              type="email"
+                              name="customer.email"
+                              label="Email"
+                            />
+                          </div>
                         </div>
-                        <span className="text-black">
-                          Save my details for later
-                        </span>
-                      </label>
-                    </div>
 
-                    {values.createCustomer && (
-                      <React.Fragment>
                         <div className="my-2 w-full">
                           <label
                             htmlFor="customer.marketing_opt_in"
@@ -229,130 +225,176 @@ function CheckoutPage({ stripe }) {
                             </span>
                           </label>
                         </div>
+                      </div>
+
+                      <div>
+                        <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
+                          Shipping address
+                        </h2>
+
+                        <AddressFields type="shipping_address" />
+                      </div>
+                    </React.Fragment>
+                  )}
+
+                  {paymentStep && (
+                    <React.Fragment>
+                      <div>
+                        <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
+                          Billing address
+                        </h2>
 
                         <div className="my-2 w-full">
-                          <Input
-                            type="password"
-                            name="customer.password"
-                            label="Password"
-                          />
+                          <label
+                            htmlFor="billingIsShipping"
+                            className="p-0 m-0 inline-flex items-center cursor-pointer"
+                          >
+                            <div className="flex items-center justify-center mr-4 relative">
+                              <Field
+                                id="billingIsShipping"
+                                name="billingIsShipping"
+                                component="input"
+                                type="checkbox"
+                                className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                              />
+                              {values.billingIsShipping && (
+                                <span className="absolute text-white flex">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 10 7"
+                                    className="w-3 h-3 fill-current"
+                                  >
+                                    <path
+                                      fill="none"
+                                      stroke="currentColor"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M9 1L3.5 6 1 3.727"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-black">
+                              Use shipping address for billing
+                            </span>
+                          </label>
                         </div>
-                      </React.Fragment>
-                    )}
-                  </div>
 
-                  <div>
-                    <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
-                      Shipping address
-                    </h2>
+                        {!values.billingIsShipping && (
+                          <AddressFields type="billing_address" />
+                        )}
 
-                    <AddressFields type="shipping_address" />
-                  </div>
+                        <div className="my-2 w-full">
+                          <label
+                            htmlFor="createCustomer"
+                            className="p-0 m-0 inline-flex items-center cursor-pointer"
+                          >
+                            <div className="flex items-center justify-center mr-4 relative">
+                              <Field
+                                id="createCustomer"
+                                name="createCustomer"
+                                component="input"
+                                type="checkbox"
+                                className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                              />
+                              {values.createCustomer && (
+                                <span className="absolute text-white flex">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 10 7"
+                                    className="w-3 h-3 fill-current"
+                                  >
+                                    <path
+                                      fill="none"
+                                      stroke="currentColor"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M9 1L3.5 6 1 3.727"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-black">
+                              Save my details for later
+                            </span>
+                          </label>
+                        </div>
 
-                  <div>
-                    <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
-                      Billing address
-                    </h2>
+                        {values.createCustomer && (
+                          <div className="my-2 w-full">
+                            <Input
+                              type="password"
+                              name="customer.password"
+                              label="Password"
+                            />
+                          </div>
+                        )}
+                      </div>
 
-                    <div className="my-2 w-full">
-                      <label
-                        htmlFor="billingIsShipping"
-                        className="p-0 m-0 inline-flex items-center cursor-pointer"
-                      >
-                        <div className="flex items-center justify-center mr-4 relative">
-                          <Field
-                            id="billingIsShipping"
-                            name="billingIsShipping"
-                            component="input"
-                            type="checkbox"
-                            className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                      <div>
+                        <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
+                          Payment method
+                        </h2>
+
+                        <div className="my-2 w-full">
+                          <div className="bg-yellow text-sm p-3 my-6">
+                            Use the test card{' '}
+                            <pre className="inline">4242 4242 4242 4242</pre>{' '}
+                            and any future expiry and CVC below to checkout.
+                          </div>
+
+                          <CardElement
+                            onChange={onStripeChange}
+                            hidePostalCode={true}
+                            id="payment"
+                            style={{
+                              base: {
+                                color: '#131313',
+                                fontFamily:
+                                  '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                                fontSize: '16px',
+                                '::placeholder': {
+                                  color: '#B3B3B3'
+                                }
+                              },
+                              invalid: {
+                                color: '#E62F17',
+                                ':focus': {
+                                  color: '#E62F17'
+                                }
+                              }
+                            }}
                           />
-                          {values.billingIsShipping && (
-                            <span className="absolute text-white flex">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 10 7"
-                                className="w-3 h-3 fill-current"
-                              >
-                                <path
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M9 1L3.5 6 1 3.727"
-                                />
-                              </svg>
+                          {values.stripe && values.stripe.error && (
+                            <span className="text-red text-sm">
+                              {values.stripe.error.message}
                             </span>
                           )}
                         </div>
-                        <span className="text-black">
-                          Use shipping address for billing
-                        </span>
-                      </label>
-                    </div>
-
-                    {!values.billingIsShipping && (
-                      <AddressFields type="billing_address" />
-                    )}
-                  </div>
-
-                  <div>
-                    <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
-                      Payment method
-                    </h2>
-
-                    <div className="my-2 w-full">
-                      <div className="bg-yellow text-sm p-3 my-6">
-                        Use the test card{' '}
-                        <pre className="inline">4242 4242 4242 4242</pre> and
-                        any future expiry and CVC below to checkout.
                       </div>
 
-                      <CardElement
-                        onChange={onStripeChange}
-                        hidePostalCode={true}
-                        id="payment"
-                        style={{
-                          base: {
-                            color: '#131313',
-                            fontFamily:
-                              '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                            fontSize: '16px',
-                            '::placeholder': {
-                              color: '#B3B3B3'
-                            }
-                          },
-                          invalid: {
-                            color: '#E62F17',
-                            ':focus': {
-                              color: '#E62F17'
-                            }
-                          }
-                        }}
-                      />
-                      {values.stripe && values.stripe.error && (
-                        <span className="text-red text-sm">
-                          {values.stripe.error.message}
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                      <div className="bg-grey-lightest p-4 my-6">
+                        <p className="text-sm text-center">
+                          By clicking the button below you agree to our terms of
+                          sale.
+                        </p>
+                      </div>
+                    </React.Fragment>
+                  )}
 
-                  <div className="bg-grey-lightest p-4 my-6">
-                    <p className="text-sm text-center">
-                      By clicking the button below you agree to our terms of
-                      sale.
-                    </p>
-
-                    <button
-                      disabled={submitting || invalid}
-                      type="submit"
-                      className="block w-full appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none mt-4 no-underline"
-                    >
-                      Confirm and Pay {subTotal}
-                    </button>
-                  </div>
+                  <button
+                    disabled={submitting || invalid || loading}
+                    type="submit"
+                    className="block w-full appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 leading-tight rounded-none focus:outline-none mt-4 no-underline"
+                  >
+                    {paymentStep
+                      ? `Confirm and Pay ${subTotal}`
+                      : 'Continue to payment'}
+                  </button>
                 </form>
               )
             }}
