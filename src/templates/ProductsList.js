@@ -8,7 +8,7 @@ import Pagination from '../components/Pagination'
 
 function ProductsList({ data: { allMoltinProduct }, pageContext }) {
   const {
-    pageNumber,
+    humanPageNumber,
     numberOfPages,
     nextPagePath,
     previousPagePath
@@ -22,8 +22,8 @@ function ProductsList({ data: { allMoltinProduct }, pageContext }) {
         products={allMoltinProduct.edges.map(({ node: product }) => product)}
       />
       <Pagination
-        index={pageNumber}
-        pageCount={numberOfPages}
+        currentPage={humanPageNumber}
+        numberOfPages={numberOfPages}
         nextPagePath={nextPagePath}
         previousPagePath={previousPagePath}
         resource="products"

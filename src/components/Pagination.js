@@ -1,43 +1,37 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-const NavLink = ({ resource, url, text, disabled }) => (
+const NavLink = ({ url, text }) => (
   <Link
-    to={`/${resource}/${url}`}
+    to={url}
     activeClassName="font-bold"
     className={`${
-      disabled ? 'text-grey-lighter pointer-events-none' : ''
+      !url ? 'text-grey-lighter pointer-events-none' : ''
     } no-underline mx-4`}
   >
     {text}
   </Link>
 )
 
-export default function Pagination({ index, pageCount, resource }) {
-  const previousUrl = index - 1 === 1 ? '/' : (index - 1).toString()
-  const nextUrl = (index + 1).toString()
+export default function Pagination({
+  currentPage,
+  numberOfPages,
+  nextPagePath,
+  previousPagePath
+}) {
+  console.log(nextPagePath, previousPagePath)
+
+  console.log(currentPage)
 
   return (
     <div className="flex justify-center items-center my-2">
-      <NavLink
-        disabled={index === 1}
-        url={previousUrl}
-        resource={resource}
-        text="‹‹"
-      />
-      {Array.from({ length: pageCount }).map((_, index) => (
-        <NavLink
-          url={index + 1 === 1 ? '/' : index + 1}
-          resource={resource}
-          text={index + 1}
-        />
-      ))}
-      <NavLink
-        disabled={index === pageCount}
-        url={nextUrl}
-        resource={resource}
-        text="››"
-      />
+      <NavLink url={previousPagePath} text="‹‹" />
+      {Array.from({ length: numberOfPages }).map((_, i) => {
+        const index = i + 1
+        const url = i < 1 ? '/products' : `/products/${index}`
+        return <NavLink url={url} text={index} />
+      })}
+      <NavLink url={nextPagePath} text="››" />
     </div>
   )
 }
