@@ -27,12 +27,12 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "dev": "rimraf .cache && gatsby develop",
+    "clean": "gatsby clean",
+    "dev": "yarn clean && gatsby develop",
     "format": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
     "autoprefixer": "9.6.1",
-    "prettier": "1.18.2",
-    "rimraf": "3.0.0"
+    "prettier": "1.18.2"
   }
 }
