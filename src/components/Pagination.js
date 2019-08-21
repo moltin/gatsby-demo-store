@@ -1,21 +1,17 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-const NavLink = props => {
-  if (!props.disable) {
-    return (
-      <Link
-        to={`/${props.resource}/${props.url}`}
-        activeStyle={{ fontWeight: 'bold' }}
-        className="no-underline mx-4"
-      >
-        {props.text}
-      </Link>
-    )
-  } else {
-    return <span className="text-grey-lighter mx-4">{props.text}</span>
-  }
-}
+const NavLink = ({ resource, url, text, disabled }) => (
+  <Link
+    to={`/${resource}/${url}`}
+    activeStyle={{ fontWeight: 'bold' }}
+    className={`${
+      disabled ? 'text-grey-lighter pointer-events-none' : ''
+    } no-underline mx-4`}
+  >
+    {text}
+  </Link>
+)
 
 export default function Pagination({ index, pageCount, resource }) {
   const previousUrl = index - 1 === 1 ? '/' : (index - 1).toString()
@@ -24,10 +20,10 @@ export default function Pagination({ index, pageCount, resource }) {
   return (
     <div className="flex justify-center items-center">
       <NavLink
-        disable={index === 1}
+        disabled={index === 1}
         url={previousUrl}
         resource={resource}
-        text="‹‹ Prev"
+        text="‹‹"
       />
       {Array.from({ length: pageCount }).map((_, index) => (
         <NavLink
@@ -37,10 +33,10 @@ export default function Pagination({ index, pageCount, resource }) {
         />
       ))}
       <NavLink
-        disable={index === pageCount}
+        disabled={index === pageCount}
         url={nextUrl}
         resource={resource}
-        text="Next ››"
+        text="››"
       />
     </div>
   )
