@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     edges: pages.data.allProducts.edges,
     createPage: createPage,
     pageTemplate: 'src/templates/ProductsList.js',
-    pageLength: 4,
+    pageLength: 6,
     pathPrefix: 'products'
   })
 

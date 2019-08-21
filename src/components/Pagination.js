@@ -4,7 +4,7 @@ import Link from 'gatsby-link'
 const NavLink = ({ resource, url, text, disabled }) => (
   <Link
     to={`/${resource}/${url}`}
-    activeStyle={{ fontWeight: 'bold' }}
+    activeClassName="font-bold"
     className={`${
       disabled ? 'text-grey-lighter pointer-events-none' : ''
     } no-underline mx-4`}
@@ -18,7 +18,7 @@ export default function Pagination({ index, pageCount, resource }) {
   const nextUrl = (index + 1).toString()
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center my-2">
       <NavLink
         disabled={index === 1}
         url={previousUrl}
