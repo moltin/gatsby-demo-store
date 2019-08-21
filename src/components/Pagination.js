@@ -19,17 +19,14 @@ export default function Pagination({
   nextPagePath,
   previousPagePath
 }) {
-  console.log(nextPagePath, previousPagePath)
-
-  console.log(currentPage)
-
   return (
     <div className="flex justify-center items-center my-2">
       <NavLink url={previousPagePath} text="‹‹" />
       {Array.from({ length: numberOfPages }).map((_, i) => {
         const index = i + 1
         const url = i < 1 ? '/products' : `/products/${index}`
-        return <NavLink url={url} text={index} />
+
+        return <NavLink key={index} url={url} text={index} />
       })}
       <NavLink url={nextPagePath} text="››" />
     </div>
