@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import Link from 'gatsby-link'
 import cx from 'classnames'
 
-const PaginationLink = ({ url, text }) => {
+const PaginationLink = ({ url, text, label }) => {
   const paginationLinkClass = useMemo(
     () =>
       cx('no-underline mx-4', {
@@ -12,7 +12,12 @@ const PaginationLink = ({ url, text }) => {
   )
 
   return (
-    <Link to={url} activeClassName="font-bold" className={paginationLinkClass}>
+    <Link
+      to={url}
+      aria-label={label}
+      activeClassName="font-bold"
+      className={paginationLinkClass}
+    >
       {text}
     </Link>
   )
@@ -36,9 +41,9 @@ export default function Pagination({
 
   return (
     <div className="flex justify-center items-center my-2">
-      <PaginationLink url={previousPagePath} text="‹‹" />
+      <PaginationLink label="Previous" url={previousPagePath} text="‹‹" />
       {paginationPages}
-      <PaginationLink url={nextPagePath} text="››" />
+      <PaginationLink label="Next" url={nextPagePath} text="››" />
     </div>
   )
 }
