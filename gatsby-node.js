@@ -1,6 +1,8 @@
 const path = require('path')
 const { paginate } = require('gatsby-awesome-pagination')
 
+const itemsPerPage = parseInt(process.env.GATSBY_ITEMS_PER_PAGE) || 9
+
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const pages = await graphql(`
     {
@@ -18,6 +20,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           node {
             id
             slug
+            products {
+              id
+            }
           }
         }
       }
@@ -36,7 +41,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   paginate({
     createPage,
     items: pages.data.allProducts.edges,
-    itemsPerPage: parseInt(process.env.GATSBY_ITEMS_PER_PAGE) || 9,
+    itemsPerPage,
     pathPrefix: '/products',
     component: path.resolve('src/templates/ProductsList.js')
   })
@@ -51,15 +56,20 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  pages.data.allCategories.edges.forEach(({ node: { id, slug } }) => {
-    createPage({
-      path: `/categories/${slug}`,
-      component: path.resolve('./src/templates/CategoryPage.js'),
-      context: {
-        id
-      }
-    })
-  })
+  pages.data.allCategories.edges.forEach(
+    ({ node: { id, slug, products: items } }) => {
+      paginate({
+        createPage,
+        items,
+        itemsPerPage,
+        pathPrefix: `/categories/${slug}`,
+        component: path.resolve('src/templates/CategoryPage.js'),
+        context: {
+          id
+        }
+      })
+    }
+  )
 
   pages.data.allCollections.edges.forEach(({ node: { id, slug } }) => {
     createPage({

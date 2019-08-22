@@ -4,31 +4,53 @@ import { graphql } from 'gatsby'
 import SEO from '../components/SEO'
 import PageTitle from '../components/PageTitle'
 import ProductGrid from '../components/ProductGrid'
+import Pagination from '../components/Pagination'
 
-function CollectionPage({ data: { category } }) {
+function CategoryPage({ data: { category, products }, pageContext }) {
+  const {
+    humanPageNumber,
+    numberOfPages,
+    nextPagePath,
+    previousPagePath
+  } = pageContext
+
   return (
-    <React.Fragment>
+    <>
       <SEO
         title={category.meta_title || category.name}
         description={category.meta_description || category.description}
       />
 
       <PageTitle title={category.name} description={category.description} />
-      <ProductGrid products={category.products} />
-    </React.Fragment>
+      <ProductGrid products={products.nodes} />
+      <Pagination
+        currentPage={humanPageNumber}
+        numberOfPages={numberOfPages}
+        nextPagePath={nextPagePath}
+        previousPagePath={previousPagePath}
+        resource={`categories/${category.slug}`}
+      />
+    </>
   )
 }
 
-export default CollectionPage
+export default CategoryPage
 
 export const query = graphql`
-  query($id: String!) {
+  query($id: String!, $limit: Int!, $skip: Int!) {
     category: moltinCategory(id: { eq: $id }) {
       id
       slug
       name
       description
-      products {
+    }
+
+    products: allMoltinProduct(
+      filter: { categories: { elemMatch: { id: { eq: $id } } } }
+      limit: $limit
+      skip: $skip
+    ) {
+      nodes {
         id
         name
         slug
