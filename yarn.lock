@@ -1423,7 +1423,7 @@ algolia-aerial@^1.5.3:
   resolved "https://registry.yarnpkg.com/algolia-aerial/-/algolia-aerial-1.5.3.tgz#c8b8ca6bc484164ffc7b36717689a424ea6bfe6c"
   integrity sha512-LZTpVlYnhqNFd+ru/Spm73omhsagiRQLmjrosa5bJ6/I9OMRp4Sb9pYZkAxcx3RSr+ZNXZqthL7rpXqMFdrnPA==
 
-algolia-places-react@^1.4.1:
+algolia-places-react@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/algolia-places-react/-/algolia-places-react-1.4.1.tgz#902e583d879025118bb417913db45097501c618b"
   integrity sha512-IQJsQUc6IKNmO3ThknogNvnFLjTjssDzhGvcAnox6x9t7skN+W5YhY7V8u5hQgQeILe4SBTmbqfiMCkvHGR+eA==
@@ -5162,7 +5162,7 @@ gather-stream@^1.0.0:
   resolved "https://registry.yarnpkg.com/gather-stream/-/gather-stream-1.0.0.tgz#b33994af457a8115700d410f317733cbe7a0904b"
   integrity sha1-szmUr0V6gRVwDUEPMXczy+egkEs=
 
-gatsby-awesome-pagination@^0.3.4:
+gatsby-awesome-pagination@0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.4.tgz#a4c5ca58377d1f92f164a28f6da06cc01037fec0"
   integrity sha512-OLO/tdD+jh7gzxeRRWUJ8Iy5NXKBBUnxTi8t9QC/Gy1tcnoIyBzO3vQFMTCkXoNP7RY5US8aiHtt7mcQfAVMQA==
