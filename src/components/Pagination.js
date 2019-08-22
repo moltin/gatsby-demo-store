@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link from 'gatsby-link'
 import cx from 'classnames'
 
@@ -19,15 +19,21 @@ export default function Pagination({
   nextPagePath,
   previousPagePath
 }) {
-  return (
-    <div className="flex justify-center items-center my-2">
-      <PaginationLink url={previousPagePath} text="‹‹" />
-      {Array.from({ length: numberOfPages }).map((_, i) => {
+  const paginationPages = useMemo(
+    () =>
+      Array.from({ length: numberOfPages }).map((_, i) => {
         const index = i + 1
         const url = i < 1 ? '/products' : `/products/${index}`
 
         return <PaginationLink key={index} url={url} text={index} />
-      })}
+      }),
+    [numberOfPages]
+  )
+
+  return (
+    <div className="flex justify-center items-center my-2">
+      <PaginationLink url={previousPagePath} text="‹‹" />
+      {paginationPages}
       <PaginationLink url={nextPagePath} text="››" />
     </div>
   )
