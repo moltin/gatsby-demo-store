@@ -2,8 +2,8 @@ import React from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
 
 const options = {
-  appId: 'plEPUZAA2D2L',
-  apiKey: '4c9f0832a65f800e31b0d50f44670b1f',
+  appId: process.env.GATSBY_ALGOLIA_PLACES_APP_ID,
+  apiKey: process.env.GATSBY_ALGOLIA_PLACES_API_KEY,
   type: ['city', 'address'],
   useDeviceLocation: false,
   style: false
