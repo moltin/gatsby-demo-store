@@ -36,7 +36,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   paginate({
     createPage,
     items: pages.data.allProducts.edges,
-    itemsPerPage: process.env.GATSBY_ITEMS_PER_PAGE || 9,
+    itemsPerPage: parseInt(process.env.GATSBY_ITEMS_PER_PAGE) || 9,
     pathPrefix: '/products',
     component: path.resolve('src/templates/ProductsList.js')
   })
