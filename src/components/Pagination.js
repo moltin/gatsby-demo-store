@@ -26,13 +26,14 @@ const PaginationLink = ({ url, text, label }) => {
 export default function Pagination({
   numberOfPages,
   nextPagePath,
-  previousPagePath
+  previousPagePath,
+  resource
 }) {
   const paginationPages = useMemo(
     () =>
       Array.from({ length: numberOfPages }).map((_, i) => {
         const index = i + 1
-        const url = i < 1 ? '/products' : `/products/${index}`
+        const url = i < 1 ? `/${resource}` : `/${resource}/${index}`
 
         return <PaginationLink key={index} url={url} text={index} />
       }),
