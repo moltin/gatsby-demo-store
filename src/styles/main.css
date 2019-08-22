@@ -95,3 +95,87 @@ button:disabled {
 .StripeElement:hover {
   @apply border-grey;
 }
+
+/* Algolia Places */
+
+.algolia-places-nostyle {
+  width: 100%;
+}
+
+.ap-nostyle-input {
+  @apply block appearance-none w-full bg-white border border-grey-dark px-4 py-3 leading-tight rounded-none relative;
+}
+
+.ap-nostyle-input::-webkit-input-placeholder {
+  @apply text-black;
+}
+.ap-nostyle-input::-moz-placeholder {
+  @apply text-black;
+}
+.ap-nostyle-input:-ms-input-placeholder {
+  @apply text-black;
+}
+.ap-nostyle-input:-moz-placeholder {
+  @apply text-black;
+}
+
+.ap-nostyle-input:focus {
+  @apply outline-none;
+}
+
+.ap-nostyle-input:hover {
+  @apply border-grey;
+}
+
+.ap-nostyle-icon-pin,
+.ap-nostyle-input-icon,
+.ap-nostyle-suggestion-icon,
+.ap-suggestion-icon {
+  @apply hidden;
+}
+
+.ap-nostyle-dropdown-menu {
+  @apply bg-white border-grey-light mt-3 w-full overflow-hidden shadow-lg text-left flex flex-col;
+}
+
+.ap-nostyle-suggestion,
+.ap-suggestion {
+  @apply px-4 py-3 text-base border-b border-grey-light cursor-pointer;
+}
+
+.ap-nostyle-suggestion em,
+.ap-suggestion em {
+  /* @apply text-black not-italic; */
+  @apply text-black;
+}
+
+.ap-nostyle-cursor,
+.ap-cursor {
+  @apply text-black bg-grey-lightest;
+}
+
+.ap-nostyle-name,
+.ap-name {
+  @apply text-black text-base;
+}
+
+.ap-nostyle-address,
+.ap-address {
+  @apply text-black text-base ml-2;
+}
+
+.ap-footer {
+  @apply flex justify-end items-center px-3 py-4;
+}
+
+.ap-footer a {
+  @apply inline-flex items-center text-grey;
+}
+
+.ap-footer a svg {
+  @apply fill-current;
+}
+
+.ap-footer:hover {
+  @apply text-black;
+}
