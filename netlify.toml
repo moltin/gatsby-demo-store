@@ -8,3 +8,4 @@
   GATSBY_STRIPE_PUBLISHABLE_KEY = "Your Stripe publishable key"
   GATSBY_ALGOLIA_PLACES_APP_ID = "Your Algolia places app ID"
   GATSBY_ALGOLIA_PLACES_API_KEY = "Your Algolia places API key"
+  GATSBY_ITEMS_PER_PAGE = "Number of items per page for paginated resources"
