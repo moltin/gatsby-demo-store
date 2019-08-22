@@ -1,4 +1,5 @@
 const path = require('path')
+const { paginate } = require('gatsby-awesome-pagination')
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const pages = await graphql(`
@@ -31,6 +32,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
     }
   `)
+
+  paginate({
+    createPage,
+    items: pages.data.allProducts.edges,
+    itemsPerPage: parseInt(process.env.GATSBY_ITEMS_PER_PAGE) || 9,
+    pathPrefix: '/products',
+    component: path.resolve('src/templates/ProductsList.js')
+  })
 
   pages.data.allProducts.edges.forEach(({ node: { id, slug } }) => {
     createPage({

@@ -5093,6 +5093,13 @@ gather-stream@^1.0.0:
   resolved "https://registry.yarnpkg.com/gather-stream/-/gather-stream-1.0.0.tgz#b33994af457a8115700d410f317733cbe7a0904b"
   integrity sha1-szmUr0V6gRVwDUEPMXczy+egkEs=
 
+gatsby-awesome-pagination@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.4.tgz#a4c5ca58377d1f92f164a28f6da06cc01037fec0"
+  integrity sha512-OLO/tdD+jh7gzxeRRWUJ8Iy5NXKBBUnxTi8t9QC/Gy1tcnoIyBzO3vQFMTCkXoNP7RY5US8aiHtt7mcQfAVMQA==
+  dependencies:
+    lodash "^4.17.10"
+
 gatsby-cli@^2.7.10:
   version "2.7.10"
   resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.7.10.tgz#2001d9c305d101dc101d991274d93b7a569b1a71"
