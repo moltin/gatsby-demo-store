@@ -32,6 +32,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           node {
             id
             slug
+            products {
+              id
+            }
           }
         }
       }
@@ -71,13 +74,18 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     }
   )
 
-  pages.data.allCollections.edges.forEach(({ node: { id, slug } }) => {
-    createPage({
-      path: `/collections/${slug}`,
-      component: path.resolve('./src/templates/CollectionPage.js'),
-      context: {
-        id
-      }
-    })
-  })
+  pages.data.allCollections.edges.forEach(
+    ({ node: { id, slug, products: items } }) => {
+      paginate({
+        createPage,
+        items,
+        itemsPerPage,
+        pathPrefix: `/collections/${slug}`,
+        component: path.resolve('src/templates/CollectionPage.js'),
+        context: {
+          id
+        }
+      })
+    }
+  )
 }
