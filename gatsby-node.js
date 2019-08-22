@@ -36,19 +36,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   paginate({
     createPage,
     items: pages.data.allProducts.edges,
-    itemsPerPage: 6,
+    itemsPerPage: process.env.GATSBY_ITEMS_PER_PAGE || 12,
     pathPrefix: '/products',
     component: path.resolve('src/templates/ProductsList.js')
-  })
-
-  pages.data.allProducts.edges.forEach(({ node: { id, slug } }) => {
-    createPage({
-      path: `/products/${slug}`,
-      component: path.resolve('./src/templates/ProductPage.js'),
-      context: {
-        id
-      }
-    })
   })
 
   pages.data.allProducts.edges.forEach(({ node: { id, slug } }) => {
