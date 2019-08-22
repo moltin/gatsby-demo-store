@@ -42,7 +42,8 @@ module.exports = {
       resolve: 'gatsby-plugin-purgecss',
       options: {
         tailwind: true,
-        purgeOnly: ['src/styles/main.css']
+        purgeOnly: ['src/styles/main.css'],
+        whitelistPatterns: ['/^ap-nostyle/', 'algolia-places-nostyle']
       }
     },
     'gatsby-plugin-stripe'

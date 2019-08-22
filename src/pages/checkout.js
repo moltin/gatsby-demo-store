@@ -175,7 +175,12 @@ function CheckoutPage({ stripe }) {
 
                         <div className="md:flex -mx-2">
                           <div className="my-2 w-full px-2">
-                            <Input name="customer.name" label="Full name" />
+                            <Input
+                              name="customer.name"
+                              label="Full name"
+                              required
+                              autoFocus
+                            />
                           </div>
 
                           <div className="my-2 w-full px-2">
@@ -183,6 +188,7 @@ function CheckoutPage({ stripe }) {
                               type="email"
                               name="customer.email"
                               label="Email"
+                              required
                             />
                           </div>
                         </div>
@@ -232,7 +238,7 @@ function CheckoutPage({ stripe }) {
                           Shipping address
                         </h2>
 
-                        <AddressFields type="shipping_address" />
+                        <AddressFields type="shipping_address" form={form} />
                       </div>
                     </React.Fragment>
                   )}
@@ -283,7 +289,7 @@ function CheckoutPage({ stripe }) {
                         </div>
 
                         {!values.billingIsShipping && (
-                          <AddressFields type="billing_address" />
+                          <AddressFields type="billing_address" form={form} />
                         )}
 
                         <div className="my-2 w-full">
