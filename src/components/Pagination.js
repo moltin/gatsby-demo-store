@@ -3,9 +3,13 @@ import Link from 'gatsby-link'
 import cx from 'classnames'
 
 const PaginationLink = ({ url, text }) => {
-  const paginationLinkClass = cx('no-underline mx-4', {
-    'text-grey-lighter pointer-events-none': !url
-  })
+  const paginationLinkClass = useMemo(
+    () =>
+      cx('no-underline mx-4', {
+        'text-grey-lighter pointer-events-none': !url
+      }),
+    [url]
+  )
 
   return (
     <Link to={url} activeClassName="font-bold" className={paginationLinkClass}>
