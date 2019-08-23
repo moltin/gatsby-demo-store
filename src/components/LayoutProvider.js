@@ -6,11 +6,15 @@ function reducer(state, { type }) {
   switch (type) {
     case 'SET_LIST':
       return {
-        layout: 'list'
+        layout: 'list',
+        isList: true,
+        isGrid: false
       }
     case 'SET_GRID':
       return {
-        layout: 'grid'
+        layout: 'grid',
+        isGrid: true,
+        isList: false
       }
     default:
       return {
@@ -40,8 +44,6 @@ const LayoutProvider = ({ children }) => {
     <LayoutContext.Provider
       value={{
         ...state,
-        isList: state.layout === 'list',
-        isGrid: state.layout === 'grid',
         toggleLayout,
         showGrid,
         showList
