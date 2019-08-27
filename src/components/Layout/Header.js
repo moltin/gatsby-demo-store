@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 
 import { CartContext } from '../../context'
 // import {  CustomerContext } from '../../context'
-import InstantSearch from '../InstantSearch'
 
 import Logo from '../../images/logo.svg'
 
@@ -63,10 +62,6 @@ function Header({ siteTitle, collections }) {
               <Link to="/login">Login</Link>
             )}
           </li> */}
-
-          <li className="nav-item">
-            <InstantSearch />
-          </li>
 
           <li className="nav-item">
             <Link to="/cart">
