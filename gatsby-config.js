@@ -69,6 +69,15 @@ module.exports = {
                       }
                     }
                   }
+                  categories {
+                    name
+                  }
+                  brands {
+                    name
+                  }
+                  collections {
+                    name
+                  }
                 }
               }
             }
@@ -78,10 +87,19 @@ module.exports = {
                 allMoltinProduct: { nodes }
               }
             }) =>
-              nodes.map(({ meta, ...rest }) => ({
-                ...rest,
-                price: meta.display_price.with_tax.formatted
-              })),
+              nodes.map(
+                ({ meta, categories, brands, collections, ...rest }) => ({
+                  ...rest,
+                  price: meta.display_price.with_tax.formatted,
+                  categories: categories
+                    ? categories.map(({ name }) => name)
+                    : [],
+                  brands: brands ? brands.map(({ name }) => name) : [],
+                  collections: collections
+                    ? collections.map(({ name }) => name)
+                    : []
+                })
+              ),
             indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
           }
         ]
