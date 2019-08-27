@@ -46,6 +46,42 @@ module.exports = {
         whitelistPatterns: ['/^ap-nostyle/', 'algolia-places-nostyle']
       }
     },
-    'gatsby-plugin-stripe'
+    'gatsby-plugin-stripe',
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: [
+          {
+            query: `
+            {
+              products: allMoltinProduct {
+                nodes {
+                  objectID: id
+                  name
+                  slug
+                  imgUrl: mainImageHref
+                  meta {
+                    display_price{
+                      with_tax{
+                        formatted
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          `,
+            transformer: ({
+              data: {
+                products: { nodes }
+              }
+            }) => nodes,
+            indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
+          }
+        ]
+      }
+    }
   ]
 }
