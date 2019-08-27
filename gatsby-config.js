@@ -56,15 +56,15 @@ module.exports = {
           {
             query: `
             {
-              products: allMoltinProduct {
+              allMoltinProduct {
                 nodes {
                   objectID: id
                   name
                   slug
                   imgUrl: mainImageHref
                   meta {
-                    display_price{
-                      with_tax{
+                    display_price {
+                      with_tax {
                         formatted
                       }
                     }
@@ -75,9 +75,13 @@ module.exports = {
           `,
             transformer: ({
               data: {
-                products: { nodes }
+                allMoltinProduct: { nodes }
               }
-            }) => nodes,
+            }) =>
+              nodes.map(({ meta, ...rest }) => ({
+                ...rest,
+                price: meta.display_price.with_tax.formatted
+              })),
             indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
           }
         ]
