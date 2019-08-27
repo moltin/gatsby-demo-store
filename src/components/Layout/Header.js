@@ -62,7 +62,6 @@ function Header({ siteTitle, collections }) {
               <Link to="/login">Login</Link>
             )}
           </li> */}
-
           <li className="nav-item">
             <Link to="/cart">
               <span className="relative inline-flex items-center">
