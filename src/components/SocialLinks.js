@@ -13,7 +13,7 @@ function SocialLinks({ product }) {
     }
   `)
 
-  const pageUrl = `${site.siteMetadata.url}/${product.slug}`
+  const pageUrl = `${site.siteMetadata.url}/products/${product.slug}`
   const shareMessage = `${product.name} ${pageUrl} via @moltin #Gatsby #JAMstack #HeadlessCommerce`
 
   return (
