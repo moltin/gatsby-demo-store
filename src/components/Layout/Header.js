@@ -55,13 +55,17 @@ function Header({ siteTitle, collections }) {
           <li className="md:hidden nav-item">
             <Link to="/products">Shop</Link>
           </li>
-          {/* <li className="list-item">
-            {loggedIn ? (
-              <Link to="/orders">{user.name}</Link>
-            ) : (
-              <Link to="/login">Login</Link>
-            )}
-          </li> */}
+          <li className="nav-item">
+            <Link to="/search">
+              <svg
+                className="h-4 fill-current text-black"
+                viewBox="0 0 56.966 56.966"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m55.146 51.887-13.558-14.101c3.486-4.144 5.396-9.358 5.396-14.786 0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837 1.192-1.147 1.23-3.049.083-4.242zm-31.162-45.887c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z" />
+              </svg>
+            </Link>
+          </li>
           <li className="nav-item">
             <Link to="/cart">
               <span className="relative inline-flex items-center">
@@ -70,7 +74,7 @@ function Header({ siteTitle, collections }) {
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
-                  className="inline-block h-4 mt-1"
+                  className="inline-block h-4 "
                 >
                   <g
                     stroke="none"

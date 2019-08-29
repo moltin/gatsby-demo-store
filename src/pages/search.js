@@ -4,6 +4,7 @@ import { InstantSearch, Hits, SortBy, PoweredBy } from 'react-instantsearch-dom'
 
 import PageTitle from '../components/PageTitle'
 import CustomRefinementList from '../components/CustomRefinementList'
+import Hit from '../components/Hit'
 
 const searchClient = algoliasearch(
   process.env.GATSBY_ALGOLIA_APP_ID,
@@ -37,7 +38,7 @@ function SearchPage() {
           </div>
 
           <div className="md:px-4 md:w-4/5">
-            <Hits />
+            <Hits hitComponent={Hit} />
           </div>
         </div>
 
