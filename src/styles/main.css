@@ -180,7 +180,7 @@ button:disabled {
   @apply text-black;
 }
 
-/* Alglia InstantSearch */
+/* Algolia InstantSearch */
 
 .ais-Hits .ais-Hits-list {
   @apply flex flex-wrap -mx-5 list-reset;
