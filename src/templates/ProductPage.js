@@ -6,6 +6,7 @@ import Photo from '../components/Photo'
 import Badge from '../components/Badge'
 import AddToCart from '../components/AddToCart'
 import useMoltinInventory from '../hooks/useMoltinInventory'
+import SocialLinks from '../components/SocialLinks'
 
 function ProductPage({ data: { product } }) {
   const [inventory, inventoryLoading, inventoryError] = useMoltinInventory(
@@ -80,6 +81,8 @@ function ProductPage({ data: { product } }) {
               Description
             </h4>
             <p>{product.description}</p>
+
+            <SocialLinks product={product} />
           </div>
         </div>
       </div>
