@@ -179,3 +179,61 @@ button:disabled {
 .ap-footer:hover {
   @apply text-black;
 }
+
+/* Algolia InstantSearch */
+
+.ais-Hits .ais-Hits-list {
+  @apply flex flex-wrap -mx-5 list-reset;
+}
+
+.ais-Hits .ais-Hits-item {
+  @apply px-5 py-2 w-full;
+}
+
+@screen md {
+  .ais-Hits .ais-Hits-item {
+    @apply p-5;
+  }
+}
+
+@screen lg {
+  .ais-Hits .ais-Hits-item {
+    @apply w-1/2;
+  }
+}
+
+.ais-RefinementList-list {
+  @apply list-reset;
+}
+
+.ais-RefinementList-label {
+  @apply py-2 flex items-center cursor-pointer;
+}
+
+.ais-RefinementList-item {
+  @apply text-grey;
+}
+
+.ais-RefinementList-item.ais-RefinementList-item--selected {
+  @apply text-black;
+}
+
+.ais-RefinementList-checkbox {
+  @apply mr-3;
+}
+
+.ais-RefinementList-count {
+  @apply ml-auto text-grey-lighter text-xs;
+}
+
+.ais-PoweredBy {
+  @apply inline-flex items-center;
+}
+
+.ais-PoweredBy-text {
+  @apply mr-3 text-sm text-grey leading-none;
+}
+
+.ais-PoweredBy-link {
+  @apply flex;
+}
