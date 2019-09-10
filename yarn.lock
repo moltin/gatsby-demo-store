@@ -1458,7 +1458,7 @@ algoliasearch-helper@^2.26.0:
     lodash "^4.17.5"
     qs "^6.5.1"
 
-algoliasearch@^3.24.5, algoliasearch@^3.27.1, algoliasearch@^3.31.0, algoliasearch@^3.33.0:
+algoliasearch@3.33.0, algoliasearch@^3.24.5, algoliasearch@^3.27.1, algoliasearch@^3.31.0:
   version "3.33.0"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-3.33.0.tgz#83b541124ebb0db54643009d4e660866b3177cdf"
   integrity sha512-9DaVmOd7cvcZeYyV0BWAeJHVWJmgOL2DNUEBY/DTR4MzD1wCWs4Djl7LAlfvkGwGBdRHZCG+l0HA1572w3T8zg==
@@ -10029,7 +10029,7 @@ react-instantsearch-core@^5.7.0:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
-react-instantsearch-dom@^5.7.0:
+react-instantsearch-dom@5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.7.0.tgz#5a9b0cfb461c08a349a5fdc5d1cff50b8f5fcf56"
   integrity sha512-FwFZZXwgaYtLrXD9KJNlrPVkfw8JOqVgpDBvra547udF4zbacZUuX7/qTyMHjVW/Lz59t5T25vCGLzmQiO89YA==
@@ -10080,7 +10080,7 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-social-sharing@^3.0.1:
+react-social-sharing@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-social-sharing/-/react-social-sharing-3.0.1.tgz#4c49ce17a4cba1e375defae5df1c31f4c3350094"
   integrity sha512-1G3xV6x0y49mSS2vZw+K6zRqATiDYi3YYeZ1FpuqgLUqD40KxP2xvSSlhY2hGTZzymB73miVXAy6i+7GqQ+mjA==
