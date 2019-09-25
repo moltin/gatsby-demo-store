@@ -12,7 +12,7 @@
     "gatsby-image": "2.2.5",
     "gatsby-plugin-algolia": "0.3.3",
     "gatsby-plugin-manifest": "2.2.2",
-    "gatsby-plugin-offline": "2.2.2",
+    "gatsby-plugin-offline": "3.0.9",
     "gatsby-plugin-postcss": "2.1.1",
     "gatsby-plugin-purgecss": "3.1.1",
     "gatsby-plugin-react-helmet": "3.1.1",
