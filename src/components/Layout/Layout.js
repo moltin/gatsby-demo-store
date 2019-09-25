@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { ToastContainer } from 'react-toastify'
 
+import SEO from '../SEO'
 import Header from './Header'
 import Banner from './Banner'
 import Footer from './Footer'
@@ -22,6 +23,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="container">
+      <SEO />
       <Header siteTitle={site.siteMetadata.title} collections={collections} />
       <main>{children}</main>
       <Banner />
