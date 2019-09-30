@@ -20,6 +20,8 @@ yarn
 
 Once you have the project setup, you can now configure the ENV variables required to run the project.
 
+⚠️ You will need to create an account with [Algolia](https://algolia.com) for search and [Algolia places](https://community.algolia.com/places). Algolia is used to power the search page and Algolia places is used during the checkout process for quick address lookup.
+
 Create a `.env` file in the root directory and add the following with your secrets:
 
 ```dosini
@@ -27,10 +29,10 @@ GATSBY_MOLTIN_CLIENT_ID=
 GATSBY_STRIPE_PUBLISHABLE_KEY=
 GATSBY_ALGOLIA_PLACES_APP_ID=
 GATSBY_ALGOLIA_PLACES_API_KEY=
-GATSBY_ALGOLIA_INDEX_NAME=
-GATSBY_ALGOLIA_APP_ID=
-GATSBY_ALGOLIA_API_KEY=
 ALGOLIA_ADMIN_KEY=
+GATSBY_ALGOLIA_API_KEY=
+GATSBY_ALGOLIA_APP_ID=
+GATSBY_ITEMS_PER_PAGE=
 ```
 
 You must also configure Stripe inside the [Dashboard](https://dashboard.moltin.com).
