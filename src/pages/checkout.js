@@ -52,9 +52,9 @@ function CheckoutPage({ stripe }) {
 
       setCurrentStep('payment')
       setLoading(false)
-    } catch ({ errors }) {
+    } catch ({ errors: [{ detail = 'Unable to process checkout' }] }) {
       setLoading(false)
-      setCheckoutError(errors)
+      setCheckoutError(detail)
     }
   }
 
@@ -129,22 +129,22 @@ function CheckoutPage({ stripe }) {
             status: 401,
             detail: 'Payment authentication failed. Please check and try again'
           }
-      }
 
-      await confirmTransaction({
-        orderId: order.id,
-        gateway: 'stripe_payment_intents',
-        payment,
-        transactionId
-      })
+        await confirmTransaction({
+          orderId: order.id,
+          gateway: 'stripe_payment_intents',
+          payment,
+          transactionId
+        })
+      }
 
       cardElement.clear()
 
       await setOrder(order)
       await deleteCart()
       await setPaid(true)
-    } catch ({ errors }) {
-      setCheckoutError(errors)
+    } catch ({ errors: [{ detail = 'Unable to process payment' }] }) {
+      setCheckoutError(detail)
     }
   }
 
