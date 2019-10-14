@@ -23,8 +23,9 @@ function CheckoutPage({ stripe }) {
   const [paid, setPaid] = useState(false)
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
-  const { checkout, pay } = useContext(CheckoutContext)
+  const { checkout, pay, confirmTransaction } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
+  const [cardElement, setCardElement] = useState(null)
 
   const shippingStep = currentStep === 'shipping'
   const paymentStep = currentStep === 'payment'
@@ -51,9 +52,9 @@ function CheckoutPage({ stripe }) {
 
       setCurrentStep('payment')
       setLoading(false)
-    } catch ({ errors }) {
+    } catch ({ errors: [{ detail = 'Unable to process checkout' }] }) {
       setLoading(false)
-      setCheckoutError(errors)
+      setCheckoutError(detail)
     }
   }
 
@@ -104,31 +105,46 @@ function CheckoutPage({ stripe }) {
 
   async function onSubmit(values) {
     try {
-      const { shipping_address } = values
       const order = await checkout(cartId, values)
 
-      const token = await stripe.createToken({
-        name: `${shipping_address.first_name} ${shipping_address.last_name}`,
-        address_line1: shipping_address.line_1,
-        address_line2: shipping_address.line_2,
-        address_city: shipping_address.city,
-        address_state: shipping_address.county,
-        address_zip: shipping_address.postcode,
-        address_country: shipping_address.country
-      })
+      const {
+        paymentMethod: { id: payment }
+      } = await stripe.createPaymentMethod('card')
 
-      await pay({
-        gateway: 'stripe',
+      const {
+        payment_intent: { client_secret, status: payment_intent_status },
+        id: transactionId
+      } = await pay({
+        gateway: 'stripe_payment_intents',
         method: 'purchase',
         orderId: order.id,
-        payment: token.token.id
+        payment
       })
+
+      if (payment_intent_status === 'requires_action') {
+        const { error } = await stripe.handleCardAction(client_secret)
+
+        if (error)
+          throw {
+            status: 401,
+            detail: 'Payment authentication failed. Please check and try again'
+          }
+
+        await confirmTransaction({
+          orderId: order.id,
+          gateway: 'stripe_payment_intents',
+          payment,
+          transactionId
+        })
+      }
+
+      cardElement.clear()
 
       await setOrder(order)
       await deleteCart()
       await setPaid(true)
-    } catch ({ errors }) {
-      setCheckoutError(errors)
+    } catch ({ errors: [{ detail = 'Unable to process payment' }] }) {
+      setCheckoutError(detail)
     }
   }
 
@@ -355,6 +371,7 @@ function CheckoutPage({ stripe }) {
 
                           <CardElement
                             onChange={onStripeChange}
+                            onReady={el => setCardElement(el)}
                             hidePostalCode={true}
                             id="payment"
                             style={{

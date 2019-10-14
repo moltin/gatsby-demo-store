@@ -31,25 +31,36 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
       billing_address
     })
 
-    // await moltin.delete(`carts/${cartId}`)
-
-    // dispatch({ type: RESET_CART })
-
     return order
   }
 
   async function pay({ gateway, method, orderId, ...rest }) {
     try {
-      const { payment } = await moltin.post(`orders/${orderId}/payments`, {
+      const { data } = await moltin.post(`orders/${orderId}/payments`, {
         gateway,
         method,
         ...rest
       })
 
-      return payment
+      return data
     } catch (err) {
       throw new Error(err.message || 'Payment failed')
     }
+  }
+
+  async function confirmTransaction({
+    gateway,
+    orderId,
+    payment,
+    transactionId
+  }) {
+    await moltin.post(
+      `orders/${orderId}/transactions/${transactionId}/confirm`,
+      {
+        payment,
+        gateway
+      }
+    )
   }
 
   return (
@@ -57,7 +68,8 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
       value={{
         ...props,
         checkout,
-        pay
+        pay,
+        confirmTransaction
       }}
     >
       {children}
