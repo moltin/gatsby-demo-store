@@ -8,6 +8,7 @@
 
 ## Setup
 
+
 You'll need a [Moltin account](https://dashboard.moltin.com) to run this store.
 
 Run the following commands in your Terminal:
