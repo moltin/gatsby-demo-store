@@ -15,7 +15,7 @@ const initialState = {
   loggedIn: false
 }
 
-function reducer(action, state) {
+function reducer(state, action) {
   switch (action.type) {
     case SET_CUSTOMER:
       return {
