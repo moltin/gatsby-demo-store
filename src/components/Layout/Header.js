@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
 import { CartContext } from '../../context'
+import AccountIcon from '../../images/icons/account-icon.svg'
+
 // import {  CustomerContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
@@ -9,6 +11,7 @@ import Logo from '../../images/logo.svg'
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
   // const { loggedIn, user } = useContext(CustomerContext)
+  const isLoggedIn = typeof window !== 'undefined' && window.localStorage.getItem('mtoken')
 
   return (
     <header className="py-6 md:py-10">
@@ -111,6 +114,25 @@ function Header({ siteTitle, collections }) {
                 )}
               </span>
             </Link>
+          </li>
+          <li className="nav-item">
+            {!isLoggedIn ? (
+              <Link to="/login">
+                <span className="relative inline-flex items-center">
+                  Login
+                </span>
+              </Link>
+            ) : (
+              <div className="hidden md:flex md:w-1/3 flex items-center">
+                <Link
+                  to="/"
+                  className="mx-auto flex items-center justify-center logo"
+                >
+                  <img src={AccountIcon} title={siteTitle} alt={siteTitle} />
+                </Link>
+              </div>
+              )
+            }
           </li>
         </ul>
       </nav>

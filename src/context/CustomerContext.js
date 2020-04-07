@@ -52,8 +52,15 @@ function CustomerProvider({ children, customerToken, ...props }) {
     dispatch({ type: SET_CUSTOMER, payload })
   }
 
-  async function register({ email, password, ...args }) {
-    return {}
+  async function register(name, email, password) {
+    const data = await moltin.post('customers', {
+      type: 'customer',
+      name,
+      email,
+      password
+    })
+
+   await login(data.data.email, password)
   }
 
   async function login(email, password) {
