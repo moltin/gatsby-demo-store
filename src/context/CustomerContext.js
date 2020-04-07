@@ -19,12 +19,16 @@ function reducer(action, state) {
   switch (action.type) {
     case SET_CUSTOMER:
       return {
-        ...state,
-        user: action.payload
+        user: action.payload,
+        loggedIn: true,
       }
 
     case LOGOUT:
-      return initialState
+      return {
+      ...state,
+      user: null,
+      loggedIn: false,
+    }
 
     default:
       return state
@@ -35,11 +39,10 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const { moltin } = useContext(MoltinContext)
   const [state, dispatch] = useReducer(reducer, initialState)
   const [token, setToken] = useLocalStorage('mtoken', customerToken)
-  // const [customerId, setCustomerId] = useLocalStorage('mcustomer')
-
+  const [customerId, setCustomerId] = useLocalStorage('mcustomer')
   useEffect(() => {
-    // token && setToken(token)
-    // loggedIn && getCustomer(customerId, customerToken)
+    token && setToken(token)
+    state.loggedIn && getCustomer(customerId, customerToken)
   }, [token])
 
   async function getCustomer(id, token) {
@@ -47,7 +50,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
       'X-Moltin-Customer-Token': token
     })
 
-    // setCustomerId(id)
+    setCustomerId(id)
     setToken(token)
     dispatch({ type: SET_CUSTOMER, payload })
   }
@@ -76,7 +79,10 @@ function CustomerProvider({ children, customerToken, ...props }) {
   }
 
   async function logout() {
-    setToken(window.localStorage.removeItem)
+    await setToken(window.localStorage.removeItem('mtoken'))
+    await setToken(window.localStorage.removeItem('mcustomer'))
+    await window.location.reload();
+    dispatch({ type: LOGOUT })
   }
 
   async function getAddresses() {

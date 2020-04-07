@@ -1,18 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'gatsby'
 
 import { CartContext } from '../../context'
 import AccountIcon from '../../images/icons/account-icon.svg'
 
-// import {  CustomerContext } from '../../context'
+import { CustomerContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
-  // const { loggedIn, user } = useContext(CustomerContext)
-  const isLoggedIn = typeof window !== 'undefined' && window.localStorage.getItem('mtoken')
+  const [state, setState] = useState({
+    isModalOpen: false,
+  })
 
+  function handleOpenModal() {
+    setState({isModalOpen: !state.isModalOpen})
+  }
+
+  const { user, logout } = useContext(CustomerContext)
+
+  const loggedIn = window.localStorage.getItem('mcustomer')
   return (
     <header className="py-6 md:py-10">
       <nav className="flex items-center justify-between relative">
@@ -116,21 +124,23 @@ function Header({ siteTitle, collections }) {
             </Link>
           </li>
           <li className="nav-item">
-            {!isLoggedIn ? (
+            {loggedIn ? (
+              <div className="relative">
+                <button onClick={handleOpenModal} className="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white">
+                  <img className="h-full w-full object-cover" src={AccountIcon}  alt="Your avatar" />
+                </button>
+                {state.isModalOpen ? (
+                  <div className="absolute z-20 right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    <a onClick={logout} href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Logout</a>
+                  </div>
+                ) : ''}
+              </div>
+                ) : (
               <Link to="/login">
                 <span className="relative inline-flex items-center">
                   Login
                 </span>
               </Link>
-            ) : (
-              <div className="hidden md:flex md:w-1/3 flex items-center">
-                <Link
-                  to="/"
-                  className="mx-auto flex items-center justify-center logo"
-                >
-                  <img src={AccountIcon} title={siteTitle} alt={siteTitle} />
-                </Link>
-              </div>
               )
             }
           </li>
