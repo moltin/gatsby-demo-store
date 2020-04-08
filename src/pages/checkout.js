@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 import { Form, Field } from 'react-final-form'
 import { CardElement, injectStripe } from 'react-stripe-elements'
 import { Link } from 'gatsby'
@@ -27,6 +27,8 @@ function CheckoutPage({ stripe }) {
   const [checkoutError, setCheckoutError] = useState(null)
   const [cardElement, setCardElement] = useState(null)
 
+  let paypalRef = useRef();
+
   const shippingStep = currentStep === 'shipping'
   const paymentStep = currentStep === 'payment'
 
@@ -51,7 +53,13 @@ function CheckoutPage({ stripe }) {
       // } = values
 
       setCurrentStep('payment')
-      setLoading(false)
+
+      useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://www.paypal.com/sdk/js?client-id=" + process.env.PAYPAL_CLIENT_ID;
+        script.addEventListener("load", () => setLoading(false));
+        document.body.appendChild(script);
+      });
     } catch ({ errors: [{ detail = 'Unable to process checkout' }] }) {
       setLoading(false)
       setCheckoutError(detail)
@@ -146,6 +154,44 @@ function CheckoutPage({ stripe }) {
     } catch ({ errors: [{ detail = 'Unable to process payment' }] }) {
       setCheckoutError(detail)
     }
+  }
+
+  if (!loading && paymentStep) {
+    setTimeout(() => {
+      window.paypal
+          .Buttons({
+            createOrder: async (data, actions) => {
+              const order = await checkout(cartId, values);
+              await setOrder(order);
+
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    description: order.id,
+                    amount: {
+                      currency_code: order.meta.display_price.with_tax.currency,
+                      value: order.meta.display_price.with_tax.amount,
+                    },
+                  },
+                ],
+              });
+            },
+            onApprove: async (data, actions) => {
+              const paypalOrder = await actions.order.capture();
+
+              cardElement.clear();
+              await deleteCart();
+              await setPaid(true);
+
+              console.log(paypalOrder);
+            },
+            onError: err => {
+              setCheckoutError(err)
+              console.error(err);
+            },
+          })
+          .render(paypalRef.current);
+    })
   }
 
   return (
@@ -418,6 +464,8 @@ function CheckoutPage({ stripe }) {
                       ? `Confirm and Pay ${subTotal}`
                       : 'Continue to payment'}
                   </button>
+
+                  <div ref={v => (paypalRef = v)}/>
                 </form>
               )
             }}
