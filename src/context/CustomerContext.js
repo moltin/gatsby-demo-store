@@ -25,7 +25,6 @@ function reducer(action, state) {
 
     case LOGOUT:
       return {
-      ...state,
       user: null,
       loggedIn: false,
     }
@@ -75,7 +74,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
       password
     })
 
-    getCustomer(customer_id, token)
+    await getCustomer(customer_id, token)
   }
 
   async function logout() {

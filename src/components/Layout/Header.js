@@ -10,12 +10,10 @@ import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
-  const [state, setState] = useState({
-    isModalOpen: false,
-  })
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleOpenModal() {
-    setState({isModalOpen: !state.isModalOpen})
+    setIsModalOpen(!isModalOpen)
   }
 
   const { user, logout } = useContext(CustomerContext)
@@ -36,7 +34,7 @@ function Header({ siteTitle, collections }) {
           <li className="nav-item relative mx-1 px-1 py-2 group mb-1 md:mb-0">
             <Link to="/collections">Collections</Link>
 
-            <div className="absolute left-0 top-0 mt-2 py-3 px-4 rounded shadow-lg bg-white z-10 hidden group-hover:block">
+            <div className="absolute pin-l pin-t mt-2 py-3 px-4 rounded shadow-lg bg-white z-10 hidden group-hover:block">
               <ul className="whitespace-no-wrap list-reset">
                 {collections.nodes.map(collection => (
                   <li key={collection.id}>
@@ -129,9 +127,9 @@ function Header({ siteTitle, collections }) {
                 <button onClick={handleOpenModal} className="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white">
                   <img className="h-full w-full object-cover" src={AccountIcon}  alt="Your avatar" />
                 </button>
-                {state.isModalOpen ? (
-                  <div className="absolute z-20 right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
-                    <a onClick={logout} href="#" className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">Logout</a>
+                {isModalOpen ? (
+                  <div className="absolute z-20 pin-r mt-2 py-2 w-24 bg-white rounded-lg shadow-xl border">
+                    <a onClick={logout} href="#" className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline">Logout</a>
                   </div>
                 ) : ''}
               </div>
