@@ -11,7 +11,7 @@ import Logo from '../../images/logo.svg'
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { logout } = useContext(CustomerContext)
+  const { logout, isLoggedIn } = useContext(CustomerContext)
   const { setDefaultCartId } = useContext(CartContext)
 
   function handleOpenModal() {
@@ -23,7 +23,6 @@ function Header({ siteTitle, collections }) {
     await setDefaultCartId()
   }
 
-  const loggedIn = window.localStorage.getItem('mcustomer')
   return (
     <header className="py-6 md:py-10">
       <nav className="flex items-center justify-between relative">
@@ -127,7 +126,7 @@ function Header({ siteTitle, collections }) {
             </Link>
           </li>
           <li className="nav-item">
-            {loggedIn ? (
+            {isLoggedIn ? (
               <div className="relative">
                 <button
                   onClick={handleOpenModal}

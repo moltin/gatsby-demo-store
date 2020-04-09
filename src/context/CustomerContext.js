@@ -15,7 +15,7 @@ const initialState = {
   loggedIn: false
 }
 
-function reducer(action, state) {
+function reducer(state, action) {
   switch (action.type) {
     case SET_CUSTOMER:
       return {
@@ -39,6 +39,8 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [token, setToken] = useLocalStorage('mtoken', customerToken)
   const [customerId, setCustomerId] = useLocalStorage('mcustomer')
+  const isLoggedIn = state.loggedIn
+
   useEffect(() => {
     token && setToken(token)
     state.loggedIn && getCustomer(customerId, customerToken)
@@ -108,7 +110,8 @@ function CustomerProvider({ children, customerToken, ...props }) {
         logout,
         getAddresses,
         addAddress,
-        removeAddress
+        removeAddress,
+        isLoggedIn
       }}
     >
       {children}
