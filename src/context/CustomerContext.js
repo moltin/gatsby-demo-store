@@ -20,14 +20,14 @@ function reducer(action, state) {
     case SET_CUSTOMER:
       return {
         user: action.payload,
-        loggedIn: true,
+        loggedIn: true
       }
 
     case LOGOUT:
       return {
-      user: null,
-      loggedIn: false,
-    }
+        user: null,
+        loggedIn: false
+      }
 
     default:
       return state
@@ -55,14 +55,15 @@ function CustomerProvider({ children, customerToken, ...props }) {
   }
 
   async function register(name, email, password) {
-    const data = await moltin.post('customers', {
+    const response = await moltin.post('customers', {
       type: 'customer',
       name,
       email,
       password
     })
 
-   await login(data.data.email, password)
+    await login(response.data.email, password)
+    return response.data.id
   }
 
   async function login(email, password) {
@@ -75,13 +76,14 @@ function CustomerProvider({ children, customerToken, ...props }) {
     })
 
     await getCustomer(customer_id, token)
+    return customer_id
   }
 
   async function logout() {
-    await setToken(window.localStorage.removeItem('mtoken'))
-    await setToken(window.localStorage.removeItem('mcustomer'))
-    await window.location.reload();
-    dispatch({ type: LOGOUT })
+    setToken('')
+    setCustomerId('')
+    await dispatch({ type: LOGOUT })
+    await window.location.reload()
   }
 
   async function getAddresses() {

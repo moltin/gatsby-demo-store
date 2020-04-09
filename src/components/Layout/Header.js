@@ -11,12 +11,17 @@ import Logo from '../../images/logo.svg'
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { logout } = useContext(CustomerContext)
+  const { setDefaultCartId } = useContext(CartContext)
 
   function handleOpenModal() {
     setIsModalOpen(!isModalOpen)
   }
 
-  const { user, logout } = useContext(CustomerContext)
+  async function onLogout() {
+    await logout()
+    await setDefaultCartId()
+  }
 
   const loggedIn = window.localStorage.getItem('mcustomer')
   return (
@@ -124,23 +129,35 @@ function Header({ siteTitle, collections }) {
           <li className="nav-item">
             {loggedIn ? (
               <div className="relative">
-                <button onClick={handleOpenModal} className="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white">
-                  <img className="h-full w-full object-cover" src={AccountIcon}  alt="Your avatar" />
+                <button
+                  onClick={handleOpenModal}
+                  className="relative z-10 block w-6 rounded-full overflow-hidden border-gray-600 focus:outline-none focus:border-white"
+                >
+                  <img
+                    className="h-full w-full object-cover"
+                    src={AccountIcon}
+                    alt="Your avatar"
+                  />
                 </button>
                 {isModalOpen ? (
                   <div className="absolute z-20 pin-r mt-2 py-2 w-24 bg-white rounded-lg shadow-xl border">
-                    <a onClick={logout} href="#" className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline">Logout</a>
+                    <a
+                      onClick={onLogout}
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline"
+                    >
+                      Logout
+                    </a>
                   </div>
-                ) : ''}
-              </div>
                 ) : (
+                  ''
+                )}
+              </div>
+            ) : (
               <Link to="/login">
-                <span className="relative inline-flex items-center">
-                  Login
-                </span>
+                <span className="relative inline-flex items-center">Login</span>
               </Link>
-              )
-            }
+            )}
           </li>
         </ul>
       </nav>
