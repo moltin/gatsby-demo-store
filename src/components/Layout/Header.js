@@ -142,7 +142,7 @@ function Header({ siteTitle, collections }) {
                   <div className="absolute z-20 pin-r mt-2 py-2 w-24 bg-white rounded-lg shadow-xl border">
                     <a
                       onClick={onLogout}
-                      href="#"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline"
                     >
                       Logout
