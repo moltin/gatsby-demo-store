@@ -43,7 +43,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
 
   useEffect(() => {
     token && setToken(token)
-    state.loggedIn && getCustomer(customerId, customerToken)
+    customerId && getCustomer(customerId, token)
   }, [token])
 
   async function getCustomer(id, token) {
