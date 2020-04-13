@@ -1,9 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 
 import Logo from '../../images/logo.svg'
+import ArrowDown from '../../images/arrow_down.svg'
 
 export default function Footer({ categories }) {
+  const subCategories = categories.nodes.filter(el => el.relationships.children)
+  const subCategoriesId = subCategories
+    .map(el => el.relationships.children.data)
+    .flat(1)
+
+  subCategories.forEach((subCategory, index) => {
+    subCategory.relationships.children.data.forEach((el, i) => {
+      const newEl = categories.nodes.filter(elem => elem.id === el.id)
+      subCategories[index].relationships.children.data[i] = newEl[0]
+    })
+  })
+
+  let categoriesArr = categories.nodes
+
+  subCategoriesId.forEach(category => {
+    categoriesArr = categoriesArr.filter(el => el.id !== category.id)
+  })
+
+  const initialValue = Array(categoriesArr.length).fill(false)
+
+  const [isOpen, setIsOpen] = useState(initialValue)
+
+  function handleOpenDropdown(value, index, e) {
+    let isOpenCopy = [...isOpen]
+    isOpenCopy[index] = !value
+    setIsOpen(isOpenCopy)
+
+    if (isOpenCopy.indexOf(true) > 0) {
+      document.addEventListener('click', clickListener)
+
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
+
+  function clickListener() {
+    setIsOpen(initialValue)
+    document.removeEventListener('click', clickListener)
+  }
+
   return (
     <footer className="block py-6 -px-2 md:py-12 md:flex">
       <div className="list-reset md:w-1/4 text-center md:text-left">
@@ -16,14 +57,50 @@ export default function Footer({ categories }) {
         <li className="font-semibold md:mb-3 text-grey text-sm uppercase">
           Categories
         </li>
-        {categories.nodes.map(category => (
+        {categoriesArr.map((category, index) => (
           <li key={category.id}>
-            <Link
-              to={`/categories/${category.slug}`}
-              className="text-grey-dark hover:text-black no-underline"
-            >
-              {category.name}
-            </Link>
+            {category.relationships.children ? (
+              <div className="relative">
+                <button
+                  onClick={e => handleOpenDropdown(isOpen[index], index, e)}
+                  className="text-grey-dark align-top hover:text-black focus:outline-none"
+                >
+                  <span className="align-middle leading-loose">
+                    {category.name}
+                  </span>
+                  <img
+                    className="align-middle"
+                    src={ArrowDown}
+                    alt="arrow icon"
+                  />
+                </button>
+                <div
+                  className={`${
+                    isOpen[index] ? 'block' : 'hidden'
+                  } absolute z-20 pin-x mt-2 text-center md:text-left`}
+                >
+                  <div className="inline-block py-2 w-24 bg-white rounded-lg shadow-xl text-center border shadow">
+                    {category.relationships.children.data.map(subCategory => (
+                      <div key={subCategory.id}>
+                        <Link
+                          to={`/categories/${subCategory.slug}`}
+                          className="text-grey-dark hover:text-black no-underline"
+                        >
+                          {subCategory.name}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                to={`/categories/${category.slug}`}
+                className="text-grey-dark hover:text-black no-underline"
+              >
+                {category.name}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

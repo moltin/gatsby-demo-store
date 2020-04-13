@@ -46,6 +46,13 @@ const categoriesQuery = graphql`
         id
         name
         slug
+        relationships {
+          children {
+            data {
+              id
+            }
+          }
+        }
       }
     }
 
