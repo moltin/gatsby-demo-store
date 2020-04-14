@@ -25,7 +25,7 @@
 
 <!--A list of Jira issues closed by this PR.-->
 
- * Fixes [FRONT-]
+ * Fixes [MT-]
 
 ## Dependencies
 
