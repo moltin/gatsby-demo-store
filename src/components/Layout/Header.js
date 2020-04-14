@@ -1,14 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'gatsby'
 
 import { CartContext } from '../../context'
-// import {  CustomerContext } from '../../context'
+import AccountIcon from '../../images/icons/account-icon.svg'
+
+import { CustomerContext } from '../../context'
 
 import Logo from '../../images/logo.svg'
 
 function Header({ siteTitle, collections }) {
   const { count, isEmpty } = useContext(CartContext)
-  // const { loggedIn, user } = useContext(CustomerContext)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { logout, isLoggedIn } = useContext(CustomerContext)
+  const { setDefaultCartId } = useContext(CartContext)
+
+  function handleOpenModal() {
+    setIsModalOpen(!isModalOpen)
+  }
+
+  async function onLogout() {
+    await logout()
+    await setDefaultCartId()
+  }
 
   return (
     <header className="py-6 md:py-10">
@@ -25,7 +38,7 @@ function Header({ siteTitle, collections }) {
           <li className="nav-item relative mx-1 px-1 py-2 group mb-1 md:mb-0">
             <Link to="/collections">Collections</Link>
 
-            <div className="absolute left-0 top-0 mt-2 py-3 px-4 rounded shadow-lg bg-white z-10 hidden group-hover:block">
+            <div className="absolute pin-l pin-t mt-2 py-3 px-4 rounded shadow-lg bg-white z-10 hidden group-hover:block">
               <ul className="whitespace-no-wrap list-reset">
                 {collections.nodes.map(collection => (
                   <li key={collection.id}>
@@ -111,6 +124,39 @@ function Header({ siteTitle, collections }) {
                 )}
               </span>
             </Link>
+          </li>
+          <li className="nav-item">
+            {isLoggedIn ? (
+              <div className="relative">
+                <button
+                  onClick={handleOpenModal}
+                  className="relative z-10 block w-6 rounded-full overflow-hidden border-gray-600 focus:outline-none focus:border-white"
+                >
+                  <img
+                    className="h-full w-full object-cover"
+                    src={AccountIcon}
+                    alt="Your avatar"
+                  />
+                </button>
+                {isModalOpen ? (
+                  <div className="absolute z-20 pin-r mt-2 py-2 w-24 bg-white rounded-lg shadow-xl border">
+                    <a
+                      onClick={onLogout}
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline"
+                    >
+                      Logout
+                    </a>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              <Link to="/login">
+                <span className="relative inline-flex items-center">Login</span>
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

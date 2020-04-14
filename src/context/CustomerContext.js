@@ -15,16 +15,19 @@ const initialState = {
   loggedIn: false
 }
 
-function reducer(action, state) {
+function reducer(state, action) {
   switch (action.type) {
     case SET_CUSTOMER:
       return {
-        ...state,
-        user: action.payload
+        user: action.payload,
+        loggedIn: true
       }
 
     case LOGOUT:
-      return initialState
+      return {
+        user: null,
+        loggedIn: false
+      }
 
     default:
       return state
@@ -35,11 +38,12 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const { moltin } = useContext(MoltinContext)
   const [state, dispatch] = useReducer(reducer, initialState)
   const [token, setToken] = useLocalStorage('mtoken', customerToken)
-  // const [customerId, setCustomerId] = useLocalStorage('mcustomer')
+  const [customerId, setCustomerId] = useLocalStorage('mcustomer')
+  const isLoggedIn = state.loggedIn
 
   useEffect(() => {
-    // token && setToken(token)
-    // loggedIn && getCustomer(customerId, customerToken)
+    token && setToken(token)
+    customerId && getCustomer(customerId, token)
   }, [token])
 
   async function getCustomer(id, token) {
@@ -47,13 +51,21 @@ function CustomerProvider({ children, customerToken, ...props }) {
       'X-Moltin-Customer-Token': token
     })
 
-    // setCustomerId(id)
+    setCustomerId(id)
     setToken(token)
     dispatch({ type: SET_CUSTOMER, payload })
   }
 
-  async function register({ email, password, ...args }) {
-    return {}
+  async function register(name, email, password) {
+    const response = await moltin.post('customers', {
+      type: 'customer',
+      name,
+      email,
+      password
+    })
+
+    await login(response.data.email, password)
+    return response.data.id
   }
 
   async function login(email, password) {
@@ -65,11 +77,15 @@ function CustomerProvider({ children, customerToken, ...props }) {
       password
     })
 
-    getCustomer(customer_id, token)
+    await getCustomer(customer_id, token)
+    return customer_id
   }
 
   async function logout() {
-    setToken(window.localStorage.removeItem)
+    setToken('')
+    setCustomerId('')
+    await dispatch({ type: LOGOUT })
+    await window.location.reload()
   }
 
   async function getAddresses() {
@@ -94,7 +110,8 @@ function CustomerProvider({ children, customerToken, ...props }) {
         logout,
         getAddresses,
         addAddress,
-        removeAddress
+        removeAddress,
+        isLoggedIn
       }}
     >
       {children}

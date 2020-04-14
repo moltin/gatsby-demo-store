@@ -131,6 +131,15 @@ function CartProvider({
     dispatch({ type: RESET_CART })
   }
 
+  async function setUserCartId(customerId) {
+    await setCartId(customerId)
+    await getCart(customerId)
+  }
+
+  async function setDefaultCartId() {
+    await setCartId(initialCartId)
+  }
+
   return (
     <Provider
       value={{
@@ -143,7 +152,9 @@ function CartProvider({
         removeFromCart,
         addPromotion,
         removePromotion: removeFromCart,
-        deleteCart
+        deleteCart,
+        setUserCartId,
+        setDefaultCartId
       }}
     >
       {children}
