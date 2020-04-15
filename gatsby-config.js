@@ -47,63 +47,63 @@ module.exports = {
       }
     },
     'gatsby-plugin-stripe',
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
-        queries: [
-          {
-            query: `
-            {
-              allMoltinProduct {
-                nodes {
-                  objectID: id
-                  name
-                  slug
-                  imgUrl: mainImageHref
-                  meta {
-                    display_price {
-                      with_tax {
-                        formatted
-                      }
-                    }
-                  }
-                  categories {
-                    name
-                  }
-                  brands {
-                    name
-                  }
-                  collections {
-                    name
-                  }
-                }
-              }
-            }
-          `,
-            transformer: ({
-              data: {
-                allMoltinProduct: { nodes }
-              }
-            }) =>
-              nodes.map(
-                ({ meta, categories, brands, collections, ...rest }) => ({
-                  ...rest,
-                  price: meta.display_price.with_tax.formatted,
-                  categories: categories
-                    ? categories.map(({ name }) => name)
-                    : [],
-                  brands: brands ? brands.map(({ name }) => name) : [],
-                  collections: collections
-                    ? collections.map(({ name }) => name)
-                    : []
-                })
-              ),
-            indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
-          }
-        ]
-      }
-    }
+    // {
+    //   resolve: `gatsby-plugin-algolia`,
+    //   options: {
+    //     appId: process.env.GATSBY_ALGOLIA_APP_ID,
+    //     apiKey: process.env.ALGOLIA_ADMIN_KEY,
+    //     queries: [
+    //       {
+    //         query: `
+    //         {
+    //           allMoltinProduct {
+    //             nodes {
+    //               objectID: id
+    //               name
+    //               slug
+    //               imgUrl: mainImageHref
+    //               meta {
+    //                 display_price {
+    //                   with_tax {
+    //                     formatted
+    //                   }
+    //                 }
+    //               }
+    //               categories {
+    //                 name
+    //               }
+    //               brands {
+    //                 name
+    //               }
+    //               collections {
+    //                 name
+    //               }
+    //             }
+    //           }
+    //         }
+    //       `,
+    //         transformer: ({
+    //           data: {
+    //             allMoltinProduct: { nodes }
+    //           }
+    //         }) =>
+    //           nodes.map(
+    //             ({ meta, categories, brands, collections, ...rest }) => ({
+    //               ...rest,
+    //               price: meta.display_price.with_tax.formatted,
+    //               categories: categories
+    //                 ? categories.map(({ name }) => name)
+    //                 : [],
+    //               brands: brands ? brands.map(({ name }) => name) : [],
+    //               collections: collections
+    //                 ? collections.map(({ name }) => name)
+    //                 : []
+    //             })
+    //           ),
+    //         indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
+    //       }
+    //     ]
+    //   }
+    // }
   ]
 }
