@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form'
 import { CardElement, injectStripe } from 'react-stripe-elements'
 import { Link } from 'gatsby'
 
-import { CartContext, CheckoutContext } from '../context'
+import { CartContext, CheckoutContext, CustomerContext } from '../context'
 import PageTitle from '../components/PageTitle'
 import Input from '../components/Input'
 import AddressFields from '../components/AddressFields'
@@ -26,9 +26,15 @@ function CheckoutPage({ stripe }) {
   const { checkout, pay, confirmTransaction } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
   const [cardElement, setCardElement] = useState(null)
+  let { fullName, email } = useContext(CustomerContext)
 
   const shippingStep = currentStep === 'shipping'
   const paymentStep = currentStep === 'payment'
+
+  if (fullName && email) {
+    initialValues.customer.name = fullName
+    initialValues.customer.email = email
+  }
 
   function validate(values) {
     if (shippingStep) return shippingValidation(values)

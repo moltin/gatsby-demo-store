@@ -138,18 +138,22 @@ function Header({ siteTitle, collections }) {
                     alt="Your avatar"
                   />
                 </button>
-                {isModalOpen ? (
-                  <div className="absolute z-20 pin-r mt-2 py-2 w-24 bg-white rounded-lg shadow-xl border">
+                {isModalOpen && (
+                  <div className="absolute z-20 pin-r mt-2 py-2 w-32 bg-white rounded-lg shadow-xl border">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+                    >
+                      Profile
+                    </Link>
                     <a
                       onClick={onLogout}
                       href="/"
-                      className="block px-4 py-2 text-gray-800 hover:text-black bg-blue hover:bg-blue-dark no-underline hover:underline"
+                      className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
                     >
                       Logout
                     </a>
                   </div>
-                ) : (
-                  ''
                 )}
               </div>
             ) : (
