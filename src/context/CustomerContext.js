@@ -11,21 +11,29 @@ let CustomerContext
 const { Provider, Consumer } = (CustomerContext = createContext())
 
 const initialState = {
-  user: null,
+  email: null,
+  fullName: '',
   loggedIn: false
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case SET_CUSTOMER:
+      const email = action.payload.email
+      const fullName = action.payload.name
+      const customerId = action.payload.name
+
       return {
-        user: action.payload,
+        email,
+        fullName,
+        customerId,
         loggedIn: true
       }
 
     case LOGOUT:
       return {
-        user: null,
+        email: null,
+        fullName: null,
         loggedIn: false
       }
 
@@ -40,6 +48,9 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const [token, setToken] = useLocalStorage('mtoken', customerToken)
   const [customerId, setCustomerId] = useLocalStorage('mcustomer')
   const isLoggedIn = state.loggedIn
+  const fullName = state.fullName
+  const email = state.email
+  const customer = customerId
 
   useEffect(() => {
     token && setToken(token)
@@ -88,6 +99,22 @@ function CustomerProvider({ children, customerToken, ...props }) {
     await window.location.reload()
   }
 
+  async function updateCustomerInfo(name, email, password) {
+    await moltin.put(
+      `customers/${customer}`,
+      {
+        type: 'customer',
+        name,
+        email,
+        password
+      },
+      {
+        'X-Moltin-Customer-Token': token
+      }
+    )
+    await getCustomer(customer, token)
+  }
+
   async function getAddresses() {
     return []
   }
@@ -111,7 +138,10 @@ function CustomerProvider({ children, customerToken, ...props }) {
         getAddresses,
         addAddress,
         removeAddress,
-        isLoggedIn
+        isLoggedIn,
+        updateCustomerInfo,
+        fullName,
+        email
       }}
     >
       {children}
