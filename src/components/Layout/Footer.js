@@ -6,7 +6,7 @@ import ArrowDown from '../../images/arrow_down.svg'
 
 export default function Footer({ categories }) {
   const subCategories = categories.filter(el => el.children.length > 0)
-  const subCategoriesId = subCategories.map(el => el.children).flat(1)
+  const subCategoriesId = subCategories.map(el => el.children)
 
   subCategories.forEach((subCategory, index) => {
     subCategory.children.forEach((el, i) => {
@@ -17,7 +17,7 @@ export default function Footer({ categories }) {
 
   let categoriesArr = [...categories]
 
-  subCategoriesId.forEach(category => {
+  subCategoriesId[0].forEach(category => {
     categoriesArr = categoriesArr.filter(el => el.parent.id !== category.id)
   })
 
