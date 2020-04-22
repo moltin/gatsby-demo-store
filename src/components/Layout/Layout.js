@@ -41,18 +41,14 @@ const categoriesQuery = graphql`
       }
     }
 
-    categories: allMoltinCategory {
-      nodes {
+    categories: allMoltinCategoryChildren {
+      children {
         id
+      }
+      parent {
         name
         slug
-        relationships {
-          children {
-            data {
-              id
-            }
-          }
-        }
+        id
       }
     }
 
