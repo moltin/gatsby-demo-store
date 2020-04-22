@@ -9,7 +9,7 @@ import Layout from './src/components/Layout'
 export const onRenderBody = ({ setPostBodyComponents }) => {
   return setPostBodyComponents([
     <script
-      src="https://unpkg.com/@bounteous/shopkit@0.0.1/dist/index.js"
+      src="https://btn.moltin.com"
       id="shopkit-js"
       key="moltin-shopkit"
       data-moltin-client-id={process.env.GATSBY_MOLTIN_CLIENT_ID}
