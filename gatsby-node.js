@@ -3,6 +3,43 @@ const { paginate } = require('gatsby-awesome-pagination')
 
 const itemsPerPage = parseInt(process.env.GATSBY_ITEMS_PER_PAGE) || 9
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type childrenData {
+      id: String
+    }
+    type MoltinCategoryChildren {
+      parent: MoltinCategory
+      children: [childrenData]
+    }
+  `
+  createTypes(typeDefs)
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Query: {
+      allMoltinCategoryChildren: {
+        type: '[MoltinCategoryChildren]',
+        resolve(source, args, context, info) {
+          const categories = context.nodeModel.getAllNodes({
+            type: `MoltinCategory`,
+          })
+          return categories.map(category => {
+            const empty = !category.relationships.children;
+            return {
+              parent: category,
+              children: empty ? [] : category.relationships.children.data,
+            }
+          })
+        }
+      }
+    }
+  }
+  createResolvers(resolvers)
+}
+
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const pages = await graphql(`
     {
