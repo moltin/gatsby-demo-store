@@ -17,9 +17,11 @@ export default function Footer({ categories }) {
 
   let categoriesArr = [...categories]
 
-  subCategoriesId[0].forEach(category => {
-    categoriesArr = categoriesArr.filter(el => el.parent.id !== category.id)
-  })
+  if (subCategoriesId.length > 0) {
+    subCategoriesId[0].forEach(category => {
+      categoriesArr = categoriesArr.filter(el => el.parent.id !== category.id)
+    })
+  }
 
   const initialValue = Array(categoriesArr.length).fill(false)
 
