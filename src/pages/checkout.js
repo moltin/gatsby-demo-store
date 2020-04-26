@@ -203,8 +203,7 @@ function CheckoutPage({ stripe }) {
             {({ handleSubmit, submitting, invalid, values, form }) => {
               const onStripeChange = e => form.change('stripe', e)
 
-              console.log('checkedShippingAddress', checkedShippingAddress)
-              console.log('checkedBillingAddress', checkedBillingAddress)
+
               if ((addressesList && addressesList.length > 0) && checkedShippingAddress) {
                 values.shipping_address = shippingAddressData
               }
@@ -223,7 +222,7 @@ function CheckoutPage({ stripe }) {
               if (values.billingIsShipping) {
                 delete values.billing_address
               }
-              {console.log('values', values)}
+
               return (
                 <form onSubmit={handleSubmit}>
                   {checkoutError && (

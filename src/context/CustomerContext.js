@@ -25,6 +25,7 @@ function reducer(state, action) {
       const customerId = action.payload.name
 
       return {
+        ...state,
         email,
         fullName,
         customerId,
@@ -133,7 +134,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
 
   async function getAddresses() {
     try {
-      const { data: payload, ...args } = await moltin.get(`/customers/${customer}/addresses`, {
+      const { data: payload } = await moltin.get(`/customers/${customer}/addresses`, {
         'X-Moltin-Customer-Token': token
       })
       dispatch({ type: SET_ADDRESSES, payload })
