@@ -5,6 +5,7 @@ import useLocalStorage from './useLocalStorage'
 
 const SET_CUSTOMER = 'SET_CUSTOMER'
 const LOGOUT = 'LOGOUT'
+const SET_ADDRESSES = 'SET_ADDRESSES'
 
 let CustomerContext
 
@@ -34,7 +35,14 @@ function reducer(state, action) {
       return {
         email: null,
         fullName: null,
-        loggedIn: false
+        loggedIn: false,
+        addresses: null
+      }
+
+    case SET_ADDRESSES:
+      return {
+        ...state,
+        addresses: action.payload
       }
 
     default:
@@ -51,10 +59,12 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const fullName = state.fullName
   const email = state.email
   const customer = customerId
+  const addressesList = state.addresses
 
   useEffect(() => {
     token && setToken(token)
     customerId && getCustomer(customerId, token)
+    customerId && token && getAddresses()
   }, [token])
 
   async function getCustomer(id, token) {
@@ -65,6 +75,12 @@ function CustomerProvider({ children, customerToken, ...props }) {
     setCustomerId(id)
     setToken(token)
     dispatch({ type: SET_CUSTOMER, payload })
+  }
+
+  async function onTokenError(e) {
+    if (e.statusCode === 403) {
+      await logout()
+    }
   }
 
   async function register(name, email, password) {
@@ -116,7 +132,14 @@ function CustomerProvider({ children, customerToken, ...props }) {
   }
 
   async function getAddresses() {
-    return []
+    try {
+      const { data: payload, ...args } = await moltin.get(`/customers/${customer}/addresses`, {
+        'X-Moltin-Customer-Token': token
+      })
+      dispatch({ type: SET_ADDRESSES, payload })
+    } catch (e) {
+      await onTokenError(e)
+    }
   }
 
   async function addAddress(address) {
@@ -141,7 +164,9 @@ function CustomerProvider({ children, customerToken, ...props }) {
         isLoggedIn,
         updateCustomerInfo,
         fullName,
-        email
+        email,
+        customerId,
+        addressesList
       }}
     >
       {children}
