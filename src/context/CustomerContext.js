@@ -143,12 +143,80 @@ function CustomerProvider({ children, customerToken, ...props }) {
     }
   }
 
-  async function addAddress(address) {
-    return []
+  async function addAddress(
+    first_name,
+    last_name,
+    line_1,
+    line_2,
+    city,
+    postcode,
+    county,
+    country
+  ) {
+    await moltin.post(`customers/${customer}/addresses`, {
+      type: 'address',
+      name: '',
+      first_name,
+      last_name,
+      company_name: '',
+      phone_number: '',
+      line_1,
+      line_2,
+      city,
+      postcode,
+      county,
+      country,
+      instructions: ''
+    })
+
+    await getAddresses()
   }
 
   async function removeAddress(id) {
-    return []
+    await moltin.delete(
+      `customers/${customer}/addresses/${id}`,
+      {},
+      {
+        'X-Moltin-Customer-Token': token
+      }
+    )
+
+    await getAddresses()
+  }
+
+  async function updateAddress(
+    id,
+    first_name,
+    last_name,
+    line_1,
+    line_2,
+    city,
+    postcode,
+    county,
+    country
+  ) {
+    await moltin.put(`customers/${customer}/addresses/${id}`, {
+      type: 'address',
+      id,
+      name: '',
+      first_name,
+      last_name,
+      company_name: '',
+      phone_number: '',
+      line_1,
+      line_2,
+      city,
+      postcode,
+      county,
+      country,
+      instructions: ''
+    },
+      {
+        'X-Moltin-Customer-Token': token
+      }
+      )
+
+    await getAddresses()
   }
 
   return (
@@ -162,6 +230,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
         getAddresses,
         addAddress,
         removeAddress,
+        updateAddress,
         isLoggedIn,
         updateCustomerInfo,
         fullName,

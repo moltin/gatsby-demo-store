@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from './Input'
 import PlacesSuggest from './PlacesSuggest'
 
-function AddressFields({ type, form }) {
+function AddressFields({ type, form, showAddressForm }) {
   const [isEditing, setIsEditing] = useState(false)
 
   const touchForm = () => setIsEditing(true)
@@ -28,7 +28,7 @@ function AddressFields({ type, form }) {
     form.change(`${type}.postcode`, '')
   }
 
-  if (!isEditing) {
+  if (!isEditing && !showAddressForm) {
     return (
       <React.Fragment>
         <PlacesSuggest

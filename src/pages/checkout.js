@@ -350,7 +350,7 @@ function CheckoutPage({ stripe }) {
                           </Link>
                         ) : (
                           <div>
-                            <AddressFields type="shipping_address" form={form} />
+                            <AddressFields type="shipping_address" form={form} showAddressForm={false} />
                           </div>
                         )}
                       </div>
@@ -441,7 +441,7 @@ function CheckoutPage({ stripe }) {
                               </div>
                             ) : (
                               <div className="w-full">
-                                <AddressFields type="billing_address" form={form} />
+                                <AddressFields type="billing_address" form={form} showAddressForm={false} />
                               </div>
                             )}
                           </div>
