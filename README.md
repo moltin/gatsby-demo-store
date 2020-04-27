@@ -1,14 +1,14 @@
-# Moltin x Gatsby Starter
+# Elastic Path Commerce Cloud Gatsby Starter
 
-> 🛍 Moltin powered Gatsby demo store
+> 🛍 Elastic Path powered Gatsby demo store
 
-[Demo](https://demo.moltin.com)
+[Demo](https://demo.elasticpath.com)
 
 🚨 THIS IS A WIP - CONTRIBUTORS WELCOME 😍
 
 ## Setup
 
-You'll need a [Moltin account](https://dashboard.moltin.com) to run this store.
+You'll need an [Elastic Path Commerce Cloud account](https://dashboard.elasticpath.com) to run this store.
 
 Run the following commands in your Terminal:
 
@@ -36,7 +36,7 @@ GATSBY_ALGOLIA_APP_ID=
 GATSBY_ITEMS_PER_PAGE=
 ```
 
-You must also configure Stripe inside the [Dashboard](https://dashboard.moltin.com).
+You must also configure Stripe inside the [Dashboard](https://dashboard.elasticpath.com).
 
 Now you're ready to go!
 
