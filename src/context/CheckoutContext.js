@@ -14,7 +14,7 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     { customer, shipping_address, billing_address = shipping_address }
   ) {
     const createCustomer = customer && customer.password
-    let customerId
+    let customerId = customer && customer.id
 
     if (createCustomer) {
       const { data: newCustomer } = await moltin.post(`customers`, {
@@ -26,7 +26,9 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     }
 
     const { data: order } = await moltin.post(`carts/${cartId}/checkout`, {
-      ...(createCustomer ? { customer: { id: customerId } } : { customer }),
+      ...(createCustomer || customerId
+        ? { customer: { id: customerId } }
+        : { customer }),
       shipping_address,
       billing_address
     })

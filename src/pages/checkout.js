@@ -26,7 +26,13 @@ function CheckoutPage({ stripe }) {
   const { checkout, pay, confirmTransaction } = useContext(CheckoutContext)
   const [checkoutError, setCheckoutError] = useState(null)
   const [cardElement, setCardElement] = useState(null)
-  let { fullName, email } = useContext(CustomerContext)
+  const [checkedShippingAddress, setCheckedShippingAddress] = useState(null)
+  const [checkedBillingAddress, setCheckedBillingAddress] = useState(null)
+  const [shippingAddressData, setShippingAddressData] = useState({})
+  const [billingAddressData, setBillingAddressData] = useState({})
+  let { fullName, email, customerId, addressesList } = useContext(
+    CustomerContext
+  )
 
   const shippingStep = currentStep === 'shipping'
   const paymentStep = currentStep === 'payment'
@@ -34,6 +40,37 @@ function CheckoutPage({ stripe }) {
   if (fullName && email) {
     initialValues.customer.name = fullName
     initialValues.customer.email = email
+    initialValues.customer.id = customerId
+  }
+
+  async function selectShippingAddress(addressId, element) {
+    const shippingAddress = {
+      line_1: element.line_1,
+      city: element.city,
+      county: element.county,
+      country: element.country,
+      postcode: element.postcode,
+      first_name: element.first_name,
+      last_name: element.last_name
+    }
+    initialValues.shipping_address = shippingAddress
+    await setShippingAddressData(shippingAddress)
+    await setCheckedShippingAddress(addressId)
+  }
+
+  async function selectBillingAddress(addressId, element) {
+    const billingAddress = {
+      line_1: element.line_1,
+      city: element.city,
+      county: element.county,
+      country: element.country,
+      postcode: element.postcode,
+      first_name: element.first_name,
+      last_name: element.last_name
+    }
+    initialValues.shipping_address = billingAddress
+    await setBillingAddressData(billingAddress)
+    await setCheckedBillingAddress(addressId)
   }
 
   function validate(values) {
@@ -169,6 +206,29 @@ function CheckoutPage({ stripe }) {
               const onStripeChange = e => form.change('stripe', e)
 
               if (
+                addressesList &&
+                addressesList.length > 0 &&
+                checkedShippingAddress
+              ) {
+                values.shipping_address = shippingAddressData
+              }
+              if (
+                addressesList &&
+                addressesList.length > 0 &&
+                checkedBillingAddress
+              ) {
+                values.billing_address = billingAddressData
+              }
+
+              if (
+                addressesList &&
+                addressesList.length > 0 &&
+                !checkedShippingAddress
+              ) {
+                delete values.shipping_address
+              }
+
+              if (
                 !values.createCustomer &&
                 values.customer &&
                 values.customer.password
@@ -194,26 +254,36 @@ function CheckoutPage({ stripe }) {
                         <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
                           Contact information
                         </h2>
-
-                        <div className="md:flex -mx-2">
-                          <div className="my-2 w-full px-2">
-                            <Input
-                              name="customer.name"
-                              label="Full name"
-                              required
-                              autoFocus
-                            />
+                        {fullName && email ? (
+                          <div className="mt-4">
+                            <div className="my-4">
+                              <span>Email: {email}</span>
+                            </div>
+                            <div className="my-4">
+                              <span>Full Name: {fullName}</span>
+                            </div>
                           </div>
+                        ) : (
+                          <div className="md:flex -mx-2">
+                            <div className="my-2 w-full px-2">
+                              <Input
+                                name="customer.name"
+                                label="Full name"
+                                required
+                                autoFocus
+                              />
+                            </div>
 
-                          <div className="my-2 w-full px-2">
-                            <Input
-                              type="email"
-                              name="customer.email"
-                              label="Email"
-                              required
-                            />
+                            <div className="my-2 w-full px-2">
+                              <Input
+                                type="email"
+                                name="customer.email"
+                                label="Email"
+                                required
+                              />
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         <div className="my-2 w-full">
                           <label
@@ -259,8 +329,53 @@ function CheckoutPage({ stripe }) {
                         <h2 className="text-black font-medium leading-loose p-0 mb-3 pt-6 pb-3 border-b border-grey-light">
                           Shipping address
                         </h2>
-
-                        <AddressFields type="shipping_address" form={form} />
+                        <div className="flex flex-wrap">
+                          {addressesList &&
+                            addressesList.length > 0 &&
+                            addressesList.map(el => (
+                              <ul key={el.id} className="w-1/2 p-0 list-reset">
+                                <li className="flex">
+                                  <input
+                                    type="radio"
+                                    name={el.id}
+                                    className="mt-1"
+                                    id={el.id}
+                                    value={el.name}
+                                    checked={checkedShippingAddress === el.id}
+                                    onChange={() =>
+                                      selectShippingAddress(el.id, el)
+                                    }
+                                  />
+                                  <label className="ml-2 mb-2" htmlFor={el.id}>
+                                    <div>
+                                      {el.first_name} {el.last_name}
+                                    </div>
+                                    <div>{el.line_1}</div>
+                                    <div>
+                                      {el.city}, {el.county}, {el.country}
+                                    </div>
+                                    <div>{el.postcode}</div>
+                                  </label>
+                                </li>
+                              </ul>
+                            ))}
+                        </div>
+                        {addressesList && addressesList.length ? (
+                          <Link
+                            to="/addresses"
+                            className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+                          >
+                            Add new Addresses
+                          </Link>
+                        ) : (
+                          <div>
+                            <AddressFields
+                              type="shipping_address"
+                              form={form}
+                              showAddressForm={false}
+                            />
+                          </div>
+                        )}
                       </div>
                     </React.Fragment>
                   )}
@@ -311,7 +426,61 @@ function CheckoutPage({ stripe }) {
                         </div>
 
                         {!values.billingIsShipping && (
-                          <AddressFields type="billing_address" form={form} />
+                          <div className="flex flex-wrap">
+                            {addressesList &&
+                              addressesList.length > 0 &&
+                              addressesList.map(el => (
+                                <ul
+                                  key={el.id}
+                                  className="w-1/2 p-0 list-reset"
+                                >
+                                  <li className="flex">
+                                    <input
+                                      type="radio"
+                                      name={el.id}
+                                      className="mt-1"
+                                      id={el.id}
+                                      value={el.name}
+                                      checked={checkedBillingAddress === el.id}
+                                      onChange={() =>
+                                        selectBillingAddress(el.id, el)
+                                      }
+                                    />
+                                    <label
+                                      className="ml-2 mb-2"
+                                      htmlFor={el.id}
+                                    >
+                                      <div>
+                                        {el.first_name} {el.last_name}
+                                      </div>
+                                      <div>{el.line_1}</div>
+                                      <div>
+                                        {el.city}, {el.county}, {el.country}
+                                      </div>
+                                      <div>{el.postcode}</div>
+                                    </label>
+                                  </li>
+                                </ul>
+                              ))}
+                            {addressesList && addressesList.length ? (
+                              <div className="w-full">
+                                <Link
+                                  to="/addresses"
+                                  className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+                                >
+                                  Add new Addresses
+                                </Link>
+                              </div>
+                            ) : (
+                              <div className="w-full">
+                                <AddressFields
+                                  type="billing_address"
+                                  form={form}
+                                  showAddressForm={false}
+                                />
+                              </div>
+                            )}
+                          </div>
                         )}
 
                         <div className="my-2 w-full">
