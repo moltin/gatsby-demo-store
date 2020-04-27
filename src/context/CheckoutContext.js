@@ -26,7 +26,9 @@ function CheckoutProvider({ cartId: initialCartId, children, ...props }) {
     }
 
     const { data: order } = await moltin.post(`carts/${cartId}/checkout`, {
-      ...(createCustomer || customerId ? { customer: { id: customerId } } : { customer }),
+      ...(createCustomer || customerId
+        ? { customer: { id: customerId } }
+        : { customer }),
       shipping_address,
       billing_address
     })

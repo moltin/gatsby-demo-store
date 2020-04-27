@@ -7,11 +7,13 @@ import SideMenu from '../components/SideMenu'
 
 function AddressPage() {
   const { addressesList } = useContext(CustomerContext)
-  const { addAddress, removeAddress, updateAddress } = useContext(CustomerContext)
-
+  const { addAddress, removeAddress, updateAddress } = useContext(
+    CustomerContext
+  )
   const [showForm, setShowForm] = useState(false)
   const [isEditMode, setEditMode] = useState(false)
   const [editAddressId, setEditAddressId] = useState('')
+  const [addressError, setAddressError] = useState('')
   const type = 'billing_address'
 
   function clearAddressForm(form) {
@@ -62,9 +64,11 @@ function AddressPage() {
           country
         )
         setShowForm(false)
+        setAddressError(null)
       }
       clearAddressForm(form)
     } catch ({ errors: [{ detail = 'Incorrect details. Try again.' }] }) {
+      setAddressError(detail)
     }
   }
 
@@ -90,8 +94,8 @@ function AddressPage() {
     clearAddressForm(form)
     setShowForm(false)
     setEditMode(false)
+    setAddressError(null)
   }
-
 
   return (
     <React.Fragment>
@@ -99,10 +103,13 @@ function AddressPage() {
         <SideMenu />
         <div className="flex-1 text-grey-darker px-4 py-2 m-2 mb-4">
           <h3 className="my-4">Address Book</h3>
-
+          {addressError && (
+            <div className="bg-red text-white p-3 text-center">
+              {addressError}
+            </div>
+          )}
           <Form onSubmit={onSubmit}>
             {({ handleSubmit, submitting, invalid, form }) => {
-
               return (
                 <form onSubmit={handleSubmit}>
                   {showForm || isEditMode ? (
@@ -115,7 +122,9 @@ function AddressPage() {
 
                       <div className="md:flex md:-mx-2">
                         <button
-                          onClick={() => {hideAddAddressForm(form)}}
+                          onClick={() => {
+                            hideAddAddressForm(form)
+                          }}
                           type="submit"
                           className="my-2 w-full px-2 appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 md:mx-2 leading-tight rounded-none focus:outline-none mt-4 no-underline"
                         >
@@ -143,7 +152,8 @@ function AddressPage() {
                                 </li>
                                 <li>{address.line_1}</li>
                                 <li>
-                                  {address.city}, {address.county}, {address.country}
+                                  {address.city}, {address.county},{' '}
+                                  {address.country}
                                 </li>
                                 <li>{address.postcode}</li>
                               </ul>
@@ -183,7 +193,6 @@ function AddressPage() {
                       </button>
                     </React.Fragment>
                   )}
-
                 </form>
               )
             }}

@@ -30,7 +30,9 @@ function CheckoutPage({ stripe }) {
   const [checkedBillingAddress, setCheckedBillingAddress] = useState(null)
   const [shippingAddressData, setShippingAddressData] = useState({})
   const [billingAddressData, setBillingAddressData] = useState({})
-  let { fullName, email, customerId, addressesList } = useContext(CustomerContext)
+  let { fullName, email, customerId, addressesList } = useContext(
+    CustomerContext
+  )
 
   const shippingStep = currentStep === 'shipping'
   const paymentStep = currentStep === 'payment'
@@ -49,11 +51,11 @@ function CheckoutPage({ stripe }) {
       country: element.country,
       postcode: element.postcode,
       first_name: element.first_name,
-      last_name: element.last_name,
+      last_name: element.last_name
     }
-      initialValues.shipping_address = shippingAddress
-      await setShippingAddressData(shippingAddress)
-      await setCheckedShippingAddress(addressId)
+    initialValues.shipping_address = shippingAddress
+    await setShippingAddressData(shippingAddress)
+    await setCheckedShippingAddress(addressId)
   }
 
   async function selectBillingAddress(addressId, element) {
@@ -64,11 +66,11 @@ function CheckoutPage({ stripe }) {
       country: element.country,
       postcode: element.postcode,
       first_name: element.first_name,
-      last_name: element.last_name,
+      last_name: element.last_name
     }
-      initialValues.shipping_address = billingAddress
-      await setBillingAddressData(billingAddress)
-      await setCheckedBillingAddress(addressId)
+    initialValues.shipping_address = billingAddress
+    await setBillingAddressData(billingAddress)
+    await setCheckedBillingAddress(addressId)
   }
 
   function validate(values) {
@@ -203,12 +205,27 @@ function CheckoutPage({ stripe }) {
             {({ handleSubmit, submitting, invalid, values, form }) => {
               const onStripeChange = e => form.change('stripe', e)
 
-
-              if ((addressesList && addressesList.length > 0) && checkedShippingAddress) {
+              if (
+                addressesList &&
+                addressesList.length > 0 &&
+                checkedShippingAddress
+              ) {
                 values.shipping_address = shippingAddressData
               }
-              if ((addressesList && addressesList.length > 0) && checkedBillingAddress) {
+              if (
+                addressesList &&
+                addressesList.length > 0 &&
+                checkedBillingAddress
+              ) {
                 values.billing_address = billingAddressData
+              }
+
+              if (
+                addressesList &&
+                addressesList.length > 0 &&
+                !checkedShippingAddress
+              ) {
+                delete values.shipping_address
               }
 
               if (
@@ -313,44 +330,50 @@ function CheckoutPage({ stripe }) {
                           Shipping address
                         </h2>
                         <div className="flex flex-wrap">
-                        {(addressesList && addressesList.length > 0) && addressesList.map(el => (
-                          <ul key={el.id} className="w-1/2 p-0 list-reset">
-                            <li className="flex">
-                              <input
-                                type="radio"
-                                name={el.id}
-                                className="mt-1"
-                                id={el.id}
-                                value={el.name}
-                                checked={checkedShippingAddress === el.id}
-                                onChange={() => selectShippingAddress(el.id ,el)}
-                              />
-                              <label className="ml-2 mb-2" htmlFor={el.id}>
-                                <div>
-                                  {el.first_name} {el.last_name}
-                                </div>
-                                <div>
-                                  {el.line_1}
-                                </div>
-                                <div>
-                                  {el.city}, {el.county}, {el.country}
-                                </div>
-                                <div>
-                                  {el.postcode}
-                                </div>
-                              </label>
-                            </li>
-                          </ul>
-                          )
-                        )}
+                          {addressesList &&
+                            addressesList.length > 0 &&
+                            addressesList.map(el => (
+                              <ul key={el.id} className="w-1/2 p-0 list-reset">
+                                <li className="flex">
+                                  <input
+                                    type="radio"
+                                    name={el.id}
+                                    className="mt-1"
+                                    id={el.id}
+                                    value={el.name}
+                                    checked={checkedShippingAddress === el.id}
+                                    onChange={() =>
+                                      selectShippingAddress(el.id, el)
+                                    }
+                                  />
+                                  <label className="ml-2 mb-2" htmlFor={el.id}>
+                                    <div>
+                                      {el.first_name} {el.last_name}
+                                    </div>
+                                    <div>{el.line_1}</div>
+                                    <div>
+                                      {el.city}, {el.county}, {el.country}
+                                    </div>
+                                    <div>{el.postcode}</div>
+                                  </label>
+                                </li>
+                              </ul>
+                            ))}
                         </div>
                         {addressesList && addressesList.length ? (
-                          <Link  to="/addresses" className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline">
+                          <Link
+                            to="/addresses"
+                            className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+                          >
                             Add new Addresses
                           </Link>
                         ) : (
                           <div>
-                            <AddressFields type="shipping_address" form={form} showAddressForm={false} />
+                            <AddressFields
+                              type="shipping_address"
+                              form={form}
+                              showAddressForm={false}
+                            />
                           </div>
                         )}
                       </div>
@@ -404,44 +427,57 @@ function CheckoutPage({ stripe }) {
 
                         {!values.billingIsShipping && (
                           <div className="flex flex-wrap">
-                            {(addressesList && addressesList.length > 0) && addressesList.map(el => (
-                              <ul key={el.id} className="w-1/2 p-0 list-reset">
-                                <li className="flex">
-                                  <input
-                                    type="radio"
-                                    name={el.id}
-                                    className="mt-1"
-                                    id={el.id}
-                                    value={el.name}
-                                    checked={checkedBillingAddress === el.id}
-                                    onChange={() => selectBillingAddress(el.id ,el)}
-                                  />
-                                  <label className="ml-2 mb-2" htmlFor={el.id}>
-                                    <div>
-                                      {el.first_name} {el.last_name}
-                                    </div>
-                                    <div>
-                                      {el.line_1}
-                                    </div>
-                                    <div>
-                                      {el.city}, {el.county}, {el.country}
-                                    </div>
-                                    <div>
-                                      {el.postcode}
-                                    </div>
-                                  </label>
-                                </li>
-                              </ul>
-                            ))}
+                            {addressesList &&
+                              addressesList.length > 0 &&
+                              addressesList.map(el => (
+                                <ul
+                                  key={el.id}
+                                  className="w-1/2 p-0 list-reset"
+                                >
+                                  <li className="flex">
+                                    <input
+                                      type="radio"
+                                      name={el.id}
+                                      className="mt-1"
+                                      id={el.id}
+                                      value={el.name}
+                                      checked={checkedBillingAddress === el.id}
+                                      onChange={() =>
+                                        selectBillingAddress(el.id, el)
+                                      }
+                                    />
+                                    <label
+                                      className="ml-2 mb-2"
+                                      htmlFor={el.id}
+                                    >
+                                      <div>
+                                        {el.first_name} {el.last_name}
+                                      </div>
+                                      <div>{el.line_1}</div>
+                                      <div>
+                                        {el.city}, {el.county}, {el.country}
+                                      </div>
+                                      <div>{el.postcode}</div>
+                                    </label>
+                                  </li>
+                                </ul>
+                              ))}
                             {addressesList && addressesList.length ? (
                               <div className="w-full">
-                                <Link  to="/addresses" className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline">
+                                <Link
+                                  to="/addresses"
+                                  className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+                                >
                                   Add new Addresses
                                 </Link>
                               </div>
                             ) : (
                               <div className="w-full">
-                                <AddressFields type="billing_address" form={form} showAddressForm={false} />
+                                <AddressFields
+                                  type="billing_address"
+                                  form={form}
+                                  showAddressForm={false}
+                                />
                               </div>
                             )}
                           </div>

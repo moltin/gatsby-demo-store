@@ -134,9 +134,12 @@ function CustomerProvider({ children, customerToken, ...props }) {
 
   async function getAddresses() {
     try {
-      const { data: payload } = await moltin.get(`/customers/${customer}/addresses`, {
-        'X-Moltin-Customer-Token': token
-      })
+      const { data: payload } = await moltin.get(
+        `/customers/${customer}/addresses`,
+        {
+          'X-Moltin-Customer-Token': token
+        }
+      )
       dispatch({ type: SET_ADDRESSES, payload })
     } catch (e) {
       await onTokenError(e)
@@ -195,26 +198,28 @@ function CustomerProvider({ children, customerToken, ...props }) {
     county,
     country
   ) {
-    await moltin.put(`customers/${customer}/addresses/${id}`, {
-      type: 'address',
-      id,
-      name: '',
-      first_name,
-      last_name,
-      company_name: '',
-      phone_number: '',
-      line_1,
-      line_2,
-      city,
-      postcode,
-      county,
-      country,
-      instructions: ''
-    },
+    await moltin.put(
+      `customers/${customer}/addresses/${id}`,
+      {
+        type: 'address',
+        id,
+        name: '',
+        first_name,
+        last_name,
+        company_name: '',
+        phone_number: '',
+        line_1,
+        line_2,
+        city,
+        postcode,
+        county,
+        country,
+        instructions: ''
+      },
       {
         'X-Moltin-Customer-Token': token
       }
-      )
+    )
 
     await getAddresses()
   }
