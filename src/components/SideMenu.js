@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 export default function SideMenu() {
   return (
-    <div className="text-grey-darker bg-grey-light px-2 py-2 m-2 h-48 w-48">
+    <div className="text-grey-darker bg-grey-light px-2 py-2 m-2 sm:h-48 sm:w-48">
       <Link
         to="/profile"
         className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"

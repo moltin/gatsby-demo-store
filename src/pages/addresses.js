@@ -4,6 +4,7 @@ import { CustomerContext } from '../context'
 import { Form } from 'react-final-form'
 import AddressFields from '../components/AddressFields'
 import SideMenu from '../components/SideMenu'
+import addressValidation from '../validation/address'
 
 function AddressPage() {
   const { addressesList } = useContext(CustomerContext)
@@ -14,7 +15,7 @@ function AddressPage() {
   const [isEditMode, setEditMode] = useState(false)
   const [editAddressId, setEditAddressId] = useState('')
   const [addressError, setAddressError] = useState('')
-  const type = 'billing_address'
+  const type = 'shipping_address'
 
   function clearAddressForm(form) {
     form.change(`${type}.first_name`, '')
@@ -97,9 +98,13 @@ function AddressPage() {
     setAddressError(null)
   }
 
+  function validate(values) {
+    return addressValidation(values)
+  }
+
   return (
     <React.Fragment>
-      <div className="flex flex-wrap ">
+      <div className="sm:flex sm:flex-wrap ">
         <SideMenu />
         <div className="flex-1 text-grey-darker px-4 py-2 m-2 mb-4">
           <h3 className="my-4">Address Book</h3>
@@ -108,7 +113,7 @@ function AddressPage() {
               {addressError}
             </div>
           )}
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit} validate={validate}>
             {({ handleSubmit, submitting, invalid, form }) => {
               return (
                 <form onSubmit={handleSubmit}>
@@ -125,7 +130,7 @@ function AddressPage() {
                           onClick={() => {
                             hideAddAddressForm(form)
                           }}
-                          type="submit"
+                          type="button"
                           className="my-2 w-full px-2 appearance-none bg-black border border-black text-white hover:text-white px-4 py-3 md:mx-2 leading-tight rounded-none focus:outline-none mt-4 no-underline"
                         >
                           Cancel

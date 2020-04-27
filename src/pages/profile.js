@@ -32,10 +32,10 @@ function ProfilePage() {
 
   return (
     <React.Fragment>
-      <div className="flex flex-wrap ">
+      <div className="sm:flex sm:flex-wrap ">
         <SideMenu />
 
-        <div className="flex-auto text-grey-darker px-4 py-2 m-2 mb-2">
+        <div className="flex-1 text-grey-darker px-4 py-2 m-2 mb-2">
           <h3 className="my-4">Personal Information</h3>
 
           <div className="max-w-sm">
