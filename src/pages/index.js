@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
+import BrandedStrings from "../strings/BrandedStrings.json"
 
 import Category from '../components/Category'
 
@@ -10,27 +11,24 @@ function IndexPage({
 }) {
   return (
     <>
-      <div className="hero overflow-y-hidden">
+      <div className="hero overflow-y-hidden overflow-x-hidden front-banner">
         <div className="container relative">
-          <div className="w-full md:w-2/3 lg:w-1/2 py-12 px-8 md:px-0">
-            <div className="text-center md:text-left md:my-auto">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal">
-                The Elastic Path Commerce Cloud demo store
+          <div>
+            <div className="banner-box text-center md:text-left md:my-auto">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal">
+                {BrandedStrings["front-title"]}
               </h1>
               <p className="mt-2">
-                This is a Gatsby demo store, built using the source plugin to
-                fetch products.
+                {BrandedStrings["front-paragraph-1"]}
               </p>
 
               <p className="mt-2">
-                Product, category and collection pages are statically generated,
-                and all dynamic cart/checkout functionality happens dynamically
-                with our JS SDKs.
+                {BrandedStrings["front-paragraph-2"]}
               </p>
 
               <Link
                 to={`/products`}
-                className="inline-block appearance-none border border-b-3 border-black text-black mt-8 px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
+                className="primary-btn inline-block appearance-none border border-b-3 border-black text-black mt-8 px-4 py-3 leading-tight rounded-none focus:outline-none my-2 no-underline"
               >
                 Shop Now
               </Link>
