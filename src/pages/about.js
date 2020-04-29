@@ -5,7 +5,7 @@ import PageTitle from '../components/PageTitle'
 
 const AboutPage = () => (
   <>
-    <SEO title="Moltin | Schedule a demo" />
+    <SEO title="Elastic Path | Schedule a demo" />
     <PageTitle>About this demo</PageTitle>
 
     <div className="max-w-xl mx-auto">

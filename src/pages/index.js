@@ -15,7 +15,7 @@ function IndexPage({
           <div className="w-full md:w-2/3 lg:w-1/2 py-12 px-8 md:px-0">
             <div className="text-center md:text-left md:my-auto">
               <h1 className="text-3xl md:text-4xl lg:text-5xl text-black font-normal">
-                The Moltin demo store
+                The Elastic Path Commerce Cloud demo store
               </h1>
               <p className="mt-2">
                 This is a Gatsby demo store, built using the source plugin to
