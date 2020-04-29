@@ -72,7 +72,7 @@ function ProductPage({ data: { product } }) {
             inventoryError
           ) : (
             <div className="flex flex-wrap flex-col md:flex-row md:items-end">
-              <AddToCart productId={product.id} disabled={!inventory.inStock} />
+              <AddToCart product={product} disabled={!inventory.inStock} />
             </div>
           )}
 
@@ -110,6 +110,15 @@ export const query = graphql`
         display_price {
           without_tax {
             formatted
+          }
+        }
+        variations {
+          id
+          name
+          options {
+            description
+            id
+            name
           }
         }
       }
