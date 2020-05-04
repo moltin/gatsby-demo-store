@@ -18,7 +18,7 @@ export default function VariationsSelector({ product, onChange }) {
       return prodMatrix
     }
     for (const x in options) {
-      if (prodMatrix[options[x]] !== undefined) {
+      if (options.hasOwnProperty(x) && prodMatrix[options[x]]) {
         const subMatrix = prodMatrix[options[x]]
         return getChildID(options, subMatrix)
       }

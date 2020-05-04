@@ -13,6 +13,26 @@ exports.createSchemaCustomization = ({ actions }) => {
       parent: MoltinCategory
       children: [childrenData]
     }
+    
+    type ProductMetaVariationsOption {
+      id: String
+      name: String
+      description: String
+    }
+    
+    type ProductMetaVariation {
+      id: String
+      name: String
+      options: [ProductMetaVariationsOption]
+    }
+    
+    type ProductMeta {
+      variations: [ProductMetaVariation]
+    }
+    
+    type MoltinProduct implements Node @infer {
+      meta: ProductMeta
+    }
   `
   createTypes(typeDefs)
 }
