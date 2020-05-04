@@ -21,7 +21,8 @@ export default function RadioButton({
       />
       <label
         htmlFor={id}
-        className={`appearance-none border border-black px-4 py-3 focus:outline-none mr-2 no-underline ${checked && 'bg-black text-white'}`}
+        className={`appearance-none border border-black px-4 py-3 focus:outline-none mr-2 no-underline ${checked &&
+          'bg-black text-white'}`}
       >
         {label}
       </label>

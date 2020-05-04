@@ -121,6 +121,7 @@ export const query = graphql`
             name
           }
         }
+        variation_matrix
       }
       manage_stock
     }
