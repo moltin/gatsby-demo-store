@@ -26,7 +26,7 @@
     "react-helmet": "5.2.1",
     "react-instantsearch-dom": "5.7.0",
     "react-social-sharing": "3.0.1",
-    "react-stripe-elements": "4.0.1",
+    "react-stripe-elements": "6.1.2",
     "react-toastify": "5.4.0",
     "tailwindcss": "0.7.4",
     "validator": "13.0.0"
