@@ -5378,12 +5378,12 @@ gather-stream@^1.0.0:
   resolved "https://registry.yarnpkg.com/gather-stream/-/gather-stream-1.0.0.tgz#b33994af457a8115700d410f317733cbe7a0904b"
   integrity sha1-szmUr0V6gRVwDUEPMXczy+egkEs=
 
-gatsby-awesome-pagination@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.4.tgz#a4c5ca58377d1f92f164a28f6da06cc01037fec0"
-  integrity sha512-OLO/tdD+jh7gzxeRRWUJ8Iy5NXKBBUnxTi8t9QC/Gy1tcnoIyBzO3vQFMTCkXoNP7RY5US8aiHtt7mcQfAVMQA==
+gatsby-awesome-pagination@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.5.tgz#e1d0d39a5350565e0e30af23979f76c89695a96a"
+  integrity sha512-rYBaGDgNtG6/+dHlM6XS2HtKodv/Y32AuysJMsZ39xIhn48UtRuYd8fmqJYc99V1dQFCPIJElNhg8fp1eOj05g==
   dependencies:
-    lodash "^4.17.10"
+    lodash "^4.17.15"
 
 gatsby-cli@^1.1.58:
   version "1.1.58"
@@ -7753,6 +7753,11 @@ lodash@^4.11.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-update@^3.0.0:
   version "3.2.0"
