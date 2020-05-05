@@ -1,0 +1,46 @@
+.front-banner {
+  background-image: url('../images/front-banner.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.primary-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.banner-box {
+  background-color: rgba(0,0,0, .75);
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+@screen md {
+  .banner-box {
+    width: 50%;
+  }
+}
+
+.banner-box > h1 {
+  color: #ffffff
+}
+
+.banner-box > p {
+  color: #6e6e6e;
+}
+
+.bottom-banner {
+  background-color: #131313;
+
+}
+
+.bottom-banner-text {
+  color: #b3b3b3
+}
+
+.bottom-banner-text-bold {
+  color: #ffffff
+}

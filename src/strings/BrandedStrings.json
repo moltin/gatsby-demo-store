@@ -1,0 +1,5 @@
+{
+    "front-title": "The Elastic Path Commerce Cloud demo store",
+    "front-paragraph-1": "This is a Gatsby demo store, built using the source plugin to fetch products.",
+    "front-paragraph-2": "Product, category and collection pages are statically generated, and all dynamic cart/checkout functionality happens dynamically with our JS SDKs."
+}

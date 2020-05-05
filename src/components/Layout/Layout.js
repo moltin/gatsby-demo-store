@@ -9,6 +9,7 @@ import Footer from './Footer'
 
 import 'react-toastify/dist/ReactToastify.css'
 import '../../styles/main.css'
+import '../../styles/branding.css'
 
 const toastOptions = {
   position: 'bottom-center',
