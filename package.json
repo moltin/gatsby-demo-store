@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "@moltin/gatsby-source-moltin": "1.6.2",
+    "@moltin/gatsby-source-moltin": "1.8.0",
     "@moltin/request": "2.0.2",
     "algolia-places-react": "1.4.1",
     "algoliasearch": "3.35.1",
