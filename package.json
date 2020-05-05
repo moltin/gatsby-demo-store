@@ -29,7 +29,7 @@
     "react-stripe-elements": "4.0.1",
     "react-toastify": "5.4.0",
     "tailwindcss": "0.7.4",
-    "validator": "10.11.0"
+    "validator": "13.0.0"
   },
   "scripts": {
     "build": "gatsby build",
