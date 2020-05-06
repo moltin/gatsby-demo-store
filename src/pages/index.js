@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import BrandedStrings from "../strings/BrandedStrings.json"
+import BrandedStrings from '../strings/BrandedStrings.json'
 
 import Category from '../components/Category'
 
@@ -16,15 +16,11 @@ function IndexPage({
           <div>
             <div className="banner-box text-center md:text-left md:my-auto">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal">
-                {BrandedStrings["front-title"]}
+                {BrandedStrings['front-title']}
               </h1>
-              <p className="mt-2">
-                {BrandedStrings["front-paragraph-1"]}
-              </p>
+              <p className="mt-2">{BrandedStrings['front-paragraph-1']}</p>
 
-              <p className="mt-2">
-                {BrandedStrings["front-paragraph-2"]}
-              </p>
+              <p className="mt-2">{BrandedStrings['front-paragraph-2']}</p>
 
               <Link
                 to={`/products`}
