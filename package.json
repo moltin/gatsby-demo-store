@@ -38,7 +38,7 @@
     "format": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
-    "autoprefixer": "9.6.5",
+    "autoprefixer": "9.7.6",
     "prettier": "1.18.2"
   }
 }
