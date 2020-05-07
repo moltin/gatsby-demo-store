@@ -80,50 +80,7 @@ function Header({ siteTitle, collections }) {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/cart">
-              <span className="relative inline-flex items-center">
-                <svg
-                  viewBox="0 0 16 17"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  className="inline-block h-4 "
-                >
-                  <g
-                    stroke="none"
-                    strokeWidth="1"
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <g
-                      transform="translate(-1367.000000, -50.000000)"
-                      stroke="#131313"
-                      strokeWidth="1.5"
-                    >
-                      <g transform="translate(64.000000, 48.000000)">
-                        <g transform="translate(1262.000000, 0.000000)">
-                          <g transform="translate(42.000000, 3.000000)">
-                            <polygon id="Path-2" points="0 15 1 4 13 4 14 15" />
-                            <path
-                              d="M4,7 C4,2 4,0 7,0 C10,0 10,2 10,7"
-                              id="Path-3"
-                            />
-                          </g>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-
-                {!isEmpty && (
-                  <span className="md:inline-flex rounded-full bg-yellow -mt-3 -ml-0 md:p-3 h-2 md:h-4 w-2 md:w-4 md:items-center md:justify-center">
-                    <span className="hidden md:inline text-black text-xs font-semibold">
-                      {count}
-                    </span>
-                  </span>
-                )}
-              </span>
-            </Link>
+            <span className="moltin-cart-button sk-button inline-flex appearance-none bg-black border border-black text-white focus:outline-none text-sm"></span>
           </li>
           <li className="nav-item">
             {isLoggedIn ? (

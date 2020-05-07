@@ -237,3 +237,27 @@ button:disabled {
 .ais-PoweredBy-link {
   @apply flex;
 }
+
+/* Shopkit */
+
+.shopkit-primary {
+  font: unset !important;
+  @apply bg-black font-sans antialiased leading-normal rounded-none
+}
+.shopkit-primary-text {
+  color: unset !important;
+  font: unset !important;
+  @apply bg-white font-sans antialiased leading-normal
+}
+.shopkit-modal {
+  color: unset !important;
+  font: unset !important;
+  @apply bg-white font-sans antialiased leading-normal
+}
+
+
+.sk-button > .shopkit-button {
+  background-color: unset !important;
+  border: none !important;
+  font: unset !important;
+}
