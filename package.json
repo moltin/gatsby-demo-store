@@ -40,5 +40,13 @@
   "devDependencies": {
     "autoprefixer": "9.7.6",
     "prettier": "1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "prettier --write"
   }
 }
