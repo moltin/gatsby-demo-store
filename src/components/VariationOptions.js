@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import RadioButton from './RadioButton'
 
-export default function VariationSelector({
+export default function VariationOptions({
   variation,
   defaultOption,
   onChange
 }) {
   const [optionChecked, setOptionChecked] = useState(defaultOption)
+  const handleChange = (option) => {
+    setOptionChecked(option.id)
+    onChange(option, variation)
+  }
   return (
     <div className="mb-4">
       <div className="font-bold">{variation.name}</div>
@@ -17,10 +21,7 @@ export default function VariationSelector({
             id={option.id}
             name={option.id}
             label={option.name}
-            onChange={() => {
-              setOptionChecked(option.id)
-              onChange(option, variation)
-            }}
+            onChange={() => handleChange(option)}
             value={option.id}
             checked={optionChecked === option.id}
           />
