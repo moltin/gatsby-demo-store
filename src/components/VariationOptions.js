@@ -7,7 +7,7 @@ export default function VariationOptions({
   onChange
 }) {
   const [optionChecked, setOptionChecked] = useState(defaultOption)
-  const handleChange = (option) => {
+  const handleChange = option => {
     setOptionChecked(option.id)
     onChange(option, variation)
   }
