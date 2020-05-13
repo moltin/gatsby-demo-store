@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
+import { CustomerContext } from '../context'
 
 export default function SideMenu() {
   return (
@@ -9,6 +10,12 @@ export default function SideMenu() {
         className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
       >
         My Profile
+      </Link>
+      <Link
+        to="/orders"
+        className="block px-4 py-2 text-gray-800 hover:text-black bg-blue no-underline hover:underline"
+      >
+        Purchase History
       </Link>
       <Link
         to="/addresses"

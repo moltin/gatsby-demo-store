@@ -24,6 +24,7 @@ function CheckoutPage({ stripe }) {
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
   const { checkout, pay, confirmTransaction } = useContext(CheckoutContext)
+  const { getAllOrders } = useContext(CustomerContext)
   const [checkoutError, setCheckoutError] = useState(null)
   const [cardElement, setCardElement] = useState(null)
   const [checkedShippingAddress, setCheckedShippingAddress] = useState(null)
@@ -186,6 +187,7 @@ function CheckoutPage({ stripe }) {
       await setOrder(order)
       await deleteCart()
       await setPaid(true)
+      await getAllOrders()
     } catch ({ errors: [{ detail = 'Unable to process payment' }] }) {
       setCheckoutError(detail)
     }
@@ -482,7 +484,7 @@ function CheckoutPage({ stripe }) {
                             )}
                           </div>
                         )}
-
+                        {!addressesList && (
                         <div className="my-2 w-full">
                           <label
                             htmlFor="createCustomer"
@@ -520,7 +522,7 @@ function CheckoutPage({ stripe }) {
                             </span>
                           </label>
                         </div>
-
+                        )}
                         {values.createCustomer && (
                           <div className="my-2 w-full">
                             <Input
