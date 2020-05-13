@@ -14,7 +14,7 @@ function OrderPage({ location }) {
         Back
       </Link>
 
-      <PageTitle title="Purchase detail" />
+      <PageTitle title="Purchase details" />
       {orderData && (
         <div className="flex flex-wrap ">
           <div className="flex-auto text-grey-darker px-4 py-2 m-2 mb-4">

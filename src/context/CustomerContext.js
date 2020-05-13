@@ -94,7 +94,7 @@ function CustomerProvider({ children, customerToken, ...props }) {
   }
 
   async function getAllOrders() {
-    const { data: payload } = await moltin.get('/orders', {
+    const { data: payload } = await moltin.get('/orders?page[limit]=100', {
       'X-Moltin-Customer-Token': token
     })
     dispatch({ type: SET_ORDERS, payload })
