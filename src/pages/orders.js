@@ -32,7 +32,7 @@ function OrderPage() {
                       <tr key={element.id}>
                         <td className="border pr-8 pl-4 py-2">
                           <Link
-                            to="orderdetails"
+                            to="/orderdetails"
                             state={{ data: element }}
                             className="no-underline hover:underline text-black"
                           >
