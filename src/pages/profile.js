@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 
 import { CustomerContext } from '../context'
-import PageTitle from '../components/PageTitle'
 import { Form } from 'react-final-form'
 import Input from '../components/Input'
 import SideMenu from '../components/SideMenu'

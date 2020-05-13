@@ -24,6 +24,7 @@ function CheckoutPage({ stripe }) {
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState(null)
   const { checkout, pay, confirmTransaction } = useContext(CheckoutContext)
+  const { getAllOrders } = useContext(CustomerContext)
   const [checkoutError, setCheckoutError] = useState(null)
   const [cardElement, setCardElement] = useState(null)
   const [checkedShippingAddress, setCheckedShippingAddress] = useState(null)
@@ -186,6 +187,7 @@ function CheckoutPage({ stripe }) {
       await setOrder(order)
       await deleteCart()
       await setPaid(true)
+      await getAllOrders()
     } catch ({ errors: [{ detail = 'Unable to process payment' }] }) {
       setCheckoutError(detail)
     }
@@ -482,45 +484,45 @@ function CheckoutPage({ stripe }) {
                             )}
                           </div>
                         )}
-
-                        <div className="my-2 w-full">
-                          <label
-                            htmlFor="createCustomer"
-                            className="p-0 m-0 inline-flex items-center cursor-pointer"
-                          >
-                            <div className="flex items-center justify-center mr-4 relative">
-                              <Field
-                                id="createCustomer"
-                                name="createCustomer"
-                                component="input"
-                                type="checkbox"
-                                className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
-                              />
-                              {values.createCustomer && (
-                                <span className="absolute text-white flex">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 10 7"
-                                    className="w-3 h-3 fill-current"
-                                  >
-                                    <path
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M9 1L3.5 6 1 3.727"
-                                    />
-                                  </svg>
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-black">
-                              Save my details for later
-                            </span>
-                          </label>
-                        </div>
-
+                        {!addressesList && (
+                          <div className="my-2 w-full">
+                            <label
+                              htmlFor="createCustomer"
+                              className="p-0 m-0 inline-flex items-center cursor-pointer"
+                            >
+                              <div className="flex items-center justify-center mr-4 relative">
+                                <Field
+                                  id="createCustomer"
+                                  name="createCustomer"
+                                  component="input"
+                                  type="checkbox"
+                                  className="appearance-none border outline-none p-2 relative rounded-none bg-black border-grey-dark hover:border-grey cursor-pointer"
+                                />
+                                {values.createCustomer && (
+                                  <span className="absolute text-white flex">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 10 7"
+                                      className="w-3 h-3 fill-current"
+                                    >
+                                      <path
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M9 1L3.5 6 1 3.727"
+                                      />
+                                    </svg>
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-black">
+                                Save my details for later
+                              </span>
+                            </label>
+                          </div>
+                        )}
                         {values.createCustomer && (
                           <div className="my-2 w-full">
                             <Input

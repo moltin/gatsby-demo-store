@@ -6,6 +6,7 @@ import useLocalStorage from './useLocalStorage'
 const SET_CUSTOMER = 'SET_CUSTOMER'
 const LOGOUT = 'LOGOUT'
 const SET_ADDRESSES = 'SET_ADDRESSES'
+const SET_ORDERS = 'SET_ORDERS'
 
 let CustomerContext
 
@@ -46,6 +47,12 @@ function reducer(state, action) {
         addresses: action.payload
       }
 
+    case SET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload
+      }
+
     default:
       return state
   }
@@ -61,11 +68,13 @@ function CustomerProvider({ children, customerToken, ...props }) {
   const email = state.email
   const customer = customerId
   const addressesList = state.addresses
+  const ordersList = state.orders
 
   useEffect(() => {
     token && setToken(token)
     customerId && getCustomer(customerId, token)
     customerId && token && getAddresses()
+    customerId && getAllOrders()
   }, [token])
 
   async function getCustomer(id, token) {
@@ -82,6 +91,13 @@ function CustomerProvider({ children, customerToken, ...props }) {
     if (e.statusCode === 403) {
       await logout()
     }
+  }
+
+  async function getAllOrders() {
+    const { data: payload } = await moltin.get('/orders?page[limit]=100', {
+      'X-Moltin-Customer-Token': token
+    })
+    dispatch({ type: SET_ORDERS, payload })
   }
 
   async function register(name, email, password) {
@@ -241,7 +257,9 @@ function CustomerProvider({ children, customerToken, ...props }) {
         fullName,
         email,
         customerId,
-        addressesList
+        addressesList,
+        getAllOrders,
+        ordersList
       }}
     >
       {children}
