@@ -12,10 +12,12 @@ export default function Category({ name, slug, description, products }) {
       {product && (
         <div className="cursor-pointer flex items-center justify-center w-full overflow-hidden relative">
           <Link to={`/categories/${slug}`}>
-            <Img
-              fluid={product.mainImage.childImageSharp.fluid}
-              alt={product.name}
-            />
+            {product.mainImage && (
+              <Img
+                fluid={product.mainImage.childImageSharp.fluid}
+                alt={product.name}
+              />
+            )}
           </Link>
         </div>
       )}
