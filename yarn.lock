@@ -995,13 +995,6 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.4.2":
-  version "7.5.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
-  integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
 "@babel/runtime@^7.4.5":
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.0.tgz#49dcbcd637099a55d3a61e590a00d6861393b1b5"
@@ -1163,13 +1156,10 @@
   resolved "https://registry.yarnpkg.com/@mikaelkristiansson/domready/-/domready-1.0.9.tgz#b2b85d8ac7bb2797e577050b61aeaf1b26fbd906"
   integrity sha512-FOAjeRHULSWXd6JMuCDwf3zPbe11kP971+Bufrj9M8rQ33ZMtThgKd6IJgzj6tr/+1Rq3czzLI1LAa9x0IC92w==
 
-
-
-
-"@moltin/gatsby-source-moltin@^1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.9.0.tgz#6fa7b61f67f765b7b3bfbfd1cd62ea15df3e547d"
-  integrity sha512-eIgkec+nhm7M0+QHbBtvAOFkzg+vnPqgsETvxxDWu7VXt70U8e2MkPaiE/IS7L5Taaq/Mg7YdlO+ubReVL3NYw==
+"@moltin/gatsby-source-moltin@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@moltin/gatsby-source-moltin/-/gatsby-source-moltin-1.9.1.tgz#563bcf53fdf3625f51808829ee0a5d213643ee5b"
+  integrity sha512-2VDXEjjMGmTEVivcS1AMUn/UibhuJqdgXygyawnX7+TGAuI39G9NeAiKX3ja2hGCbhBHpivEntA0okInA0QiUw==
   dependencies:
     "@moltin/request" "^2.0.0"
     deepmerge "^4.0.0"
@@ -10280,20 +10270,19 @@ react-stripe-elements@6.1.2:
   dependencies:
     prop-types "15.7.2"
 
-react-toastify@5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-5.5.0.tgz#f55de44f6b5e3ce3b13b69e5bb4427f2c9404822"
-  integrity sha512-jsVme7jALIFGRyQsri/g4YTsRuaaGI70T6/ikjwZMB4mwTZaCWqj5NqxhGrRStKlJc5npXKKvKeqTiRGQl78LQ==
+react-toastify@6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-6.0.4.tgz#5a06f9ef29b9f257813fd0ab7c5b1f2aa9e33551"
+  integrity sha512-ieNHqMZim/8h0NfSigWsmqly9dG4JwtTnBCq3y5UVua73Os8VyvsZkdu5CHORqXXgIe9CGIIPz4AbIiFXWkLHg==
   dependencies:
-    "@babel/runtime" "^7.4.2"
     classnames "^2.2.6"
     prop-types "^15.7.2"
-    react-transition-group "^4"
+    react-transition-group "^4.4.1"
 
-react-transition-group@^4:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.0.tgz#59f1e6ec384a11e245fa6f2ade8e104d752ac87c"
-  integrity sha512-c7wuNGJlHItwt6+HS0e9r53ZD5ARJDJSRYBv0APmfQqSCSokdrgJm07IO0ZKwjTVkIQKOlSTO3F06A3JqUSl7Q==
+react-transition-group@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
+  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
   dependencies:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
