@@ -1,3 +1,5 @@
+<img src="https://www.elasticpath.com/themes/custom/bootstrap_sass/logo.svg" alt="" width="400" />
+
 # Elastic Path Commerce Cloud Gatsby Starter
 
 > 🛍 Elastic Path powered Gatsby demo store
@@ -43,3 +45,8 @@ Now you're ready to go!
 ```bash
 yarn dev
 ```
+
+## Terms And Conditions
+
+- Any changes to this project must be reviewed and approved by the repository owner. For more information about contributing, see the [Contribution Guide](https://github.com/moltin/gatsby-demo-store/blob/master/.github/CONTRIBUTING.md).
+- For more information about the license, see [MIT License](https://github.com/moltin/gatsby-demo-store/blob/master/LICENSE).
