@@ -2,9 +2,9 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: 'I Love Lamp',
+    title: 'Elastic Path demo store',
     description:
-      'I love carpet. I love desk. I love lamp. I Love Lamp is the official Moltin demo store.',
+      'The official Elastic Path demo store.',
     author: '@moltin',
     url: process.env.DEPLOY_PRIME_URL || process.env.URL || 'localhost:8000'
   },
