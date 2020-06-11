@@ -46,7 +46,10 @@ export const query = graphql`
     }
 
     products: allMoltinProduct(
-      filter: { categories: { elemMatch: { id: { eq: $id } } } }
+      filter: {
+        categories: { elemMatch: { id: { eq: $id } } },
+        parent: {id: {eq: null}}
+    }
       limit: $limit
       skip: $skip
     ) {
