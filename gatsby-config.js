@@ -69,6 +69,9 @@ module.exports = {
                       }
                     }
                   }
+                  price {
+                    amount
+                  }
                   categories {
                     name
                   }
@@ -88,7 +91,7 @@ module.exports = {
               }
             }) =>
               nodes.map(
-                ({ meta, categories, brands, collections, ...rest }) => ({
+                ({ meta, categories, brands, collections, price, ...rest }) => ({
                   ...rest,
                   price: meta.display_price.with_tax.formatted,
                   categories: categories
@@ -97,7 +100,10 @@ module.exports = {
                   brands: brands ? brands.map(({ name }) => name) : [],
                   collections: collections
                     ? collections.map(({ name }) => name)
-                    : []
+                    : [],
+                  amount: price
+                  ? price[0].amount
+                  : null,
                 })
               ),
             indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME
