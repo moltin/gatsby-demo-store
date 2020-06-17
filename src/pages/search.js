@@ -27,8 +27,8 @@ function SearchPage() {
                 defaultRefinement={indexName}
                 items={[
                   { value: indexName, label: 'Featured' },
-                  { value: 'product_price_asc', label: 'Price asc.' },
-                  { value: 'product_price_desc', label: 'Price desc.' }
+                  { value: `${indexName}_price_asc`, label: 'Price asc.' },
+                  { value: `${indexName}_price_desc`, label: 'Price desc.' }
                 ]}
               />
             </div>
