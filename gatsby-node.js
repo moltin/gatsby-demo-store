@@ -63,7 +63,7 @@ exports.createResolvers = ({ createResolvers }) => {
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const pages = await graphql(`
     {
-      allProducts: allMoltinProduct {
+      allProducts: allMoltinProduct(filter: {parent: {id: {eq: null}}}) {
         edges {
           node {
             id

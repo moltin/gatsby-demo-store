@@ -36,7 +36,7 @@ export default ProductsList
 
 export const query = graphql`
   query allProductsQuery($limit: Int!, $skip: Int!) {
-    allMoltinProduct(limit: $limit, skip: $skip) {
+    allMoltinProduct(limit: $limit, skip: $skip, filter: {parent: {id: {eq: null}}}) {
       edges {
         node {
           id
