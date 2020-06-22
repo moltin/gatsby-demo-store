@@ -9,6 +9,8 @@ function IndexPage({
     categories: { edges: categories }
   }
 }) {
+  const topCategories = categories.filter(cat => !cat.node.relationships.parent);
+
   return (
     <>
       <div className="hero overflow-y-hidden overflow-x-hidden front-banner">
@@ -33,9 +35,9 @@ function IndexPage({
         </div>
       </div>
 
-      {categories && (
+      {topCategories && (
         <div className="flex flex-wrap -mx-6">
-          {categories.map(({ node }) => (
+          {topCategories.map(({ node }) => (
             <Category key={node.id} {...node} />
           ))}
         </div>
@@ -60,6 +62,18 @@ export const query = graphql`
                 fluid(maxWidth: 560) {
                   ...GatsbyImageSharpFluid
                 }
+              }
+            }
+          }
+          relationships {
+            children {
+              data {
+                id
+              }
+            }
+            parent {
+              data {
+                id
               }
             }
           }

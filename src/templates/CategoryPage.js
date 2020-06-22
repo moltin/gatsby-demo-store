@@ -5,14 +5,17 @@ import SEO from '../components/SEO'
 import PageTitle from '../components/PageTitle'
 import ProductGrid from '../components/ProductGrid'
 import Pagination from '../components/Pagination'
+import Category from '../components/Category'
 
-function CategoryPage({ data: { category, products }, pageContext }) {
+function CategoryPage({ data: { category, categories : { edges: categories }, products }, pageContext }) {
   const {
     humanPageNumber,
     numberOfPages,
     nextPagePath,
     previousPagePath
   } = pageContext
+
+  const childCategories = category.relationships.children && category.relationships.children.data.map(child => categories.find(cat => cat.node.id === child.id));
 
   return (
     <>
@@ -22,6 +25,13 @@ function CategoryPage({ data: { category, products }, pageContext }) {
       />
 
       <PageTitle title={category.name} description={category.description} />
+      {childCategories && (
+        <div className="flex flex-wrap -mx-6">
+          {childCategories.map(({ node }) => (
+            <Category key={node.id} {...node} />
+          ))}
+        </div>
+      )}
       <ProductGrid products={products.nodes} />
       <Pagination
         currentPage={humanPageNumber}
@@ -43,6 +53,39 @@ export const query = graphql`
       slug
       name
       description
+      relationships {
+        children {
+          data {
+            id
+          }
+        }
+        parent {
+          data {
+            id
+          }
+        }
+      }
+    }
+
+    categories: allMoltinCategory {
+      edges {
+        node {
+          id
+          name
+          slug
+          description
+          products {
+            name
+            mainImage {
+              childImageSharp {
+                fluid(maxWidth: 560) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     products: allMoltinProduct(
