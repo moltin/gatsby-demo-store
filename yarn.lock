@@ -10255,10 +10255,10 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-social-sharing@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-social-sharing/-/react-social-sharing-3.0.1.tgz#4c49ce17a4cba1e375defae5df1c31f4c3350094"
-  integrity sha512-1G3xV6x0y49mSS2vZw+K6zRqATiDYi3YYeZ1FpuqgLUqD40KxP2xvSSlhY2hGTZzymB73miVXAy6i+7GqQ+mjA==
+react-social-sharing@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-social-sharing/-/react-social-sharing-3.3.0.tgz#cc356bd8667abc9075281737580da352684a3e23"
+  integrity sha512-MDiMIuXOg477Rlo67Vy2l2bmq6Rt5e8LY14TYKhOrgQNmf5A6BDJEnAnR3EwbKrFqW4SI0o2deFkAbI2AlSPUQ==
   dependencies:
     styled-components "^4.1.1"
     styled-is "^1.1.5"
