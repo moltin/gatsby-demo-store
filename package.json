@@ -24,7 +24,7 @@
     "react-dom": "16.13.1",
     "react-final-form": "4.1.0",
     "react-helmet": "5.2.1",
-    "react-instantsearch-dom": "6.4.0",
+    "react-instantsearch-dom": "6.23.4",
     "react-social-sharing": "3.0.1",
     "react-stripe-elements": "6.1.2",
     "react-toastify": "6.0.4",
