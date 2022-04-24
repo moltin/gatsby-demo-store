@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "autoprefixer": "9.7.6",
-    "prettier": "1.19.1"
+    "prettier": "2.6.2"
   },
   "husky": {
     "hooks": {
